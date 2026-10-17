@@ -48,8 +48,8 @@ Two trained semantic comparators, a fine-tuned cross-encoder and an
 embedding-plus-classifier model, both fail to supply the missing check at a
 usable operating point (0.36–0.40 detection at 0.24–0.34 false alarms, against
 a target of 0.70 at 0.20). A zero-shot Qwen3.5-9B judge fails in the same
-direction (0.16 detection at 0.03 false alarms). We will release the items,
-prompts and generations with the paper.
+direction (0.16 detection at 0.03 false alarms). We release the items, prompts
+and generations.
 
 # 1. Introduction
 
@@ -119,7 +119,7 @@ conflict silently anyway.** In the three base models we test, the risk cannot
 be read off a parameter count, a clean-task accuracy figure, or a base model's
 loud failure, and when it is present it is invisible to the check that
 deployment relies on. Two attempts to learn the semantic comparison do not
-work, and the archived data makes that negative checkable.
+work, and the released data makes that negative checkable.
 
 Our contributions are:
 
@@ -138,8 +138,7 @@ Our contributions are:
    76.2% and 65.7% of theirs.
 5. Two recorded, item-grouped attempts to train the missing semantic check,
    both of which fail, and a zero-shot Qwen3.5-9B judge that fails in the same
-   direction, with the data archived for release so the negative can be
-   checked.
+   direction, with the data released so the negative can be checked.
 6. A prompt manipulation showing the route is policy: keeping the deployment
    instruction and merely permitting a clarification cuts the anchor's silent
    substitutions from 0.548 to 0.348 (McNemar p = 1.6e-8) and turns 0.648 of
@@ -295,7 +294,7 @@ tokenization curiosity. The shifted rate is the operational worry: the model
 picks the member that a schema-aware reader would recognise as dangerous.
 
 Items are frozen before any model runs, and the frozen set, schemas, prompts
-and generations are archived for release following the datasheet conventions
+and generations are released following the datasheet conventions
 for documenting what a dataset does and does not cover (Gebru et al., 2021).
 The pre-registration, written before the first run, names the readouts, the
 matched-twin control class and the falsification condition; it is included in
@@ -455,9 +454,8 @@ differ in one thing, the enum.
 This is not a replication of the local protocol. The provider's quantisation,
 hardware and sampler are unknown and are not the local 4-bit greedy setup, so
 we report the arm separately and claim only the contrast between its two
-schema variants. A probe, archived with the other artifacts, established what
-the closed-enum path does with the arguments: an explicit request to emit a
-made-up non-member value
+schema variants. A released probe established what the closed-enum path does
+with the arguments: an explicit request to emit a made-up non-member value
 never produced one. Across the 210 awkward items, 193 returned a member and 17
 refused to call; no call contained the requested string. With the enum
 removed, the same 210 items returned the supplied string on all 210. The full
@@ -486,7 +484,7 @@ this study, then frozen. There is no train/test split across models: the same
 420 items are used for every model, which is what makes the paired comparisons
 valid. The comparators are the only trained components and are trained and
 evaluated only on the 7B run. All prompts, item files, result JSONs and
-scripts are archived for release.
+scripts are released.
 
 The study does not require a real framework to execute tools; the outcome
 taxonomy is defined on the emitted call, and whether a real validator would
@@ -521,7 +519,7 @@ Table: Anchor model (Qwen2.5-7B-Instruct) on 420 frozen items.
 
 The 15 remaining awkward responses (0.071) split into 7 that emitted a value
 which was neither a member nor the supplied string, and 8 that produced no
-parseable call, one of which is an explicit refusal. They are in the result
+parseable call, one of which is an explicit refusal. They are in the released
 JSON and do not affect the conclusions. Figure 1 shows the same outcome split
 for the three base models and the three instruction arms.
 
@@ -1162,7 +1160,7 @@ route open to the model. In the models we test, that is why the risk cannot be
 screened for by size, by ordinary accuracy, or by whether the base model fails
 loudly. Two trained
 semantic comparators, and a zero-shot judge of the same decision, fail to
-supply the missing check at a usable operating point, and the archived data
+supply the missing check at a usable operating point, and the released data
 makes that negative checkable. The practical conclusion is
 modest and immediate: the check that gates execution does not measure
 faithfulness, the conflict should be caught at the instruction before the model
@@ -1173,9 +1171,11 @@ caller rather than retried into a valid call.
 
 The fifteen schemas, 420 items, prompts, system-prompt arms, per-item
 generations, result JSONs, the pre-registration and its follow-up addendum,
-and every analysis script are archived in a repository that will be made
-public with the paper; in the meantime they are available from the author.
-Every number in §5 is produced by one of those scripts from a stored JSON;
+and every analysis script are released at
+
+`https://github.com/LakshitF/valid-but-wrong`
+
+Every number in §5 is produced by one of those scripts from a released JSON;
 none is hand-transcribed.
 
 # References

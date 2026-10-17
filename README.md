@@ -4,7 +4,7 @@ Release accompanying the paper *"Valid but Wrong: Silent Enum Substitution in
 Tool Calls, and Why Schema Validation Cannot See It"* (Lakshit Farswan,
 Department of Computer Science, The University of Texas at Austin, 2026).
 
-**Paper:** `paper/main.pdf` (source `paper/main.md`), 26 pages.
+**Paper:** `paper/main.pdf` (source `paper/main.md`), 25 pages.
 
 ## What is here
 
@@ -157,15 +157,15 @@ citation manager.
 arXiv does not accept Markdown as source. `paper/build_arxiv.sh` writes
 `paper/arxiv/` (`main.tex` plus `figures/`) and the upload tarball
 `paper/arxiv.tar.gz`; both are generated and git-ignored. The tarball was
-compiled with tectonic at 26 pages before this README was written.
+compiled with tectonic at 25 pages before this README was written.
 
 ```bash
 cd paper && ./build_arxiv.sh
 ```
 
 Categories, the Comments field, the author-block conventions used by UT Austin
-papers, and the plain-text abstract for arXiv's metadata field (3,182
-characters in the paper, 1,889 in the field's 1,920-character limit) are in
+papers, and the plain-text abstract for arXiv's metadata field (3,162
+characters in the paper, 1,884 in the field's 1,920-character limit) are in
 `paper/ARXIV-SUBMISSION.md`.
 
 ## Note on `24_reparse.py`

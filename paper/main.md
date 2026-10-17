@@ -173,8 +173,8 @@ FEVER (Thorne et al., 2018) and the hallucination surveys (Ji et al., 2023;
 Huang et al., 2023) formalize unsupported content; Lost in the Middle (Liu et
 al., 2024) shows position-dependent failure; holistic evaluation established
 the protocol of measuring many behaviours at once (Liang et al., 2023); and
-LLM-as-judge studies (Zheng et al., 2023) show that automated evaluation has
-its own biases. Silent failure has been studied in prose: SilentProbe (Li et
+LLM-as-judge studies (L. Zheng et al., 2023) show that automated evaluation has
+its own biases. Silent failure has been studied in prose: SilentProbe (Z. Li et
 al., 2026) shows that models asked to use a term absent from their vocabulary
 invent a substitute rather than report the absence, and PhantomFill (Usman,
 2026) shows invention on unanswerable inputs. Neither involves a schema, a supplied
@@ -185,7 +185,7 @@ Related work also shows that models resolve conflicts between sources by
 authority and order: they merge retrieved and generated context without marking
 the boundary (Tan et al., 2024), over-trust tools framed as authoritative (Yang
 et al., 2026; Kumar & Chopra, 2026), and follow whichever conflicting source
-appears first (Kurfali & Östling, 2025; Li et al., 2026). Our setting removes
+appears first (Kurfali & Östling, 2025; J. Li et al., 2026). Our setting removes
 that ambiguity — exactly one source, the instruction, and one constraint, the
 schema — which is the narrower conflict every tool-calling pipeline contains.
 
@@ -194,23 +194,23 @@ schema — which is the narrower conflict every tool-calling pipeline contains.
 Table 1 positions the closest work. The cell we occupy — a value supplied by
 the instruction that no enum member can express, under unconstrained decoding,
 with matched clean twins, a paraphrase/shift split, and measurements of the
-downstream checks — is empty. SilentProbe (Li et al., 2026) is prose-only and has no schema
+downstream checks — is empty. SilentProbe (Z. Li et al., 2026) is prose-only and has no schema
 constraint; the Constraint Tax (Ray, 2026) is about decoding modes and never
 mentions enums; Schema-First Tool APIs (Sigdel & Baral, 2026) is about
 interface versus semantic misuse without an argument-value rate; PhantomFill
 (Usman, 2026) invents values where none exist rather than substituting a
 supplied one. We claim no new decomposition of content versus position; that
-belongs to PriDe (Zheng et al., 2023), which we use only as a control design.
+belongs to PriDe (C. Zheng et al., 2023), which we use only as a control design.
 
 Table: **Table 1.** Position relative to the closest prior work.
 
 | Prior work | Manipulation | Why this study is not it |
 |---|---|---|
-| SilentProbe (Li et al., 2026) | Prose; absent term comes from the request | No schema, no supplied argument, no conflict |
+| SilentProbe (Z. Li et al., 2026) | Prose; absent term comes from the request | No schema, no supplied argument, no conflict |
 | Constraint Tax (Ray, 2026) | Decoding modes; model generates its own values | No enum, no near-miss class, no abstention |
 | Schema-First Tool APIs (Sigdel & Baral, 2026) | Interface versus semantic misuse | No argument-value rate |
 | PhantomFill (Usman, 2026) | Unanswerable input, invented values | Invention, not substitution |
-| PriDe (Zheng et al., 2023) | MCQ label shuffle | Owns the content/position decomposition only |
+| PriDe (C. Zheng et al., 2023) | MCQ label shuffle | Owns the content/position decomposition only |
 
 # 3. Research questions and methods
 

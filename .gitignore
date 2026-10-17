@@ -17,3 +17,6 @@ guides/
 proposal.md
 CLAUDE.md
 .venv
+csml-submit/
+temp.txt
+.claude/

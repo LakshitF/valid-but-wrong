@@ -1,0 +1,232 @@
+{
+  "qwen7b": {
+    "n_awkward": 210,
+    "substitution": 115,
+    "substitution_rate": 0.5476190476190477,
+    "substitution_ci": [
+      0.4800464941540681,
+      0.6134806773598002
+    ],
+    "echo": 80,
+    "echo_rate": 0.38095238095238093,
+    "clean_error": 0,
+    "clean_n": 210,
+    "equivalent": {
+      "n": 138,
+      "substituted": 90,
+      "rate": 0.6521739130434783
+    },
+    "shifted": {
+      "n": 72,
+      "substituted": 25,
+      "rate": 0.3472222222222222
+    },
+    "abstain": 0.004761904761904762
+  },
+  "qwen3b": {
+    "n_awkward": 210,
+    "substitution": 18,
+    "substitution_rate": 0.08571428571428572,
+    "substitution_ci": [
+      0.05490452444629317,
+      0.1314090833830534
+    ],
+    "echo": 181,
+    "echo_rate": 0.861904761904762,
+    "clean_error": 0,
+    "clean_n": 210,
+    "equivalent": {
+      "n": 138,
+      "substituted": 17,
+      "rate": 0.12318840579710146
+    },
+    "shifted": {
+      "n": 72,
+      "substituted": 1,
+      "rate": 0.013888888888888888
+    },
+    "abstain": 0.0
+  },
+  "qwen3b_pressure": {
+    "n_awkward": 210,
+    "substitution": 17,
+    "substitution_rate": 0.08095238095238096,
+    "substitution_ci": [
+      0.051154461463624706,
+      0.12580642921433507
+    ],
+    "echo": 184,
+    "echo_rate": 0.8761904761904762,
+    "clean_error": 0,
+    "clean_n": 210,
+    "equivalent": {
+      "n": 138,
+      "substituted": 15,
+      "rate": 0.10869565217391304
+    },
+    "shifted": {
+      "n": 72,
+      "substituted": 2,
+      "rate": 0.027777777777777776
+    },
+    "abstain": 0.0
+  },
+  "qwen7b_pressure": {
+    "n_awkward": 210,
+    "substitution": 208,
+    "substitution_rate": 0.9904761904761905,
+    "substitution_ci": [
+      0.9659454811957657,
+      0.997384385397077
+    ],
+    "echo": 1,
+    "echo_rate": 0.004761904761904762,
+    "clean_error": 0,
+    "clean_n": 210,
+    "equivalent": {
+      "n": 138,
+      "substituted": 137,
+      "rate": 0.9927536231884058
+    },
+    "shifted": {
+      "n": 72,
+      "substituted": 71,
+      "rate": 0.9861111111111112
+    },
+    "abstain": 0.0
+  },
+  "mistral7b": {
+    "n_awkward": 210,
+    "substitution": 37,
+    "substitution_rate": 0.1761904761904762,
+    "substitution_ci": [
+      0.13061337248865776,
+      0.23340186121703846
+    ],
+    "echo": 164,
+    "echo_rate": 0.780952380952381,
+    "clean_error": 0,
+    "clean_n": 210,
+    "equivalent": {
+      "n": 138,
+      "substituted": 36,
+      "rate": 0.2608695652173913
+    },
+    "shifted": {
+      "n": 72,
+      "substituted": 1,
+      "rate": 0.013888888888888888
+    },
+    "abstain": 0.0
+  },
+  "paired_qwen7b_vs_qwen3b": {
+    "only_a": 97,
+    "only_b": 0,
+    "both": 18,
+    "neither": 95,
+    "mcnemar_p": 1.262177448353619e-29,
+    "n_items": 210
+  },
+  "paired_qwen3b_vs_pressure": {
+    "only_a": 3,
+    "only_b": 2,
+    "both": 15,
+    "neither": 190,
+    "mcnemar_p": 1.0,
+    "n_items": 210
+  },
+  "paired_qwen7b_vs_pressure": {
+    "only_a": 0,
+    "only_b": 93,
+    "both": 115,
+    "neither": 2,
+    "mcnemar_p": 2.0194839173657902e-28,
+    "n_items": 210
+  },
+  "paired_qwen7b_vs_mistral": {
+    "only_a": 79,
+    "only_b": 1,
+    "both": 36,
+    "neither": 94,
+    "mcnemar_p": 1.3400325923359048e-22,
+    "n_items": 210
+  },
+  "qwen7b_equivalent_vs_shifted_fisher_p": 3.705211620643255e-05,
+  "qwen7b_equivalent_vs_shifted_table": [
+    [
+      90,
+      48
+    ],
+    [
+      25,
+      47
+    ]
+  ],
+  "qwen7b_per_schema": {
+    "n_schemas": 15,
+    "min": 0.13333333333333333,
+    "max": 0.9333333333333333,
+    "counts": {
+      "0": [
+        9,
+        15
+      ],
+      "1": [
+        8,
+        15
+      ],
+      "2": [
+        14,
+        15
+      ],
+      "3": [
+        10,
+        15
+      ],
+      "4": [
+        2,
+        15
+      ],
+      "5": [
+        8,
+        12
+      ],
+      "6": [
+        3,
+        15
+      ],
+      "7": [
+        8,
+        15
+      ],
+      "8": [
+        2,
+        15
+      ],
+      "9": [
+        7,
+        15
+      ],
+      "10": [
+        4,
+        12
+      ],
+      "11": [
+        11,
+        12
+      ],
+      "12": [
+        5,
+        12
+      ],
+      "13": [
+        10,
+        12
+      ],
+      "14": [
+        14,
+        15
+      ]
+    }
+  }
+}

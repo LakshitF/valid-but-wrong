@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the paper and this repository."
+title: "Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It"
+type: software
+authors:
+  - family-names: Farswan
+    given-names: Lakshit
+year: 2026
+license: MIT
+abstract: "Code, frozen item set and result artifacts for a study of silent enum substitution in tool calls and the limits of JSON-schema validation."
+keywords:
+  - tool calling
+  - structured output
+  - JSON schema
+  - LLM evaluation
+  - enum substitution

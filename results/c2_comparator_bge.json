@@ -1,0 +1,1901 @@
+{
+  "model": "BAAI/bge-small-en-v1.5",
+  "folds": 5,
+  "fold_metrics": [
+    {
+      "fold": 1,
+      "pair_auc_lr": 0.6496040177709098,
+      "pair_auc_cosine": 0.6501835039598224,
+      "threshold_cosine": 0.53,
+      "threshold_lr": 0.435
+    },
+    {
+      "fold": 2,
+      "pair_auc_lr": 0.648695652173913,
+      "pair_auc_cosine": 0.648695652173913,
+      "threshold_cosine": 0.535,
+      "threshold_lr": 0.465
+    },
+    {
+      "fold": 3,
+      "pair_auc_lr": 0.5746031746031747,
+      "pair_auc_cosine": 0.5746031746031747,
+      "threshold_cosine": 0.53,
+      "threshold_lr": 0.41000000000000003
+    },
+    {
+      "fold": 4,
+      "pair_auc_lr": 0.6829813664596273,
+      "pair_auc_cosine": 0.6675776397515528,
+      "threshold_cosine": 0.5650000000000001,
+      "threshold_lr": 0.5
+    },
+    {
+      "fold": 5,
+      "pair_auc_lr": 0.6133861309638786,
+      "pair_auc_cosine": 0.6170562101603245,
+      "threshold_cosine": 0.535,
+      "threshold_lr": 0.525
+    }
+  ],
+  "cosine": {
+    "n_evaluated": 115,
+    "n_shifted": 25,
+    "n_equivalent": 90,
+    "detection_shifted": 0.36,
+    "false_alarm_equivalent": 0.24444444444444444,
+    "auc_emitted": 0.5,
+    "evaluations": [
+      {
+        "id": "s00_008",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.5806360244750977,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s00_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5667704939842224,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s01_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5896061658859253,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s01_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7590517997741699,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s02_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.4577828049659729,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s02_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7032885551452637,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s03_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6361360549926758,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s03_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7074588537216187,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s05_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5086085796356201,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s05_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5592411756515503,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s06_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6272071599960327,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s07_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6379691362380981,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s08_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6421673893928528,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s09_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6741088032722473,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s09_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5587149858474731,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s10_004",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.5086466073989868,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s11_000",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5735582709312439,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s11_020",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.695107102394104,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s12_006",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5653694868087769,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s12_016",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.669793963432312,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s13_002",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5685738325119019,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s13_012",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5238858461380005,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s13_022",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.5683127641677856,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6832950711250305,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7092437744140625,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5019209980964661,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s00_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5916041731834412,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s00_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.5339047908782959,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s01_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.7183776497840881,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5025439262390137,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_016",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5261098146438599,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_026",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5876064300537109,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s03_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.6640661954879761,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s03_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.7001811861991882,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s05_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5435218811035156,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s05_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.5338549613952637,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s07_016",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5349991321563721,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s09_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.6160584688186646,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s10_022",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.51460862159729,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s11_008",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5719260573387146,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s11_018",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.6213111877441406,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s13_000",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.6007571220397949,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s13_010",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5990918874740601,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s13_020",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5393412709236145,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s14_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.5243070125579834,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s14_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.5096732378005981,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s00_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.4508514106273651,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s01_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6703267693519592,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s01_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.7595301866531372,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s02_004",
+        "fold": 3,
+        "kind": "shifted",
+        "p_acceptable": 0.6485469341278076,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s02_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.4744575023651123,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s02_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6490522623062134,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s05_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.572320818901062,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s07_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5856992602348328,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s07_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5493495464324951,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s09_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6020821332931519,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s10_000",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.4827805161476135,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s11_006",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6022024154663086,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s11_016",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5890270471572876,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s12_022",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6754406690597534,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s13_008",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5075901746749878,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_004",
+        "fold": 3,
+        "kind": "shifted",
+        "p_acceptable": 0.6370525360107422,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.7452811002731323,
+        "flagged": false,
+        "threshold": 0.53
+      },
+      {
+        "id": "s14_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5130795836448669,
+        "flagged": true,
+        "threshold": 0.53
+      },
+      {
+        "id": "s00_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.48362481594085693,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s01_022",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5732421875,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s02_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6385089159011841,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s02_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5176160931587219,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s02_022",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.7187201380729675,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s03_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5522209405899048,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s03_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5463272929191589,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s03_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.6030303239822388,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s04_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5526056289672852,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s05_002",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.5598505735397339,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s06_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5430724620819092,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s07_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6030418276786804,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s07_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.6029396057128906,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s09_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5883026123046875,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s11_004",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6178746223449707,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s11_014",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6246181726455688,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s12_000",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5668923854827881,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s12_020",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.661453127861023,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s13_016",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5526621341705322,
+        "flagged": true,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s14_002",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.6397897005081177,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s14_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.7215369939804077,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s14_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.7018765211105347,
+        "flagged": false,
+        "threshold": 0.5650000000000001
+      },
+      {
+        "id": "s00_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.4589569866657257,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s00_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5913677215576172,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s00_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5483736991882324,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s01_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6781470775604248,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s01_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5930331945419312,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6307767629623413,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5116351842880249,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s02_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6560563445091248,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s03_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5719131827354431,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s03_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.5266669392585754,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s03_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6728144884109497,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s04_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5754855871200562,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s05_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5782724618911743,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s05_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5078138113021851,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s06_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.637043833732605,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s07_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6171318292617798,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s07_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6185163259506226,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s08_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.550281822681427,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s09_000",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.6002875566482544,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s09_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.6238399744033813,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s10_006",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.42574840784072876,
+        "flagged": true,
+        "threshold": 0.535
+      },
+      {
+        "id": "s11_002",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6054786443710327,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s11_012",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5843204259872437,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s11_022",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6755145788192749,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s13_004",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5561434030532837,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s13_014",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.6182653307914734,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s14_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.64546799659729,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s14_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.6736280918121338,
+        "flagged": false,
+        "threshold": 0.535
+      },
+      {
+        "id": "s14_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.7222834825515747,
+        "flagged": false,
+        "threshold": 0.535
+      }
+    ]
+  },
+  "lr": {
+    "n_evaluated": 115,
+    "n_shifted": 25,
+    "n_equivalent": 90,
+    "detection_shifted": 0.36,
+    "false_alarm_equivalent": 0.34444444444444444,
+    "auc_emitted": 0.508888888888889,
+    "evaluations": [
+      {
+        "id": "s00_008",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.5206308069815643,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s00_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.49714755262128496,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s01_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5357810753612725,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s01_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7844627318529999,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s02_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.3207942403684247,
+        "flagged": true,
+        "threshold": 0.435
+      },
+      {
+        "id": "s02_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7137984075118569,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s03_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6127169202853693,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s03_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.719537833077575,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s05_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.3999606457941273,
+        "flagged": true,
+        "threshold": 0.435
+      },
+      {
+        "id": "s05_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.4843942360826883,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s06_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5982617085430707,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s07_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6156610422475763,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s08_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7878498447815685,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s09_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6717531313655082,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s09_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.4835035317234782,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s10_004",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.4000225055248585,
+        "flagged": true,
+        "threshold": 0.435
+      },
+      {
+        "id": "s11_000",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.50864848047638,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s11_020",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7023368351047364,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s12_006",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.4947737191063668,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s12_016",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.6652723123007318,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s13_002",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.5002032611101682,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s13_012",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.4250489974689173,
+        "flagged": true,
+        "threshold": 0.435
+      },
+      {
+        "id": "s13_022",
+        "fold": 1,
+        "kind": "shifted",
+        "p_acceptable": 0.4997608833913722,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s14_008",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.6853328239774996,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s14_018",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.7219727752731486,
+        "flagged": false,
+        "threshold": 0.435
+      },
+      {
+        "id": "s14_028",
+        "fold": 1,
+        "kind": "equivalent",
+        "p_acceptable": 0.3891331949475545,
+        "flagged": true,
+        "threshold": 0.435
+      },
+      {
+        "id": "s00_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5376888639381874,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s00_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.43871173043272177,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s01_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.7358014025415438,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s02_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.38641518930216573,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s02_016",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.4255369573821932,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s02_026",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5308371747686473,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s03_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.6570467931230134,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s03_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.7107278629433129,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s05_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.4550840477379606,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s05_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.4386272149373762,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s07_016",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.44056872445328804,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s09_006",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5791983555413276,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s10_022",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.4062946977737364,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s11_008",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.5038746370572443,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s11_018",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.5879904609621331,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s13_000",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.553318401606727,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s13_010",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.550481766995759,
+        "flagged": false,
+        "threshold": 0.465
+      },
+      {
+        "id": "s13_020",
+        "fold": 2,
+        "kind": "equivalent",
+        "p_acceptable": 0.44795283537942515,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s14_016",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.4225042231632844,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s14_026",
+        "fold": 2,
+        "kind": "shifted",
+        "p_acceptable": 0.398121275062676,
+        "flagged": true,
+        "threshold": 0.465
+      },
+      {
+        "id": "s00_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.25911145698505966,
+        "flagged": true,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s01_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6998801799113661,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s01_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.8345015144421314,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s02_004",
+        "fold": 3,
+        "kind": "shifted",
+        "p_acceptable": 0.6589110301975141,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s02_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.3001629357490124,
+        "flagged": true,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s02_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.6598921466157116,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s05_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.49987152707938315,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s07_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5287532355432131,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s07_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.45038981515383364,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s09_004",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5638412698152847,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s10_000",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.3154910605316734,
+        "flagged": true,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s11_006",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5640969684877977,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s11_016",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.5359150416802656,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s12_022",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.7090832846542773,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s13_008",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.3635250226065875,
+        "flagged": true,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s14_004",
+        "fold": 3,
+        "kind": "shifted",
+        "p_acceptable": 0.6362392876688154,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s14_014",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.8167814866596375,
+        "flagged": false,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s14_024",
+        "fold": 3,
+        "kind": "equivalent",
+        "p_acceptable": 0.3745743455047184,
+        "flagged": true,
+        "threshold": 0.41000000000000003
+      },
+      {
+        "id": "s00_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.36304261175733166,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s01_022",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5082697937981339,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s02_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6145793819081236,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s02_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.41668360193976367,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s02_022",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.7309384703263754,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s03_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.47338840423025264,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s03_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.46364069525254337,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s03_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.5574806712195691,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s04_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6675775911809466,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s05_002",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.4860364278601766,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s06_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.458268824089842,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s07_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5574995214002679,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s07_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.5573320127017439,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s09_002",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5332304253715472,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s11_004",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5816483843346095,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s11_014",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.5925064075649407,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s12_000",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.4977262541541825,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s12_020",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.6499922178613495,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s13_016",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.47411901947675567,
+        "flagged": true,
+        "threshold": 0.5
+      },
+      {
+        "id": "s14_002",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.6165925555523661,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s14_012",
+        "fold": 4,
+        "kind": "equivalent",
+        "p_acceptable": 0.7346022544496038,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s14_022",
+        "fold": 4,
+        "kind": "shifted",
+        "p_acceptable": 0.7083758453954725,
+        "flagged": false,
+        "threshold": 0.5
+      },
+      {
+        "id": "s00_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.30390625121614356,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s00_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5378160267087175,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s00_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.45840688390329654,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s01_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6886970207165987,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s01_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5408795578551556,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s02_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6090505590269857,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s02_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.39203748033620583,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s02_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6525990688769139,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s03_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5018798744130134,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s03_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.41885721360798706,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s03_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6801702543941398,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s04_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5084912468447305,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s05_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5136469125853637,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s05_010",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.3853152332346007,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s06_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6200409503622084,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s07_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5847493918391445,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s07_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5872361589482619,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s08_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.46191620272371514,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s09_000",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.5541845260207566,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s09_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.5967558122245823,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s10_006",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.25452382381844274,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s11_002",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5636590007982005,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s11_012",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.5248240811228788,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s11_022",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6845031981267375,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s13_004",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.47271864560579846,
+        "flagged": true,
+        "threshold": 0.525
+      },
+      {
+        "id": "s13_014",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.5867856596589144,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s14_000",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.6346206598089233,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s14_010",
+        "fold": 5,
+        "kind": "shifted",
+        "p_acceptable": 0.6814791979058571,
+        "flagged": false,
+        "threshold": 0.525
+      },
+      {
+        "id": "s14_020",
+        "fold": 5,
+        "kind": "equivalent",
+        "p_acceptable": 0.7541378019922406,
+        "flagged": false,
+        "threshold": 0.525
+      }
+    ]
+  }
+}

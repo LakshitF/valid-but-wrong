@@ -1,0 +1,41 @@
+{
+  "7b": {
+    "n": 210,
+    "primary_member": 210,
+    "primary_member_rate": 1.0,
+    "primary_paired": 155,
+    "primary_paired_rate": 0.7380952380952381,
+    "cue_member": 210,
+    "cue_member_rate": 1.0,
+    "cue_paired": 155,
+    "cue_paired_rate": 0.7380952380952381,
+    "rescued_member": 0,
+    "rescued_paired": 0
+  },
+  "3b": {
+    "n": 210,
+    "primary_member": 160,
+    "primary_member_rate": 0.7619047619047619,
+    "primary_paired": 102,
+    "primary_paired_rate": 0.4857142857142857,
+    "cue_member": 160,
+    "cue_member_rate": 0.7619047619047619,
+    "cue_paired": 102,
+    "cue_paired_rate": 0.4857142857142857,
+    "rescued_member": 0,
+    "rescued_paired": 0
+  },
+  "mistral": {
+    "n": 210,
+    "primary_member": 138,
+    "primary_member_rate": 0.6571428571428571,
+    "primary_paired": 106,
+    "primary_paired_rate": 0.5047619047619047,
+    "cue_member": 146,
+    "cue_member_rate": 0.6952380952380952,
+    "cue_paired": 113,
+    "cue_paired_rate": 0.5380952380952381,
+    "rescued_member": 8,
+    "rescued_paired": 7
+  }
+}

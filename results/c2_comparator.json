@@ -1,0 +1,1215 @@
+{
+  "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "n_items": 420,
+  "n_pairs": 990,
+  "n_acceptable_pairs": 138,
+  "n_unacceptable_pairs": 852,
+  "folds": 5,
+  "epochs": 3,
+  "lr": 2e-05,
+  "fold_metrics": [
+    {
+      "fold": 1,
+      "n_train": 792,
+      "n_test": 198,
+      "auc_pairs": 0.6853389994205138,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "fold": 2,
+      "n_train": 792,
+      "n_test": 198,
+      "auc_pairs": 0.613416149068323,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "fold": 3,
+      "n_train": 792,
+      "n_test": 198,
+      "auc_pairs": 0.5809523809523809,
+      "threshold": 0.58
+    },
+    {
+      "fold": 4,
+      "n_train": 792,
+      "n_test": 198,
+      "auc_pairs": 0.6643478260869565,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "fold": 5,
+      "n_train": 792,
+      "n_test": 198,
+      "auc_pairs": 0.6188912497585475,
+      "threshold": 0.4599999999999999
+    }
+  ],
+  "emitted_evaluated": 115,
+  "emitted_shifted": 25,
+  "emitted_equivalent": 90,
+  "detection_shifted": 0.4,
+  "false_alarm_equivalent": 0.32222222222222224,
+  "auc_emitted": 0.5888888888888889,
+  "baselines": {
+    "schema_validation": {
+      "detection": 0.0,
+      "false_alarm": 0.0
+    },
+    "literal_diff": {
+      "detection": 0.861,
+      "false_alarm": 0.822
+    }
+  },
+  "evaluations": [
+    {
+      "id": "s00_008",
+      "fold": 1,
+      "kind": "shifted",
+      "value": "in review",
+      "emitted": "in_progress",
+      "p_acceptable": 0.4311507046222687,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s00_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "fixed",
+      "emitted": "resolved",
+      "p_acceptable": 0.6336225271224976,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s01_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "no longer needed",
+      "emitted": "changed_mind",
+      "p_acceptable": 0.47109490633010864,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s01_028",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "duplicate payment",
+      "emitted": "duplicate_charge",
+      "p_acceptable": 0.8637202978134155,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s02_008",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "one month terms",
+      "emitted": "net_30",
+      "p_acceptable": 0.5124416947364807,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s02_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "cash on delivery",
+      "emitted": "on_delivery",
+      "p_acceptable": 0.7383647561073303,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s03_008",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "fast track",
+      "emitted": "express",
+      "p_acceptable": 0.25985175371170044,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s03_028",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "bulk haulage",
+      "emitted": "freight",
+      "p_acceptable": 0.6291523575782776,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s05_008",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "average",
+      "emitted": "medium",
+      "p_acceptable": 0.32307687401771545,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s05_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "severe",
+      "emitted": "critical",
+      "p_acceptable": 0.4829502999782562,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s06_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "late",
+      "emitted": "overdue",
+      "p_acceptable": 0.3950653076171875,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s07_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "delete",
+      "emitted": "remove",
+      "p_acceptable": 0.747754693031311,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s08_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "administrator",
+      "emitted": "admin",
+      "p_acceptable": 0.49176961183547974,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s09_008",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "half time",
+      "emitted": "part_time",
+      "p_acceptable": 0.5587139129638672,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s09_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "trainee",
+      "emitted": "intern",
+      "p_acceptable": 0.2942526638507843,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s10_004",
+      "fold": 1,
+      "kind": "shifted",
+      "value": "shareable",
+      "emitted": "public",
+      "p_acceptable": 0.3463977575302124,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s11_000",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "attending",
+      "emitted": "accepted",
+      "p_acceptable": 0.5996701121330261,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s11_020",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "unanswered",
+      "emitted": "no_response",
+      "p_acceptable": 0.889535129070282,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s12_006",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "standard",
+      "emitted": "normal",
+      "p_acceptable": 0.3466893136501312,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s12_016",
+      "fold": 1,
+      "kind": "shifted",
+      "value": "soon",
+      "emitted": "urgent",
+      "p_acceptable": 0.7208694815635681,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s13_002",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "am slot",
+      "emitted": "morning",
+      "p_acceptable": 0.2026289850473404,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s13_012",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "after work",
+      "emitted": "evening",
+      "p_acceptable": 0.4414510428905487,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s13_022",
+      "fold": 1,
+      "kind": "shifted",
+      "value": "whole day",
+      "emitted": "anytime",
+      "p_acceptable": 0.3045954406261444,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s14_008",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "castilian",
+      "emitted": "spanish",
+      "p_acceptable": 0.3161838948726654,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s14_018",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "de",
+      "emitted": "german",
+      "p_acceptable": 0.24295318126678467,
+      "flagged_unacceptable": true,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s14_028",
+      "fold": 1,
+      "kind": "equivalent",
+      "value": "unknown",
+      "emitted": "other",
+      "p_acceptable": 0.4128444492816925,
+      "flagged_unacceptable": false,
+      "threshold": 0.32999999999999996
+    },
+    {
+      "id": "s00_006",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "underway",
+      "emitted": "in_progress",
+      "p_acceptable": 0.3731940984725952,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s00_026",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "cancelled",
+      "emitted": "closed",
+      "p_acceptable": 0.46051323413848877,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s01_006",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "incorrect item",
+      "emitted": "wrong_item",
+      "p_acceptable": 0.7517995834350586,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s02_006",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "thirty days",
+      "emitted": "net_30",
+      "p_acceptable": 0.48143211007118225,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s02_016",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "due in 60 days",
+      "emitted": "net_60",
+      "p_acceptable": 0.7317091822624207,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s02_026",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "staged payments",
+      "emitted": "instalments",
+      "p_acceptable": 0.2995137572288513,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s03_016",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "urgent courier",
+      "emitted": "express",
+      "p_acceptable": 0.3665323853492737,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s03_026",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "lorry",
+      "emitted": "freight",
+      "p_acceptable": 0.37866148352622986,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s05_006",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "moderate",
+      "emitted": "medium",
+      "p_acceptable": 0.5847978591918945,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s05_016",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "major",
+      "emitted": "critical",
+      "p_acceptable": 0.5416025519371033,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s07_016",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "second look",
+      "emitted": "review",
+      "p_acceptable": 0.26223188638687134,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s09_006",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "reduced hours",
+      "emitted": "part_time",
+      "p_acceptable": 0.3450908064842224,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s10_022",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "highly sensitive",
+      "emitted": "restricted",
+      "p_acceptable": 0.3907458186149597,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s11_008",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "no",
+      "emitted": "declined",
+      "p_acceptable": 0.6366074681282043,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s11_018",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "pending",
+      "emitted": "tentative",
+      "p_acceptable": 0.6901546716690063,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s13_000",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "before noon",
+      "emitted": "morning",
+      "p_acceptable": 0.6212785840034485,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s13_010",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "after lunch",
+      "emitted": "afternoon",
+      "p_acceptable": 0.5440047979354858,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s13_020",
+      "fold": 2,
+      "kind": "equivalent",
+      "value": "no preference",
+      "emitted": "anytime",
+      "p_acceptable": 0.36003661155700684,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s14_016",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "quebecois",
+      "emitted": "other",
+      "p_acceptable": 0.26317691802978516,
+      "flagged_unacceptable": true,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s14_026",
+      "fold": 2,
+      "kind": "shifted",
+      "value": "mixed",
+      "emitted": "other",
+      "p_acceptable": 0.46242696046829224,
+      "flagged_unacceptable": false,
+      "threshold": 0.41999999999999993
+    },
+    {
+      "id": "s00_024",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "archived",
+      "emitted": "closed",
+      "p_acceptable": 0.3059552311897278,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s01_014",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "never arrived",
+      "emitted": "not_delivered",
+      "p_acceptable": 0.7346035242080688,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s01_024",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "charged twice",
+      "emitted": "duplicate_charge",
+      "p_acceptable": 0.8403599858283997,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s02_004",
+      "fold": 3,
+      "kind": "shifted",
+      "value": "cash before delivery",
+      "emitted": "prepaid",
+      "p_acceptable": 0.6495518684387207,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s02_014",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "two month terms",
+      "emitted": "net_60",
+      "p_acceptable": 0.5888463258743286,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s02_024",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "in parts",
+      "emitted": "instalments",
+      "p_acceptable": 0.4885314702987671,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s05_004",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "small",
+      "emitted": "low",
+      "p_acceptable": 0.6000069379806519,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s07_004",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "pass",
+      "emitted": "allow",
+      "p_acceptable": 0.558698296546936,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s07_014",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "human check",
+      "emitted": "review",
+      "p_acceptable": 0.4191277027130127,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s09_004",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "regular",
+      "emitted": "full_time",
+      "p_acceptable": 0.5012534260749817,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s10_000",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "open",
+      "emitted": "public",
+      "p_acceptable": 0.3078992962837219,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s11_006",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "not attending",
+      "emitted": "declined",
+      "p_acceptable": 0.8344151973724365,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s11_016",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "unsure",
+      "emitted": "tentative",
+      "p_acceptable": 0.6989391446113586,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s12_022",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "asap",
+      "emitted": "urgent",
+      "p_acceptable": 0.756386935710907,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s13_008",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "pm slot",
+      "emitted": "afternoon",
+      "p_acceptable": 0.35766249895095825,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s14_004",
+      "fold": 3,
+      "kind": "shifted",
+      "value": "british",
+      "emitted": "english",
+      "p_acceptable": 0.7370554208755493,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s14_014",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "francais",
+      "emitted": "french",
+      "p_acceptable": 0.8304242491722107,
+      "flagged_unacceptable": false,
+      "threshold": 0.58
+    },
+    {
+      "id": "s14_024",
+      "fold": 3,
+      "kind": "equivalent",
+      "value": "unspecified",
+      "emitted": "other",
+      "p_acceptable": 0.46622586250305176,
+      "flagged_unacceptable": true,
+      "threshold": 0.58
+    },
+    {
+      "id": "s00_022",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "completed",
+      "emitted": "closed",
+      "p_acceptable": 0.4330093264579773,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s01_022",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "unwanted",
+      "emitted": "changed_mind",
+      "p_acceptable": 0.39752426743507385,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s02_002",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "payment in advance",
+      "emitted": "prepaid",
+      "p_acceptable": 0.5676720142364502,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s02_012",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "sixty days",
+      "emitted": "net_60",
+      "p_acceptable": 0.5818935036659241,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s02_022",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "due at delivery",
+      "emitted": "on_delivery",
+      "p_acceptable": 0.8365656733512878,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s03_002",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "economy",
+      "emitted": "standard",
+      "p_acceptable": 0.37044093012809753,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s03_012",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "next day",
+      "emitted": "overnight",
+      "p_acceptable": 0.43621790409088135,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s03_022",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "local depot",
+      "emitted": "pickup_point",
+      "p_acceptable": 0.4208100140094757,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s04_012",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "professional",
+      "emitted": "pro",
+      "p_acceptable": 0.5540672540664673,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s05_002",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "negligible",
+      "emitted": "low",
+      "p_acceptable": 0.50177001953125,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s06_002",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "in preparation",
+      "emitted": "draft",
+      "p_acceptable": 0.3957548439502716,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s07_002",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "approve",
+      "emitted": "allow",
+      "p_acceptable": 0.5912948250770569,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s07_022",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "hide",
+      "emitted": "remove",
+      "p_acceptable": 0.5353721976280212,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s09_002",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "salaried",
+      "emitted": "full_time",
+      "p_acceptable": 0.5273123383522034,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s11_004",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "confirmed",
+      "emitted": "accepted",
+      "p_acceptable": 0.694336473941803,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s11_014",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "provisional",
+      "emitted": "tentative",
+      "p_acceptable": 0.6676573157310486,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s12_000",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "minor",
+      "emitted": "low",
+      "p_acceptable": 0.5473129749298096,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s12_020",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "immediate",
+      "emitted": "urgent",
+      "p_acceptable": 0.7687200307846069,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s13_016",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "late",
+      "emitted": "evening",
+      "p_acceptable": 0.6446141600608826,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s14_002",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "en-gb",
+      "emitted": "english",
+      "p_acceptable": 0.7567065954208374,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s14_012",
+      "fold": 4,
+      "kind": "equivalent",
+      "value": "fr",
+      "emitted": "french",
+      "p_acceptable": 0.4059794843196869,
+      "flagged_unacceptable": true,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s14_022",
+      "fold": 4,
+      "kind": "shifted",
+      "value": "austrian",
+      "emitted": "german",
+      "p_acceptable": 0.587334156036377,
+      "flagged_unacceptable": false,
+      "threshold": 0.49999999999999994
+    },
+    {
+      "id": "s00_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "newly reported",
+      "emitted": "open",
+      "p_acceptable": 0.3910704553127289,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s00_010",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "being worked on",
+      "emitted": "in_progress",
+      "p_acceptable": 0.4060196578502655,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s00_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "done",
+      "emitted": "resolved",
+      "p_acceptable": 0.640225887298584,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s01_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "arrived broken",
+      "emitted": "damaged",
+      "p_acceptable": 0.6910632848739624,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s01_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "bought by mistake",
+      "emitted": "changed_mind",
+      "p_acceptable": 0.546234130859375,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s02_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "paid upfront",
+      "emitted": "prepaid",
+      "p_acceptable": 0.46078887581825256,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s02_010",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "due in 30 days",
+      "emitted": "net_30",
+      "p_acceptable": 0.7074898481369019,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s02_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "pay on receipt",
+      "emitted": "on_delivery",
+      "p_acceptable": 0.6026464104652405,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s03_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "regular post",
+      "emitted": "standard",
+      "p_acceptable": 0.5007582902908325,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s03_010",
+      "fold": 5,
+      "kind": "shifted",
+      "value": "two day",
+      "emitted": "standard",
+      "p_acceptable": 0.41447898745536804,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s03_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "collection point",
+      "emitted": "pickup_point",
+      "p_acceptable": 0.6330133676528931,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s04_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "no cost",
+      "emitted": "free",
+      "p_acceptable": 0.43396034836769104,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s05_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "minor",
+      "emitted": "low",
+      "p_acceptable": 0.5406355857849121,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s05_010",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "mid",
+      "emitted": "medium",
+      "p_acceptable": 0.4726378917694092,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s06_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "past due",
+      "emitted": "overdue",
+      "p_acceptable": 0.40793129801750183,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s07_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "permit",
+      "emitted": "allow",
+      "p_acceptable": 0.8708775639533997,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s07_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "take down",
+      "emitted": "remove",
+      "p_acceptable": 0.7126837372779846,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s08_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "read only",
+      "emitted": "viewer",
+      "p_acceptable": 0.48953768610954285,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s09_000",
+      "fold": 5,
+      "kind": "shifted",
+      "value": "permanent",
+      "emitted": "full_time",
+      "p_acceptable": 0.5201135873794556,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s09_010",
+      "fold": 5,
+      "kind": "shifted",
+      "value": "hourly",
+      "emitted": "part_time",
+      "p_acceptable": 0.41229474544525146,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s10_006",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "staff only",
+      "emitted": "internal",
+      "p_acceptable": 0.3370741307735443,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s11_002",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "yes",
+      "emitted": "accepted",
+      "p_acceptable": 0.8017629384994507,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s11_012",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "maybe",
+      "emitted": "tentative",
+      "p_acceptable": 0.5672153830528259,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s11_022",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "awaiting reply",
+      "emitted": "no_response",
+      "p_acceptable": 0.8331002593040466,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s13_004",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "early",
+      "emitted": "morning",
+      "p_acceptable": 0.6113109588623047,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s13_014",
+      "fold": 5,
+      "kind": "shifted",
+      "value": "night slot",
+      "emitted": "evening",
+      "p_acceptable": 0.6598896384239197,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s14_000",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "en",
+      "emitted": "english",
+      "p_acceptable": 0.8202348947525024,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s14_010",
+      "fold": 5,
+      "kind": "shifted",
+      "value": "latam",
+      "emitted": "spanish",
+      "p_acceptable": 0.36943915486335754,
+      "flagged_unacceptable": true,
+      "threshold": 0.4599999999999999
+    },
+    {
+      "id": "s14_020",
+      "fold": 5,
+      "kind": "equivalent",
+      "value": "deutsch",
+      "emitted": "german",
+      "p_acceptable": 0.4777947962284088,
+      "flagged_unacceptable": false,
+      "threshold": 0.4599999999999999
+    }
+  ]
+}

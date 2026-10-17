@@ -1,0 +1,16 @@
+{
+  "n_both_in_members": 104,
+  "n_only_base_in_members": 11,
+  "n_only_rotated_in_members": 20,
+  "same_member_rate": 0.9519230769230769,
+  "same_index_rate": 0.0,
+  "chance_rate_1_over_k": 0.21212121212121213,
+  "mean_enum_size": 4.714285714285714,
+  "member_shift_counts": {
+    "resolved->closed": 1,
+    "express->overnight": 1,
+    "restricted->confidential": 1,
+    "afternoon->evening": 1,
+    "spanish->other": 1
+  }
+}

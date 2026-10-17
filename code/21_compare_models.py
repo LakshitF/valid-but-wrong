@@ -3,7 +3,7 @@
 Reads results/c2_raw.json (7B base), c2_rot2.json (7B rotated),
 c2_qwen3b.json and c2_qwen3b_rot2.json. Writes RESULTS-c2-replication.md.
 
-Run: .venv/bin/python scripts/21_compare_models.py
+Run: .venv/bin/python code/21_compare_models.py
 """
 from __future__ import annotations
 

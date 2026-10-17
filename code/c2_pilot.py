@@ -31,9 +31,9 @@ NEAR-MISS TAGS. "equivalent" paraphrases could be normalised losslessly;
 substitution rate carried only by "equivalent" is weak, so the two are split.
 
 Run:
-  .venv/bin/python scripts/c2_pilot.py --limit 4 --out results/c2_smoke.json
-  .venv/bin/python scripts/c2_pilot.py --out results/c2_raw.json
-  .venv/bin/python scripts/c2_pilot.py --rotate 2 --out results/c2_rot2.json
+  .venv/bin/python code/c2_pilot.py --limit 4 --out results/c2_smoke.json
+  .venv/bin/python code/c2_pilot.py --out results/c2_raw.json
+  .venv/bin/python code/c2_pilot.py --rotate 2 --out results/c2_rot2.json
 """
 
 from __future__ import annotations
@@ -317,7 +317,7 @@ def summarize(results: list[dict], rotate: int = 0, system_suffix: str = "") -> 
     """All readouts, computed from per-item records only.
 
     Kept separate from generation so stored runs can be re-classified offline
-    with the same arithmetic (see scripts/24_reparse.py).
+    with the same arithmetic (see code/24_reparse.py).
     """
     awk = [r for r in results if r["arm"] == "awkward"]
     cln = [r for r in results if r["arm"] == "clean"]

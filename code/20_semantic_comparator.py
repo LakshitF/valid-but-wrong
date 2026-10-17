@@ -10,7 +10,7 @@ Input:  results/c2_raw.json (the frozen 420-item base pass)
 Output: results/c2_comparator.json, RESULTS-c2-comparator.md
 
 Run:
-  .venv/bin/python scripts/20_semantic_comparator.py
+  .venv/bin/python code/20_semantic_comparator.py
 """
 from __future__ import annotations
 

@@ -4,7 +4,7 @@ Writes results/c2_headline_stats.json. Nothing here is hand-copied into the
 draft; the draft reads these values.
 
 Run:
-  .venv/bin/python scripts/23_headline_stats.py
+  .venv/bin/python code/23_headline_stats.py
 """
 from __future__ import annotations
 

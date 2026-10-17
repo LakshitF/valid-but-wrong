@@ -4,7 +4,7 @@ Reads whichever result files exist and writes figures/*.pdf and *.png.
 Every plotted number is computed from the JSON artifacts, never hand-typed.
 
 Run:
-  .venv/bin/python scripts/30_figures.py
+  .venv/bin/python code/30_figures.py
 """
 from __future__ import annotations
 

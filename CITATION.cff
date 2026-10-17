@@ -5,12 +5,23 @@ type: software
 authors:
   - family-names: Farswan
     given-names: Lakshit
+    affiliation: "Department of Computer Science, The University of Texas at Austin"
 year: 2026
 license: MIT
-abstract: "Code, frozen item set and result artifacts for a study of silent enum substitution in tool calls and the limits of JSON-schema validation."
+abstract: "Code, frozen item set and result artifacts for a study of silent enum substitution in tool calls and the limits of JSON-schema validation. Code is MIT-licensed; items, results, figures and manuscript text are CC BY 4.0 (see LICENSE-DATA)."
 keywords:
   - tool calling
   - structured output
   - JSON schema
   - LLM evaluation
   - enum substitution
+preferred-citation:
+  type: article
+  title: "Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It"
+  authors:
+    - family-names: Farswan
+      given-names: Lakshit
+      affiliation: "Department of Computer Science, The University of Texas at Austin"
+  year: 2026
+  journal: "arXiv preprint"
+  notes: "Preprint. arXiv identifier to be added after announcement."

@@ -15,7 +15,7 @@ Input:  results/c2_raw.json
 Output: results/c2_comparator_bge.json, RESULTS-c2-comparator-bge.md
 
 Run:
-  .venv/bin/python scripts/22_bge_comparator.py
+  .venv/bin/python code/22_bge_comparator.py
 """
 from __future__ import annotations
 

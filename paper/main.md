@@ -1,6 +1,6 @@
 ---
 title: "Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It"
-author: "Lakshit Farswan"
+author: "Lakshit Farswan  \nDepartment of Computer Science, The University of Texas at Austin"
 date: "2026"
 ---
 
@@ -973,7 +973,7 @@ The fifteen schemas, 420 items, prompts, system-prompt arms, per-item
 generations, result JSONs, the pre-registration and its follow-up addendum,
 and every analysis script are released at
 
-`https://github.com/LakshitF/PracticeAI/tree/main/csml/submission`
+`https://github.com/LakshitF/valid-but-wrong`
 
 Every number in §5 is produced by one of those scripts from a released JSON;
 none is hand-transcribed.
@@ -1130,7 +1130,8 @@ Neural Information Processing Systems*.
 
 # Appendix A. Use of AI in this project
 
-Claude (Anthropic) was used as a research assistant throughout. Its uses were:
+Claude (Anthropic), used through the Claude Code interface between September
+and October 2026, was a research assistant throughout. Its uses were:
 literature orientation and novelty checking (locating the closest prior work
 and verifying that the enum-conflict cell was unoccupied); writing the
 experiment harness and analysis scripts; running the analyses; and drafting

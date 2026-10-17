@@ -16,8 +16,8 @@ Rules for using this script honestly
   the narrow bug fix it claims to be, and the change must be re-examined.
 
 Run:
-  .venv/bin/python scripts/24_reparse.py            # dry run, print diffs
-  .venv/bin/python scripts/24_reparse.py --apply    # rewrite results in place
+  .venv/bin/python code/24_reparse.py            # dry run, print diffs
+  .venv/bin/python code/24_reparse.py --apply    # rewrite results in place
 """
 from __future__ import annotations
 

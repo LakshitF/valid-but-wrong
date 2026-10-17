@@ -206,7 +206,8 @@ def render(tok, s: dict, item: dict, rotate: int) -> str:
         },
     ]
     return tok.apply_chat_template(
-        msgs, tools=[schema], tokenize=False, add_generation_prompt=True
+        msgs, tools=[schema], tokenize=False, add_generation_prompt=True,
+        enable_thinking=False,
     )
 
 
@@ -251,15 +252,24 @@ def main() -> int:
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
     tok = AutoTokenizer.from_pretrained(args.model)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model,
-        quantization_config=BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16,
-        ),
-        device_map="cuda",
+    quant = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
     )
+    try:
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model, quantization_config=quant, device_map="cuda"
+        )
+    except (ValueError, KeyError):
+        # Current multimodal checkpoints (e.g. Qwen3.5) are conditional-
+        # generation models rather than causal LMs. Text-only prompts still
+        # work through the same generate() path.
+        from transformers import AutoModelForImageTextToText
+
+        model = AutoModelForImageTextToText.from_pretrained(
+            args.model, quantization_config=quant, device_map="cuda"
+        )
     model.eval()
 
     # Smoke the template once so a template failure is not 300 failures.

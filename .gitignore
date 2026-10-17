@@ -15,8 +15,11 @@ paper/main.out
 .plans/
 guides/
 proposal.md
+review-result.md
 CLAUDE.md
 .venv
 csml-submit/
 temp.txt
 .claude/
+.openrouter_key
+.env

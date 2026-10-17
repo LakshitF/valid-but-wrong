@@ -6,6 +6,7 @@ authors:
   - family-names: Farswan
     given-names: Lakshit
     affiliation: "Department of Computer Science, The University of Texas at Austin"
+    email: "lf24586@my.utexas.edu"
 year: 2026
 license: MIT
 abstract: "Code, frozen item set and result artifacts for a study of silent enum substitution in tool calls and the limits of JSON-schema validation. Code is MIT-licensed; items, results, figures and manuscript text are CC BY 4.0 (see LICENSE-DATA)."
@@ -22,6 +23,7 @@ preferred-citation:
     - family-names: Farswan
       given-names: Lakshit
       affiliation: "Department of Computer Science, The University of Texas at Austin"
+      email: "lf24586@my.utexas.edu"
   year: 2026
   journal: "arXiv preprint"
   notes: "Preprint. arXiv identifier to be added after announcement."

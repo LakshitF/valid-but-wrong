@@ -1,0 +1,861 @@
+{
+  "definition": "flag when the emitted value is not a verbatim substring of the rendered instruction",
+  "instruction_template": "Set the {field} to \"{value}\" for record {rid}.",
+  "substituted": {
+    "n": 115,
+    "flagged": 113,
+    "rate": 0.9826086956521739,
+    "ci": [
+      0.9387986235183484,
+      0.9952177478532923
+    ]
+  },
+  "equivalent": {
+    "n": 90,
+    "flagged": 88,
+    "rate": 0.9777777777777777,
+    "ci": [
+      0.9225532261919241,
+      0.9938846862051364
+    ]
+  },
+  "shifted": {
+    "n": 25,
+    "flagged": 25,
+    "rate": 1.0,
+    "ci": [
+      0.8668035060468212,
+      1.0
+    ]
+  },
+  "clean_control": {
+    "n": 210,
+    "flagged": 0,
+    "rate": 0.0,
+    "ci": [
+      0.0,
+      0.017964699104383804
+    ]
+  },
+  "unflagged_substituted": [
+    {
+      "id": "s04_012",
+      "value": "professional",
+      "emitted": "pro",
+      "near_miss_kind": "equivalent"
+    },
+    {
+      "id": "s08_018",
+      "value": "administrator",
+      "emitted": "admin",
+      "near_miss_kind": "equivalent"
+    }
+  ],
+  "per_item": [
+    {
+      "id": "s00_000",
+      "near_miss_kind": "equivalent",
+      "value": "newly reported",
+      "emitted": "open",
+      "flagged": true
+    },
+    {
+      "id": "s00_006",
+      "near_miss_kind": "equivalent",
+      "value": "underway",
+      "emitted": "in_progress",
+      "flagged": true
+    },
+    {
+      "id": "s00_008",
+      "near_miss_kind": "shifted",
+      "value": "in review",
+      "emitted": "in_progress",
+      "flagged": true
+    },
+    {
+      "id": "s00_010",
+      "near_miss_kind": "equivalent",
+      "value": "being worked on",
+      "emitted": "in_progress",
+      "flagged": true
+    },
+    {
+      "id": "s00_018",
+      "near_miss_kind": "equivalent",
+      "value": "fixed",
+      "emitted": "resolved",
+      "flagged": true
+    },
+    {
+      "id": "s00_020",
+      "near_miss_kind": "equivalent",
+      "value": "done",
+      "emitted": "resolved",
+      "flagged": true
+    },
+    {
+      "id": "s00_022",
+      "near_miss_kind": "shifted",
+      "value": "completed",
+      "emitted": "closed",
+      "flagged": true
+    },
+    {
+      "id": "s00_024",
+      "near_miss_kind": "equivalent",
+      "value": "archived",
+      "emitted": "closed",
+      "flagged": true
+    },
+    {
+      "id": "s00_026",
+      "near_miss_kind": "shifted",
+      "value": "cancelled",
+      "emitted": "closed",
+      "flagged": true
+    },
+    {
+      "id": "s01_000",
+      "near_miss_kind": "equivalent",
+      "value": "arrived broken",
+      "emitted": "damaged",
+      "flagged": true
+    },
+    {
+      "id": "s01_006",
+      "near_miss_kind": "equivalent",
+      "value": "incorrect item",
+      "emitted": "wrong_item",
+      "flagged": true
+    },
+    {
+      "id": "s01_014",
+      "near_miss_kind": "equivalent",
+      "value": "never arrived",
+      "emitted": "not_delivered",
+      "flagged": true
+    },
+    {
+      "id": "s01_018",
+      "near_miss_kind": "equivalent",
+      "value": "no longer needed",
+      "emitted": "changed_mind",
+      "flagged": true
+    },
+    {
+      "id": "s01_020",
+      "near_miss_kind": "equivalent",
+      "value": "bought by mistake",
+      "emitted": "changed_mind",
+      "flagged": true
+    },
+    {
+      "id": "s01_022",
+      "near_miss_kind": "equivalent",
+      "value": "unwanted",
+      "emitted": "changed_mind",
+      "flagged": true
+    },
+    {
+      "id": "s01_024",
+      "near_miss_kind": "equivalent",
+      "value": "charged twice",
+      "emitted": "duplicate_charge",
+      "flagged": true
+    },
+    {
+      "id": "s01_028",
+      "near_miss_kind": "equivalent",
+      "value": "duplicate payment",
+      "emitted": "duplicate_charge",
+      "flagged": true
+    },
+    {
+      "id": "s02_000",
+      "near_miss_kind": "equivalent",
+      "value": "paid upfront",
+      "emitted": "prepaid",
+      "flagged": true
+    },
+    {
+      "id": "s02_002",
+      "near_miss_kind": "equivalent",
+      "value": "payment in advance",
+      "emitted": "prepaid",
+      "flagged": true
+    },
+    {
+      "id": "s02_004",
+      "near_miss_kind": "shifted",
+      "value": "cash before delivery",
+      "emitted": "prepaid",
+      "flagged": true
+    },
+    {
+      "id": "s02_006",
+      "near_miss_kind": "equivalent",
+      "value": "thirty days",
+      "emitted": "net_30",
+      "flagged": true
+    },
+    {
+      "id": "s02_008",
+      "near_miss_kind": "equivalent",
+      "value": "one month terms",
+      "emitted": "net_30",
+      "flagged": true
+    },
+    {
+      "id": "s02_010",
+      "near_miss_kind": "equivalent",
+      "value": "due in 30 days",
+      "emitted": "net_30",
+      "flagged": true
+    },
+    {
+      "id": "s02_012",
+      "near_miss_kind": "equivalent",
+      "value": "sixty days",
+      "emitted": "net_60",
+      "flagged": true
+    },
+    {
+      "id": "s02_014",
+      "near_miss_kind": "equivalent",
+      "value": "two month terms",
+      "emitted": "net_60",
+      "flagged": true
+    },
+    {
+      "id": "s02_016",
+      "near_miss_kind": "equivalent",
+      "value": "due in 60 days",
+      "emitted": "net_60",
+      "flagged": true
+    },
+    {
+      "id": "s02_018",
+      "near_miss_kind": "equivalent",
+      "value": "cash on delivery",
+      "emitted": "on_delivery",
+      "flagged": true
+    },
+    {
+      "id": "s02_020",
+      "near_miss_kind": "equivalent",
+      "value": "pay on receipt",
+      "emitted": "on_delivery",
+      "flagged": true
+    },
+    {
+      "id": "s02_022",
+      "near_miss_kind": "equivalent",
+      "value": "due at delivery",
+      "emitted": "on_delivery",
+      "flagged": true
+    },
+    {
+      "id": "s02_024",
+      "near_miss_kind": "equivalent",
+      "value": "in parts",
+      "emitted": "instalments",
+      "flagged": true
+    },
+    {
+      "id": "s02_026",
+      "near_miss_kind": "equivalent",
+      "value": "staged payments",
+      "emitted": "instalments",
+      "flagged": true
+    },
+    {
+      "id": "s03_000",
+      "near_miss_kind": "equivalent",
+      "value": "regular post",
+      "emitted": "standard",
+      "flagged": true
+    },
+    {
+      "id": "s03_002",
+      "near_miss_kind": "equivalent",
+      "value": "economy",
+      "emitted": "standard",
+      "flagged": true
+    },
+    {
+      "id": "s03_008",
+      "near_miss_kind": "equivalent",
+      "value": "fast track",
+      "emitted": "express",
+      "flagged": true
+    },
+    {
+      "id": "s03_010",
+      "near_miss_kind": "shifted",
+      "value": "two day",
+      "emitted": "standard",
+      "flagged": true
+    },
+    {
+      "id": "s03_012",
+      "near_miss_kind": "equivalent",
+      "value": "next day",
+      "emitted": "overnight",
+      "flagged": true
+    },
+    {
+      "id": "s03_016",
+      "near_miss_kind": "shifted",
+      "value": "urgent courier",
+      "emitted": "express",
+      "flagged": true
+    },
+    {
+      "id": "s03_020",
+      "near_miss_kind": "equivalent",
+      "value": "collection point",
+      "emitted": "pickup_point",
+      "flagged": true
+    },
+    {
+      "id": "s03_022",
+      "near_miss_kind": "shifted",
+      "value": "local depot",
+      "emitted": "pickup_point",
+      "flagged": true
+    },
+    {
+      "id": "s03_026",
+      "near_miss_kind": "shifted",
+      "value": "lorry",
+      "emitted": "freight",
+      "flagged": true
+    },
+    {
+      "id": "s03_028",
+      "near_miss_kind": "equivalent",
+      "value": "bulk haulage",
+      "emitted": "freight",
+      "flagged": true
+    },
+    {
+      "id": "s04_000",
+      "near_miss_kind": "equivalent",
+      "value": "no cost",
+      "emitted": "free",
+      "flagged": true
+    },
+    {
+      "id": "s04_012",
+      "near_miss_kind": "equivalent",
+      "value": "professional",
+      "emitted": "pro",
+      "flagged": false
+    },
+    {
+      "id": "s05_000",
+      "near_miss_kind": "equivalent",
+      "value": "minor",
+      "emitted": "low",
+      "flagged": true
+    },
+    {
+      "id": "s05_002",
+      "near_miss_kind": "shifted",
+      "value": "negligible",
+      "emitted": "low",
+      "flagged": true
+    },
+    {
+      "id": "s05_004",
+      "near_miss_kind": "equivalent",
+      "value": "small",
+      "emitted": "low",
+      "flagged": true
+    },
+    {
+      "id": "s05_006",
+      "near_miss_kind": "equivalent",
+      "value": "moderate",
+      "emitted": "medium",
+      "flagged": true
+    },
+    {
+      "id": "s05_008",
+      "near_miss_kind": "equivalent",
+      "value": "average",
+      "emitted": "medium",
+      "flagged": true
+    },
+    {
+      "id": "s05_010",
+      "near_miss_kind": "equivalent",
+      "value": "mid",
+      "emitted": "medium",
+      "flagged": true
+    },
+    {
+      "id": "s05_016",
+      "near_miss_kind": "shifted",
+      "value": "major",
+      "emitted": "critical",
+      "flagged": true
+    },
+    {
+      "id": "s05_018",
+      "near_miss_kind": "equivalent",
+      "value": "severe",
+      "emitted": "critical",
+      "flagged": true
+    },
+    {
+      "id": "s06_002",
+      "near_miss_kind": "equivalent",
+      "value": "in preparation",
+      "emitted": "draft",
+      "flagged": true
+    },
+    {
+      "id": "s06_018",
+      "near_miss_kind": "equivalent",
+      "value": "late",
+      "emitted": "overdue",
+      "flagged": true
+    },
+    {
+      "id": "s06_020",
+      "near_miss_kind": "equivalent",
+      "value": "past due",
+      "emitted": "overdue",
+      "flagged": true
+    },
+    {
+      "id": "s07_000",
+      "near_miss_kind": "equivalent",
+      "value": "permit",
+      "emitted": "allow",
+      "flagged": true
+    },
+    {
+      "id": "s07_002",
+      "near_miss_kind": "equivalent",
+      "value": "approve",
+      "emitted": "allow",
+      "flagged": true
+    },
+    {
+      "id": "s07_004",
+      "near_miss_kind": "equivalent",
+      "value": "pass",
+      "emitted": "allow",
+      "flagged": true
+    },
+    {
+      "id": "s07_014",
+      "near_miss_kind": "equivalent",
+      "value": "human check",
+      "emitted": "review",
+      "flagged": true
+    },
+    {
+      "id": "s07_016",
+      "near_miss_kind": "equivalent",
+      "value": "second look",
+      "emitted": "review",
+      "flagged": true
+    },
+    {
+      "id": "s07_018",
+      "near_miss_kind": "equivalent",
+      "value": "delete",
+      "emitted": "remove",
+      "flagged": true
+    },
+    {
+      "id": "s07_020",
+      "near_miss_kind": "equivalent",
+      "value": "take down",
+      "emitted": "remove",
+      "flagged": true
+    },
+    {
+      "id": "s07_022",
+      "near_miss_kind": "shifted",
+      "value": "hide",
+      "emitted": "remove",
+      "flagged": true
+    },
+    {
+      "id": "s08_000",
+      "near_miss_kind": "equivalent",
+      "value": "read only",
+      "emitted": "viewer",
+      "flagged": true
+    },
+    {
+      "id": "s08_018",
+      "near_miss_kind": "equivalent",
+      "value": "administrator",
+      "emitted": "admin",
+      "flagged": false
+    },
+    {
+      "id": "s09_000",
+      "near_miss_kind": "shifted",
+      "value": "permanent",
+      "emitted": "full_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_002",
+      "near_miss_kind": "equivalent",
+      "value": "salaried",
+      "emitted": "full_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_004",
+      "near_miss_kind": "equivalent",
+      "value": "regular",
+      "emitted": "full_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_006",
+      "near_miss_kind": "equivalent",
+      "value": "reduced hours",
+      "emitted": "part_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_008",
+      "near_miss_kind": "equivalent",
+      "value": "half time",
+      "emitted": "part_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_010",
+      "near_miss_kind": "shifted",
+      "value": "hourly",
+      "emitted": "part_time",
+      "flagged": true
+    },
+    {
+      "id": "s09_018",
+      "near_miss_kind": "equivalent",
+      "value": "trainee",
+      "emitted": "intern",
+      "flagged": true
+    },
+    {
+      "id": "s10_000",
+      "near_miss_kind": "equivalent",
+      "value": "open",
+      "emitted": "public",
+      "flagged": true
+    },
+    {
+      "id": "s10_004",
+      "near_miss_kind": "shifted",
+      "value": "shareable",
+      "emitted": "public",
+      "flagged": true
+    },
+    {
+      "id": "s10_006",
+      "near_miss_kind": "equivalent",
+      "value": "staff only",
+      "emitted": "internal",
+      "flagged": true
+    },
+    {
+      "id": "s10_022",
+      "near_miss_kind": "shifted",
+      "value": "highly sensitive",
+      "emitted": "restricted",
+      "flagged": true
+    },
+    {
+      "id": "s11_000",
+      "near_miss_kind": "equivalent",
+      "value": "attending",
+      "emitted": "accepted",
+      "flagged": true
+    },
+    {
+      "id": "s11_002",
+      "near_miss_kind": "equivalent",
+      "value": "yes",
+      "emitted": "accepted",
+      "flagged": true
+    },
+    {
+      "id": "s11_004",
+      "near_miss_kind": "equivalent",
+      "value": "confirmed",
+      "emitted": "accepted",
+      "flagged": true
+    },
+    {
+      "id": "s11_006",
+      "near_miss_kind": "equivalent",
+      "value": "not attending",
+      "emitted": "declined",
+      "flagged": true
+    },
+    {
+      "id": "s11_008",
+      "near_miss_kind": "equivalent",
+      "value": "no",
+      "emitted": "declined",
+      "flagged": true
+    },
+    {
+      "id": "s11_012",
+      "near_miss_kind": "equivalent",
+      "value": "maybe",
+      "emitted": "tentative",
+      "flagged": true
+    },
+    {
+      "id": "s11_014",
+      "near_miss_kind": "equivalent",
+      "value": "provisional",
+      "emitted": "tentative",
+      "flagged": true
+    },
+    {
+      "id": "s11_016",
+      "near_miss_kind": "equivalent",
+      "value": "unsure",
+      "emitted": "tentative",
+      "flagged": true
+    },
+    {
+      "id": "s11_018",
+      "near_miss_kind": "shifted",
+      "value": "pending",
+      "emitted": "tentative",
+      "flagged": true
+    },
+    {
+      "id": "s11_020",
+      "near_miss_kind": "equivalent",
+      "value": "unanswered",
+      "emitted": "no_response",
+      "flagged": true
+    },
+    {
+      "id": "s11_022",
+      "near_miss_kind": "equivalent",
+      "value": "awaiting reply",
+      "emitted": "no_response",
+      "flagged": true
+    },
+    {
+      "id": "s12_000",
+      "near_miss_kind": "equivalent",
+      "value": "minor",
+      "emitted": "low",
+      "flagged": true
+    },
+    {
+      "id": "s12_006",
+      "near_miss_kind": "equivalent",
+      "value": "standard",
+      "emitted": "normal",
+      "flagged": true
+    },
+    {
+      "id": "s12_016",
+      "near_miss_kind": "shifted",
+      "value": "soon",
+      "emitted": "urgent",
+      "flagged": true
+    },
+    {
+      "id": "s12_020",
+      "near_miss_kind": "equivalent",
+      "value": "immediate",
+      "emitted": "urgent",
+      "flagged": true
+    },
+    {
+      "id": "s12_022",
+      "near_miss_kind": "equivalent",
+      "value": "asap",
+      "emitted": "urgent",
+      "flagged": true
+    },
+    {
+      "id": "s13_000",
+      "near_miss_kind": "equivalent",
+      "value": "before noon",
+      "emitted": "morning",
+      "flagged": true
+    },
+    {
+      "id": "s13_002",
+      "near_miss_kind": "equivalent",
+      "value": "am slot",
+      "emitted": "morning",
+      "flagged": true
+    },
+    {
+      "id": "s13_004",
+      "near_miss_kind": "equivalent",
+      "value": "early",
+      "emitted": "morning",
+      "flagged": true
+    },
+    {
+      "id": "s13_008",
+      "near_miss_kind": "equivalent",
+      "value": "pm slot",
+      "emitted": "afternoon",
+      "flagged": true
+    },
+    {
+      "id": "s13_010",
+      "near_miss_kind": "equivalent",
+      "value": "after lunch",
+      "emitted": "afternoon",
+      "flagged": true
+    },
+    {
+      "id": "s13_012",
+      "near_miss_kind": "equivalent",
+      "value": "after work",
+      "emitted": "evening",
+      "flagged": true
+    },
+    {
+      "id": "s13_014",
+      "near_miss_kind": "shifted",
+      "value": "night slot",
+      "emitted": "evening",
+      "flagged": true
+    },
+    {
+      "id": "s13_016",
+      "near_miss_kind": "equivalent",
+      "value": "late",
+      "emitted": "evening",
+      "flagged": true
+    },
+    {
+      "id": "s13_020",
+      "near_miss_kind": "equivalent",
+      "value": "no preference",
+      "emitted": "anytime",
+      "flagged": true
+    },
+    {
+      "id": "s13_022",
+      "near_miss_kind": "shifted",
+      "value": "whole day",
+      "emitted": "anytime",
+      "flagged": true
+    },
+    {
+      "id": "s14_000",
+      "near_miss_kind": "equivalent",
+      "value": "en",
+      "emitted": "english",
+      "flagged": true
+    },
+    {
+      "id": "s14_002",
+      "near_miss_kind": "shifted",
+      "value": "en-gb",
+      "emitted": "english",
+      "flagged": true
+    },
+    {
+      "id": "s14_004",
+      "near_miss_kind": "shifted",
+      "value": "british",
+      "emitted": "english",
+      "flagged": true
+    },
+    {
+      "id": "s14_008",
+      "near_miss_kind": "equivalent",
+      "value": "castilian",
+      "emitted": "spanish",
+      "flagged": true
+    },
+    {
+      "id": "s14_010",
+      "near_miss_kind": "shifted",
+      "value": "latam",
+      "emitted": "spanish",
+      "flagged": true
+    },
+    {
+      "id": "s14_012",
+      "near_miss_kind": "equivalent",
+      "value": "fr",
+      "emitted": "french",
+      "flagged": true
+    },
+    {
+      "id": "s14_014",
+      "near_miss_kind": "equivalent",
+      "value": "francais",
+      "emitted": "french",
+      "flagged": true
+    },
+    {
+      "id": "s14_016",
+      "near_miss_kind": "shifted",
+      "value": "quebecois",
+      "emitted": "other",
+      "flagged": true
+    },
+    {
+      "id": "s14_018",
+      "near_miss_kind": "equivalent",
+      "value": "de",
+      "emitted": "german",
+      "flagged": true
+    },
+    {
+      "id": "s14_020",
+      "near_miss_kind": "equivalent",
+      "value": "deutsch",
+      "emitted": "german",
+      "flagged": true
+    },
+    {
+      "id": "s14_022",
+      "near_miss_kind": "shifted",
+      "value": "austrian",
+      "emitted": "german",
+      "flagged": true
+    },
+    {
+      "id": "s14_024",
+      "near_miss_kind": "equivalent",
+      "value": "unspecified",
+      "emitted": "other",
+      "flagged": true
+    },
+    {
+      "id": "s14_026",
+      "near_miss_kind": "shifted",
+      "value": "mixed",
+      "emitted": "other",
+      "flagged": true
+    },
+    {
+      "id": "s14_028",
+      "near_miss_kind": "equivalent",
+      "value": "unknown",
+      "emitted": "other",
+      "flagged": true
+    }
+  ]
+}

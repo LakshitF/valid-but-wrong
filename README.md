@@ -4,7 +4,7 @@ Release accompanying the paper *"Valid but Wrong: Silent Enum Substitution in
 Tool Calls, and Why Schema Validation Cannot See It"* (Lakshit Farswan,
 Department of Computer Science, The University of Texas at Austin, 2026).
 
-**Paper:** `paper/main.pdf` (source `paper/main.md`), 22 pages.
+**Paper:** `paper/main.pdf` (source `paper/main.md`), 26 pages.
 
 ## What is here
 
@@ -20,10 +20,14 @@ Department of Computer Science, The University of Texas at Austin, 2026).
 | `code/23_headline_stats.py` | Wilson intervals, exact McNemar, Fisher tests |
 | `code/21_compare_models.py` | Cross-model table |
 | `code/24_reparse.py` | Re-scores stored generations from their saved text (see note below) |
+| `code/25_literal_check.py` | Deterministic literal check: flags a call whose value is not verbatim in the instruction |
 | `code/40_comprehension.py` | Prose comprehension control: can a model map the value to a member at all? |
 | `code/42_retry.py` | Validation-retry control: what an echoed call becomes on one retry |
 | `code/43_extra_stats.py` | Wilson intervals and paired tests for the three added controls |
 | `code/44_comprehension_parse.py` | Post-hoc cue-based re-parse of the prose-probe completions |
+| `code/45_cluster_stats.py` | Schema-level bootstrap intervals for the headline rates |
+| `code/47_llm_judge.py` | Zero-shot LLM judge on the emitted substitutions |
+| `code/48_openrouter.py` | Hosted tool-call arm with a closed enum and an enum-removed control |
 | `code/30_figures.py` | All four figures |
 | `PREREGISTRATION-c2.md` | Readouts, gates and decision rules, frozen before the primary runs |
 | `PREREGISTRATION-c2-addendum.md` | The three post-primary controls, declared descriptive rather than confirmatory |
@@ -77,6 +81,29 @@ which allowed value they want." --out results/c2_abstain_7b.json
 .venv/bin/python code/42_retry.py --model Qwen/Qwen2.5-7B-Instruct \
     --base results/c2_raw.json --out results/c2_retry_7b.json
 
+# same retry, error message withholding the allowed-value list
+.venv/bin/python code/42_retry.py --model Qwen/Qwen2.5-7B-Instruct --no-list \
+    --base results/c2_raw.json --out results/c2_retry_nolist_7b.json
+
+# zero-shot LLM judge on the emitted substitutions
+.venv/bin/python code/47_llm_judge.py --model Qwen/Qwen3.5-9B \
+    --base results/c2_raw.json --out results/c2_llm_judge_qwen35_9b.json
+
+# hosted arm (needs OPENROUTER_API_KEY); closed enum, then enum removed
+.venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-9b \
+    --provider SiliconFlow --out results/c2_qwen35_9b_api.json
+.venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-9b \
+    --provider SiliconFlow --no-enum --out results/c2_qwen35_9b_api_noenum.json
+
+# enum-enforcement probe: all 210 awkward items, explicit demand for a made-up non-member
+.venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-9b \
+    --provider SiliconFlow --probe --limit 210 --out results/c2_enum_probe_closed.json
+.venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-9b \
+    --provider SiliconFlow --probe --no-enum --limit 210 --out results/c2_enum_probe_open.json
+
+# literal check on the stored calls (no model run)
+.venv/bin/python code/25_literal_check.py
+
 # comparators
 .venv/bin/python code/20_semantic_comparator.py
 .venv/bin/python code/22_bge_comparator.py
@@ -89,9 +116,18 @@ which allowed value they want." --out results/c2_abstain_7b.json
 .venv/bin/python code/30_figures.py
 ```
 
-Model weights are not included (per the course's guidance). Nothing needs to be
+Model weights are not included. Nothing needs to be
 trained before the runner can be used; the comparators train inside their own
 scripts.
+
+The pre-registration was written before the release layout was fixed. It refers
+to `items/c2_items.py` and `scripts/c2_pilot.py`; in this repository those files
+are `code/c2_items.py` and `code/c2_pilot.py`. The code is otherwise unchanged.
+`code/45_cluster_stats.py` is the schema-clustered bootstrap added in revision;
+it reads the same released JSONs and writes `results/c2_cluster_stats.json`.
+`results/c2_downstream.json` is retained from an earlier reviewer-based audit;
+it is not the literal check. The paper's §5.8 numbers are reproduced by
+`code/25_literal_check.py` from `results/c2_raw.json`.
 
 ## Building the PDF
 
@@ -121,15 +157,15 @@ citation manager.
 arXiv does not accept Markdown as source. `paper/build_arxiv.sh` writes
 `paper/arxiv/` (`main.tex` plus `figures/`) and the upload tarball
 `paper/arxiv.tar.gz`; both are generated and git-ignored. The tarball was
-compiled with tectonic at 22 pages before this README was written.
+compiled with tectonic at 26 pages before this README was written.
 
 ```bash
 cd paper && ./build_arxiv.sh
 ```
 
 Categories, the Comments field, the author-block conventions used by UT Austin
-papers, and the plain-text abstract for arXiv's metadata field (2,406
-characters in the paper, 1,902 in the field's 1,920-character limit) are in
+papers, and the plain-text abstract for arXiv's metadata field (3,182
+characters in the paper, 1,889 in the field's 1,920-character limit) are in
 `paper/ARXIV-SUBMISSION.md`.
 
 ## Note on `24_reparse.py`

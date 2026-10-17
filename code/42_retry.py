@@ -34,6 +34,15 @@ RETRY_TEMPLATE = (
     "Respond to the original instruction."
 )
 
+# The no-list arm omits the allowed values. The base retry lists them, as a
+# validator's error commonly does, which makes the option set salient at the
+# moment the model revises; this arm separates schema pressure from salience.
+RETRY_TEMPLATE_NO_LIST = (
+    'Your previous tool call was rejected by schema validation: the value '
+    '"{value}" is not one of the allowed values for this field. '
+    "Respond to the original instruction."
+)
+
 
 def summarize(rows: list[dict]) -> dict:
     n = len(rows)
@@ -68,6 +77,11 @@ def main() -> int:
     ap.add_argument("--base", required=True, help="base result JSON with echoes")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--max-new-tokens", type=int, default=96)
+    ap.add_argument(
+        "--no-list",
+        action="store_true",
+        help="omit the allowed values from the retry message",
+    )
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -114,8 +128,12 @@ def main() -> int:
             {"role": "assistant", "content": r["text"]},
             {
                 "role": "user",
-                "content": RETRY_TEMPLATE.format(
-                    value=r["emitted"], members=", ".join(members)
+                "content": (
+                    RETRY_TEMPLATE_NO_LIST.format(value=r["emitted"])
+                    if args.no_list
+                    else RETRY_TEMPLATE.format(
+                        value=r["emitted"], members=", ".join(members)
+                    )
                 ),
             },
         ]

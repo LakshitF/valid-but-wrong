@@ -135,7 +135,7 @@ def fig_kind_split() -> None:
 
 def fig_detection_plane() -> None:
     pts = [("schema\nvalidation", 0.0, 0.0, "#7f7f7f", "o"),
-           ("literal diff", 0.861, 0.822, "#c0504d", "s"),
+           ("literal diff", 0.983, 0.978, "#c0504d", "s"),
            ("comparator 1\n(MS MARCO)", 0.400, 0.322, "#1f4e79", "D"),
            ("comparator 2\n(BGE + LR)", 0.360, 0.344, "#4f8a3c", "^")]
     fig, ax = plt.subplots(figsize=(5.4, 4.4))

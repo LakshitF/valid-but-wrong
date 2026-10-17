@@ -10,3 +10,10 @@ paper/arxiv.tar.gz
 paper/main.aux
 paper/main.log
 paper/main.out
+
+# private working material (never released)
+.plans/
+guides/
+proposal.md
+CLAUDE.md
+.venv

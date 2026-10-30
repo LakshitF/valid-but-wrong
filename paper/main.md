@@ -195,10 +195,10 @@ schema. That is the narrower conflict every tool-calling pipeline contains.
 
 ## 2.4 What this paper adds
 
-Table 1 positions the closest work. The cell we occupy is empty: a value
-supplied by the instruction that no enum member can express, under
+Table 1 positions the closest work. We did not find prior work that studies
+a value supplied by the instruction that no enum member can express, under
 unconstrained decoding, with matched clean twins, a paraphrase/shift split, and
-measurements of the downstream checks. SilentProbe (Z. Li et al., 2026) is prose-only and has no schema
+measurements of the downstream checks, though our search was not exhaustive. SilentProbe (Z. Li et al., 2026) is prose-only and has no schema
 constraint; the Constraint Tax (Ray, 2026) is about decoding modes and never
 mentions enums; Schema-First Tool APIs (Sigdel & Baral, 2026) is about
 interface versus semantic misuse without an argument-value rate; PhantomFill
@@ -273,9 +273,10 @@ picks the member that a schema-aware reader would recognise as dangerous.
 Items are frozen before any model runs, and the frozen set, schemas, prompts
 and generations are released following the datasheet conventions
 for documenting what a dataset does and does not cover (Gebru et al., 2021).
-The pre-registration, written before the first run, names the readouts, the
-matched-twin control class and the falsification condition; it is included in
-the release package.
+The pre-registration names the readouts, the matched-twin control class and
+the falsification condition, and is included in the release package. It was
+written before the primary runs, but it has no external timestamp, so that
+ordering rests on the author's records.
 
 ## 3.2 Rendering and decoding
 
@@ -350,9 +351,9 @@ with a sentence embedder (`BAAI/bge-small-en-v1.5`; Reimers & Gurevych, 2019;
 Muennighoff et al., 2023), CLS pooling and L2 normalised, and scores cosine
 similarity, raw and through a logistic regression on cosine plus four lexical
 features. Each operating point is chosen on the training folds to maximise
-balanced accuracy. The usable target, fixed before the runs in the execution
-plan included in the release, was detection 0.70 at false alarms of at most
-0.20.
+balanced accuracy. The usable target was detection 0.70 at false alarms of at
+most 0.20. It was set before the comparator runs, but it is not recorded in the
+released pre-registration.
 
 As a non-trained baseline on the same decision, we also query Qwen3.5-9B
 (Qwen Team, 2026; released February 2026), which is not one of the three
@@ -476,9 +477,8 @@ not a simulation of execution side effects.
 Table 2 reports the anchor model on all 420 items. On the 210 awkward items,
 115 calls (0.548, 95% CI [0.480, 0.613]) emitted a schema-valid member other
 than the supplied value. On the 210 matched clean items, the model made zero
-errors: every valid value was copied exactly. The contrast is stark, 115
-against 0 on matched items, and it rules out the explanation that the model is
-simply bad at tool calls. It is good at tool calls. §5.4
+errors: every valid value was copied exactly. The 115 against 0 on matched
+items rules out the explanation that the model is simply bad at tool calls. §5.4
 shows that being good at tool calls is not by itself what produces the
 substitution: two other models are equally error-free on these items and do
 not do it.
@@ -569,8 +569,8 @@ Two features of Table 3 matter more than the aggregate rates. First, both other 
 *competent* in the only sense the clean arm measures: zero errors on the 210
 matched clean items. The loud failure is not a capability deficit that happens
 to be safe. Second, both substitute the acceptable paraphrases (0.261 and
-0.123) while almost never substituting a meaning change (0.014 each), roughly
-twenty times more selective than the anchor.
+0.123) while almost never substituting a meaning change (0.014 each). The
+anchor substitutes shifted items at 0.347, about 25 times their rate.
 
 So neither scale nor clean-task competence explains the outcome. Mistral is the
 same size as the anchor and differs decisively on the same items (McNemar
@@ -735,8 +735,8 @@ Literal comparison detected 98.3% of the substitutions (113/115): it flags any
 call whose value does not appear verbatim in the instruction. But it also
 flagged 97.8% of the *correct* equivalent mappings (88/90). On the shifted
 calls alone it detects 100% (25/25), which is why it looks attractive in a
-demo: it catches every case the engineer cares about, at the cost of rejecting
-almost every case where the model did the right thing. The two unflagged
+small test: it catches every case the engineer cares about, at the cost of
+rejecting almost every case where the model did the right thing. The two unflagged
 substitutions are ones where the emitted member appears inside the supplied
 word (`pro` in "professional", `admin` in "administrator"), so string matching
 fails in both directions. In a deployed pipeline that false-alarm rate means
@@ -981,19 +981,18 @@ values a model can map to a member at all ranges from 0.66 to 1.00 while clean
 accuracy stays at 1.00 for all three.
 
 What differs is what each model does when the instruction and the schema
-disagree. That is a policy its authors chose, visible nowhere in its accuracy,
-and it varies from "echo the invalid value and be caught" to "rewrite the
-argument and proceed". For the anchor the policy is the
-whole story, because the mapping is always available to it; for the two loud
+disagree. That behaviour is not visible in clean accuracy, and it varies from
+"echo the invalid value and be caught" to "rewrite the argument and proceed".
+We cannot say how it arose in training. For the anchor it behaves like a policy,
+because the mapping is always available to it; for the two loud
 models the echo rate also reflects a partial mapping deficit, so their behaviour
 should not be read as a pure policy contrast (§5.5). An evaluation that measures only
 schema-validity rates will rank the anchor as the most successful model of the
 three, at 0.548 substitution against 0.086 and 0.176, because every one of those
-calls validates and runs. The metric moves the right way while the risk moves
-the wrong way. The gate therefore inverts the incentive: it rewards exactly the
-behaviour the caller cannot see. A retry
-completes the inversion: the same conflict, tried again, moves from a raised
-error to a valid execution (§5.11).
+calls validates and runs. A validity metric therefore rewards the behaviour
+the caller cannot see, and a retry pushes further in the same direction: the
+same conflict, tried again, moves from a raised error to a valid execution
+(§5.11).
 
 This is an instance of a broader pattern in machine learning systems, where
 the failure modes that matter are the ones the monitoring does not represent
@@ -1003,8 +1002,8 @@ interface.
 
 ## 6.2 Why the comparators fail
 
-The two attempts were designed to be the constructive half of the paper, and
-they did not work. The reason is instructive. The classification task we posed,
+The two attempts were meant to supply the missing check, and they did not
+work. A likely reason is that the classification task we posed,
 deciding whether a member is an acceptable mapping of a value, is not a
 similarity task. "Staging but with real data" is lexically and semantically closer to
 `staging` than to `prod`, yet the correct reading of the user's intent is that
@@ -1063,8 +1062,8 @@ alarm.
 Fifth, do not retry a schema-invalid call into compliance. One validation retry
 converted 0.787, 0.724 and 0.945 of the three models' echoed calls into
 schema-valid substitutions, and 0.692, 0.691 and 0.942 of the meaning-changing
-ones. A retry that asks the model to satisfy the schema again is a machine for
-turning a visible failure into an invisible one. If the pipeline cannot surface
+ones. A retry that asks the model to satisfy the schema again usually turns a
+visible failure into an invisible one. If the pipeline cannot surface
 the conflict to the caller it should stop; if it can, the caller should choose
 the member, not the model.
 

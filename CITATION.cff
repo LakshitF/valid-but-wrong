@@ -25,5 +25,5 @@ preferred-citation:
       affiliation: "Department of Computer Science, The University of Texas at Austin"
       email: "lf24586@my.utexas.edu"
   year: 2026
-  journal: "arXiv preprint"
-  notes: "Preprint. arXiv identifier to be added after announcement."
+  journal: "Preprint"
+  notes: "Preprint. A DOI and any arXiv identifier will be added once available."

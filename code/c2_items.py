@@ -7,8 +7,8 @@ Written 2026-10-02. Claim under test:
     output is schema-valid, so the framework executes it, and the caller sees no
     signal that the argument differs from the instruction.
 
-Design constraints (freeze before running; see `dismissed.md` rule 7 — the
-control class and the comparison band must be fixed before items exist):
+Design constraints (freeze before running; the control class and the
+comparison band must be fixed before items exist):
 
   - Every schema has exactly ONE required field, a closed enum. Nothing else can
     absorb the error.

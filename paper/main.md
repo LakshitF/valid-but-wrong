@@ -7,49 +7,25 @@ date: "2026"
 
 # Abstract
 
-Tool-calling pipelines treat JSON-schema validation as their safety gate: if
-the call validates, it executes. We show that the gate does not measure what
-it is assumed to measure. We construct 420 frozen items across 15 tools in
-which an ordinary instruction supplies a value that a closed enum cannot
-express, paired with matched clean items. Qwen2.5-7B-Instruct silently
-substitutes a schema-valid near-miss member on 54.8% of the awkward items and
-makes zero errors on the clean ones. Where the nearest member changes the
-meaning of the supplied value rather than paraphrasing it, it substitutes on
-34.7% of items, so 25 meaning-changing calls are among the 115 substitutions.
-Every one validates and would execute. Schema
-validation detects 0 of the 115 substitutions, by construction. A literal
-comparison against the instruction detects 98.3% of them but false-alarms on
-97.8% of correct paraphrases. Qwen2.5-7B's behaviour is a policy choice, not a
-capability limit. Asked the same items in prose, with the enum listed and a
-forced choice, it names an allowed member for all 210, including every one it
-echoed, so its silence is not a missing mapping. Two other models, equally
-perfect on the clean items, name an allowed member for 76.2% and 65.7% of the
-awkward items: Qwen2.5-3B and Mistral-7B echo the invalid value 86.2% and
-78.1% of the time in the no-retry harness, and change meaning silently on 1.4%
-of shifted items against Qwen2.5-7B's 34.7%; on all 210 paired items the
-contrast is extreme (exact McNemar p < 1e-22), but their loudness mixes policy
-with a mapping deficit. The framing selects the
-route: keeping the base instruction to emit a single call and merely permitting
-a clarification cuts the anchor's silent substitutions from 54.8% to 34.8%
-(McNemar p = 1.6e-8) and turns 64.8% of awkward items into questions, while the
-two loud models ignore the permission. The loud/silent contrast is also not a
-stable safety order: one validation retry converts 78.7%, 72.4% and 94.5% of
-the three models' echoed calls into schema-valid substitutions, including
-69.2%, 69.1% and 94.2% of their meaning-changing ones. Withholding the allowed
-values from the retry leaves the anchor's and Mistral's conversion high and
-cuts the 3B's from 69.1% to 23.5% of shifted echoes. Provider-side enforcement
-removes the loud route entirely on the one provider we test: behind a hosted
-API that enforces the enum, Qwen3.5-9B substitutes on all 210 awkward items and
-all 72 shifted ones and never echoes, and with the enum removed from the tool
-definition it echoes 210/210. The provider's constraint, not the model's
-preference, produces that silence. In the three models we test, neither
-parameter count nor clean-task accuracy explains which route a model takes.
-Two trained semantic comparators, a fine-tuned cross-encoder and an
-embedding-plus-classifier model, both fail to supply the missing check at a
-usable operating point (0.36–0.40 detection at 0.24–0.34 false alarms, against
-a target of 0.70 at 0.20). A zero-shot Qwen3.5-9B judge fails in the same
-direction (0.16 detection at 0.03 false alarms). We release the items, prompts
-and generations.
+Tool-calling pipelines treat JSON-schema validation as a gate: if the call
+validates, it executes. We test what that gate misses when an instruction
+supplies a value that a closed enum cannot express. On 420 frozen items across
+15 tools (210 awkward items, 210 matched clean twins), Qwen2.5-7B-Instruct
+silently substitutes a schema-valid near-miss member on 54.8% of awkward items
+and makes no errors on the clean ones. On the 72 items whose nearest member
+changes the meaning, it substitutes on 34.7%. Schema validation detects none of
+these calls; a literal comparison against the instruction detects 98.3% but
+rejects 97.8% of correct paraphrases. In our models the behaviour is not
+explained by scale or clean-task accuracy: a same-size Mistral-7B and a
+Qwen2.5-3B, equally perfect on clean items, instead echo the invalid value, but
+one validation retry turns most of those echoes (72% to 95%) into silent
+substitutions too. Permitting a clarification cuts the 7B's silent
+substitutions to 34.8%, and a hosted API that enforces the enum leaves
+substitution as the only route (Qwen3.5-9B: 210/210). Two trained comparators
+and a zero-shot judge fail to supply the missing semantic check. The study is
+small (three local models, one hosted model, a designed item set, one
+annotator); we release the items, prompts and every generation at
+https://github.com/LakshitF/valid-but-wrong.
 
 # 1. Introduction
 
@@ -112,7 +88,8 @@ so their loudness is not a durable safety property either.
 Those findings combine into a claim narrower than "models silently substitute
 enum values" but better supported: **whether a model resolves an unsatisfiable
 enum silently is a property of that model that is not readable from its scale
-or its clean-task accuracy; the anchor's silence is policy, the loud models'
+or its clean-task accuracy; the anchor's silence looks like a policy (the mapping is available to it and a
+prompt change moves it), the loud models'
 echoes mix policy with a mapping deficit, and the loud alternative is not a
 stable safety guarantee, because a validation retry usually resolves the
 conflict silently anyway.** In the three base models we test, the risk cannot
@@ -1135,13 +1112,15 @@ apply.
 
 # 7. Conclusion
 
-A schema-valid call is not a faithful call. When an instruction supplies a
+A schema-valid call is not a faithful call. In the models and items we tested,
+when an instruction supplies a
 value a closed enum cannot express, Qwen2.5-7B silently substitutes a near-miss
 member in 54.8% of cases and changes the meaning in 34.7% of the items where
 the nearest member is wrong; every such call validates and executes, schema
 validation detects none, and literal comparison detects almost all at the price
-of rejecting almost every correct mapping. The silence is a policy rather than
-a property of the task. Asked the same items in prose with a forced choice, the
+of rejecting almost every correct mapping. For the 7B model the silence behaves like
+a policy rather than a property of the task; we test one model family at two
+sizes, one other family, and one hosted model, so we do not claim it generalises. Asked the same items in prose with a forced choice, the
 anchor names an allowed member for every one of the 210 awkward items, so the
 mapping is available; and merely
 permitting a clarification, with the instruction to emit a single call
@@ -1175,8 +1154,8 @@ and every analysis script are released at
 
 `https://github.com/LakshitF/valid-but-wrong`
 
-Every number in §5 is produced by one of those scripts from a released JSON;
-none is hand-transcribed.
+Every number in §5 can be traced to a released JSON written by one of those
+scripts; the README maps each section and table to its script and file.
 
 # References
 

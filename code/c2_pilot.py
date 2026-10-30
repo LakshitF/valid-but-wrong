@@ -1,7 +1,7 @@
 """C2 pilot — near-miss enum substitution in required tool-call arguments.
 
-Pre-registration (fixed before this ran; see `candidates.md` and `dismissed.md`
-rule 7 — readout, control class, and comparison band are all named here).
+Pre-registration (see PREREGISTRATION-c2.md: readout, control class, and
+comparison band are all named there).
 
 CLAIM. When a required enum field cannot be filled with the exact gold member,
 the model substitutes a near-miss member rather than abstaining or erroring. The

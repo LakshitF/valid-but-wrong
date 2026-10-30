@@ -4,7 +4,7 @@ Release accompanying the paper *"Valid but Wrong: Silent Enum Substitution in
 Tool Calls, and Why Schema Validation Cannot See It"* (Lakshit Farswan,
 Department of Computer Science, The University of Texas at Austin, 2026).
 
-**Paper:** `paper/main.pdf` (source `paper/main.md`), 25 pages.
+**Paper:** `paper/main.pdf` (source `paper/main.md`).
 
 ## What is here
 
@@ -141,8 +141,7 @@ pandoc main.md -o main.pdf --pdf-engine=tectonic \
 ```
 
 `tectonic` is used because it is a self-contained LaTeX engine that fetches its
-own packages; `pdflatex` and `xelatex` are not installed on this machine. To
-inspect or hand in the LaTeX, dump the intermediate file:
+own packages. To inspect or hand in the LaTeX, dump the intermediate file:
 
 ```bash
 pandoc main.md -o main.tex -s --resource-path=.
@@ -157,15 +156,15 @@ citation manager.
 arXiv does not accept Markdown as source. `paper/build_arxiv.sh` writes
 `paper/arxiv/` (`main.tex` plus `figures/`) and the upload tarball
 `paper/arxiv.tar.gz`; both are generated and git-ignored. The tarball was
-compiled with tectonic at 25 pages before this README was written.
+compiled with tectonic.
 
 ```bash
 cd paper && ./build_arxiv.sh
 ```
 
 Categories, the Comments field, the author-block conventions used by UT Austin
-papers, and the plain-text abstract for arXiv's metadata field (3,162
-characters in the paper, 1,884 in the field's 1,920-character limit) are in
+papers, and the plain-text abstract for arXiv's metadata field (1,386
+characters, under the field's 1,920-character limit) are in
 `paper/ARXIV-SUBMISSION.md`.
 
 ## Note on `24_reparse.py`
@@ -185,8 +184,22 @@ reproducible without a GPU:
 
 ## Traceability
 
-Every number in the paper is written by one of the scripts above into a JSON
-file in `results/`. None was transcribed by hand.
+Every number in the paper can be traced to a JSON file in `results/`, written
+by one of the scripts above. Tables in `paper/main.md` are typed from those
+files; the mapping is below.
+
+| Paper | Produced by | Data |
+|---|---|---|
+| §5.1–5.4, Tables 2–3 | `code/c2_pilot.py`, `code/23_headline_stats.py` | `results/c2_raw.json`, `c2_qwen3b.json`, `c2_mistral.json`, `c2_headline_stats.json` |
+| §5.2 rotation | `code/c2_pilot.py --rotate 2` | `results/c2_rot2.json`, `c2_rotation_summary.json` |
+| §5.5, Table 4 | `code/40_comprehension.py`, `code/44_comprehension_parse.py` | `results/c2_comprehension_*.json` |
+| §5.6, Table 5 | `code/c2_pilot.py --system-suffix` | `results/c2_7b_pressure*.json` |
+| §5.7, Table 6 | `code/c2_pilot.py --system` | `results/c2_abstain_*.json` |
+| §5.8, Table 7 | `code/25_literal_check.py` | `results/c2_literal_check.json` |
+| §5.9 | `code/20_semantic_comparator.py`, `code/22_bge_comparator.py`, `code/47_llm_judge.py` | `results/c2_comparator*.json`, `c2_llm_judge_qwen35_9b.json` |
+| §5.10 | `code/45_cluster_stats.py` | `results/c2_cluster_stats.json` |
+| §5.11, Tables 8–9 | `code/42_retry.py` | `results/c2_retry_*.json` |
+| §5.12, Table 10 | `code/48_openrouter.py` | `results/c2_qwen35_9b_api*.json`, `c2_enum_probe_*.json` |
 
 ## License
 

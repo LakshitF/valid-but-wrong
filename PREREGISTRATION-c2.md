@@ -1,13 +1,15 @@
 # C2 — Pre-registration
 
-Written 2026-10-02, **before the pilot ran**. Item set frozen at
-`items/c2_items.py`; harness frozen at `scripts/c2_pilot.py`. Neither is edited
-after the first full run. Any later change is a new pass, recorded as such.
+Dated 2026-10-02, written before the primary runs according to the author's
+records. This repository has no earlier external timestamp, so the date is the
+author's statement, not independently verifiable. Item set frozen at
+`items/c2_items.py`; harness frozen at `scripts/c2_pilot.py` (now
+`code/c2_items.py` and `code/c2_pilot.py`). Neither was edited after the first
+full run. Any later change is a new pass, recorded as such.
 
-This file exists because of `dismissed.md` rule 7. G1 pre-registered a ratio
-threshold and a deletion count, passed, and then died when a control class it had
-never named reversed the result. **The control class is named here, before items
-were written.**
+The design commits to a control class up front, because a pre-registered ratio
+threshold can pass and then be reversed by a control class it never named.
+**The control class is named here, before items were written.**
 
 ---
 
@@ -24,8 +26,7 @@ caller receives no signal that the argument differs from the instruction.
 > ordinary argument-error rate on matched clean items, there is no substitution
 > effect — only ordinary argument error — and the claim is dead.**
 
-Per `003` and the G1 precedent: a null here is a death, not a discovery. No
-re-framing.
+A null here is a null result, not a discovery. No re-framing.
 
 ---
 

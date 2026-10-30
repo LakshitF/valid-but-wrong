@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite the paper and this repository."
+message: "If you use this work, please cite the paper."
 title: "Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It"
 type: software
 authors:
@@ -9,7 +9,7 @@ authors:
     email: "lf24586@my.utexas.edu"
 year: 2026
 license: MIT
-abstract: "Code, frozen item set and result artifacts for a study of silent enum substitution in tool calls and the limits of JSON-schema validation. Code is MIT-licensed; items, results, figures and manuscript text are CC BY 4.0 (see LICENSE-DATA)."
+abstract: "Code, data and paper for Valid but Wrong, a study of what tool-calling models do when a user gives a value the tool's list of allowed values does not include. The repository has the 420 test items, the scripts that ran the models and computed the statistics, and the raw model outputs behind every number in the paper. The code is under the MIT license. The items, results, figures and paper text are under CC BY 4.0."
 keywords:
   - tool calling
   - structured output

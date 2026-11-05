@@ -89,10 +89,10 @@ including most of the meaning-changing ones, into schema-valid substitutions,
 so their loudness is not a durable safety property either.
 
 Those findings combine into a claim narrower than "models silently substitute
-enum values" but better supported: **whether a model resolves an unsatisfiable
-enum silently is a property of that model that is not readable from its scale
-or its clean-task accuracy; the anchor's silence looks like a policy (the mapping is available to it and a
-prompt change moves it), the loud models'
+enum values" but better supported. Whether a model resolves an unsatisfiable
+enum silently is a property of that model, and it is not readable from its scale
+or its clean-task accuracy. The anchor's silence looks like a policy: the
+mapping is available to it and a prompt change moves it. The loud models'
 echoes mix policy with a mapping deficit, and the loud alternative is not a
 stable safety guarantee, because a validation retry usually resolves the
 conflict silently anyway.** In the three base models we test, the risk cannot
@@ -248,20 +248,13 @@ Table: Position relative to the closest prior work.
 
 # 3. Research questions and methods
 
-We ask four questions.
-
-**RQ1.** When an instruction supplies a value that a closed enum cannot
-express, how often does a tool-calling model emit a schema-valid near-miss
-member, compared with the ordinary error rate on matched clean items?
-
-**RQ2.** Is the chosen member selected for its meaning (the same member
-survives an enum rotation) or for its position (the same index survives)?
-
-**RQ3.** Do the checks a pipeline actually has detect the substitution, and at
-what false-alarm cost?
-
-**RQ4.** Can a small trained comparator separate acceptable paraphrase
-mappings from meaning-changing substitutions on held-out items?
+We ask how often a tool-calling model emits a schema-valid near-miss member
+when an instruction supplies a value a closed enum cannot express, compared
+with the ordinary error rate on matched clean items. We then ask whether the
+chosen member is selected for its meaning or its position, whether the checks a
+pipeline actually has detect the substitution and at what false-alarm cost, and
+whether a small trained comparator can separate acceptable paraphrase mappings
+from meaning-changing substitutions on held-out items.
 
 Three controls support the interpretation of these questions rather than
 adding a fifth: a prose comprehension probe (§3.6), an abstention arm that
@@ -272,8 +265,8 @@ follow-up controls, not as pre-registered tests.
 ## 3.1 Item construction
 
 We define 15 tools, each with a name, a one-sentence purpose, and a single
-required string argument constrained to a closed enum of four or five members,
-covering realistic operational domains: ticket priority, deployment
+required string argument constrained to a closed enum of four or five members.
+The domains are realistic and operationally varied: ticket priority, deployment
 environment, log level, notification channel, storage tier, incident severity,
 access level, task status, payment method, region, data retention class, alert
 window, shipping speed, cache policy, and review outcome.
@@ -289,11 +282,11 @@ uninterpretable.
 Each awkward item is tagged with the near-miss member it invites, and with the
 relation between that member and the supplied value:
 
-- **Equivalent (138 items).** The member is a fair paraphrase. *"urgent-ish"*
-  → `high` conveys what the user meant, even though the literal string differs.
-- **Shifted (72 items).** The member is the nearest available option but
-  changes the meaning. *"staging but with real data"* → `prod` moves real data
-  into production; the nearest member is precisely the wrong one.
+The 138 equivalent items have a member that is a fair paraphrase:
+*"urgent-ish"* maps to `high` and conveys what the user meant, even though the
+literal string differs. The 72 shifted items have a nearest member that changes
+the meaning: *"staging but with real data"* maps to `prod` and moves real data
+into production, where the nearest member is precisely the wrong one.
 
 The split is what makes the claim about meaning rather than strings. A
 substitution rate driven entirely by equivalent mappings would be a
@@ -413,13 +406,12 @@ echoed.
 ## 3.7 Abstention arm
 
 The base system prompt instructs the model to call the tool and emit a single
-call, which mechanically discourages the ask-for-clarification route. To test
-whether the anchor's silence is selected by that instruction, we kept the two
-sentences that tell the model to call the tool and emit a single call, and added
-a sentence that explicitly permits asking: *"If the requested value cannot be
-expressed with the allowed values, do not call the tool; instead ask the user
-which allowed value they want."* The only difference from the base prompt is
-that permission. Items, decoding and classification are unchanged, and the arm
+call, which mechanically discourages the ask-for-clarification route. To test whether the anchor's silence is selected by that instruction, we kept
+the two sentences that tell the model to call the tool and emit a single call.
+To those we added one sentence that explicitly permits asking: "If the
+requested value cannot be expressed with the allowed values, do not call the
+tool; instead ask the user which allowed value they want." The only difference
+from the base prompt is that permission. Items, decoding and classification are unchanged, and the arm
 is run on all three models.
 
 ## 3.8 Validation retry
@@ -547,7 +539,7 @@ not a simulation of execution side effects.
 
 # 5. Results
 
-## 5.1 The substitution is large, silent, and not ordinary error
+## 5.1 Silent substitution on more than half the awkward items
 
 Table 2 reports the anchor model on all 420 items. On the 210 awkward items,
 115 calls (0.548, 95% CI [0.480, 0.613]) emitted a schema-valid member other
@@ -1040,7 +1032,7 @@ non-enforcing endpoint for Qwen3.5-9B and the enforcing SiliconFlow endpoint
 from §5.12. Table 11 reports the precision-and-provider comparison; Table 12
 reports the free-choice panel.
 
-**Precision and enforcement.** The same Qwen3.5-9B weights on DeepInfra BF16 and
+The same Qwen3.5-9B weights on DeepInfra BF16 and
 Venice FP8, both non-enforcing, produce the same route item for item: 31.9%
 substitution, 13.9% shifted, 68.1% echo, and 0/210 clean errors on both. The
 counts are identical (67 substitutions, 143 echoes, 10 of 72 shifted
@@ -1059,7 +1051,7 @@ returned HTTP 404 for this model and was not run. The panel therefore finds no
 BF16-versus-FP8 effect for this model on these two stacks and leaves a direct
 free-choice 4-bit control open.
 
-**Family and scale.** In the free-choice panel the silent route is present in
+In the free-choice panel the silent route is present in
 every arm. Substitution ranges from 31.9% to 78.1% and shifted substitution from
 13.9% to 66.7%; clean error is 0/210 everywhere. The rate is not monotonic in
 parameter count: across the Qwen-family ladder it is 31.9% at 9B, 61.9% at 27B,
@@ -1085,7 +1077,7 @@ does establish is narrower and still useful: the silent route is not a
 4-bit-only, one-family or small-model artifact; it persists at 70B/72B; and
 neither parameter count nor clean accuracy predicts it.
 
-**What this changes.** The local claim was that the route is a model policy not
+The local claim was that the route is a model policy not
 readable from scale or clean accuracy. The panel extends that claim across
 families and serving stacks, and adds a second axis: the serving stack can
 convert a mixed route into a near-total silent one. It does not establish a
@@ -1136,11 +1128,11 @@ What it does not remove is the interpretation question: the panel measures the
 route, not why a model chooses it. The prose probe that separates policy from a
 mapping deficit was run only on the local models, and the panel's two
 tokenizer-diverse rows do not isolate tokenization from training. Those remain
-open, and §6.4 states them as such.
+open, and §6.4 lists them among the limitations.
 
 # 6. Discussion
 
-## 6.1 The blind spot is structural, and silence is a policy
+## 6.1 Why the gate cannot see intent
 
 The schema-validation result might suggest that the validator should be
 improved. It should not be: a validator has access only to the call, so it can
@@ -1152,11 +1144,11 @@ shift. The missing component is a semantic comparison, and §5.9 shows it is
 not trivial to build.
 
 The local result, and the hosted panel in §5.13, remove the two shortcuts an
-engineer would like to use. The first is scale: Mistral-7B is the same size as
-the anchor and resolves the conflict in the opposite way, so a bigger model is
-not automatically the quieter one and a smaller model is not automatically the
-loud one; the panel adds that substitution is not monotonic from 9B to 72B and
-differs across families at matched provider and precision. The second is
+engineer would like to use. The first is scale: Mistral-7B is the same size as the anchor and resolves the
+conflict in the opposite way, so a bigger model is not automatically the quieter
+one and a smaller model is not automatically the loud one. The panel adds that
+substitution is not monotonic from 9B to 72B and differs across families at
+matched provider and precision. The second is
 clean-task accuracy: all local models score zero errors on the matched clean
 items, and every usable panel arm does too, so an evaluation that screens on
 ordinary tool-call accuracy ranks them as tied and tells you nothing about this
@@ -1288,12 +1280,11 @@ phrasing. The item set is
 generated rather than drawn from production traffic, so the rates are
 estimates for a designed distribution, not for any particular deployment. The
 near-miss labels are single-annotator. The downstream checks are simulated on
-emitted calls rather than run through a real framework. The comprehension
-control forces a choice, so it establishes that a mapping is available, not
-that the model would volunteer one unprompted; the abstention arm uses one
-wording, and the retry arm uses two, with and without the allowed values, so
-the contribution of the list is measured rather than assumed, but both replay
-a single retry rather than a loop. The comparators are
+emitted calls rather than run through a real framework. The comprehension control forces a choice, so it establishes that a mapping is
+available, not that the model would volunteer one unprompted. The abstention arm
+uses one wording and the retry arm uses two, with and without the allowed
+values, so the contribution of the list is measured rather than assumed. Both
+replay a single retry rather than a loop. The comparators are
 trained on 138 positive pairs, which is small, and their failure may be a
 data-scale result rather than an architectural one; we cannot distinguish
 those with the data we have. The zero-shot judge is one model with one prompt,
@@ -1310,11 +1301,10 @@ apply.
 
 # 7. Conclusion
 
-A schema-valid call is not a faithful call. In the models and items we tested,
-when an instruction supplies a
-value a closed enum cannot express, Qwen2.5-7B silently substitutes a near-miss
-member in 54.8% of cases and changes the meaning in 34.7% of the items where
-the nearest member is wrong; every such call validates and executes, schema
+A schema-valid call is not a faithful call. In the models and items we tested, when an instruction supplies a value a
+closed enum cannot express, Qwen2.5-7B silently substitutes a near-miss member
+in 54.8% of cases and changes the meaning in 34.7% of the items where the
+nearest member is wrong. Every such call validates and executes. Schema
 validation detects none, and literal comparison detects almost all at the price
 of rejecting almost every correct mapping. For the 7B model the silence behaves like
 a policy rather than a property of the task; the local study covers one family

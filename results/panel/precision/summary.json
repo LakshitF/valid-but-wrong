@@ -1,0 +1,150 @@
+[
+  {
+    "name": "deepinfra",
+    "provider": "DeepInfra",
+    "quantization": "BF16",
+    "model": "qwen/qwen3.5-9b",
+    "enforcement": "no",
+    "enforcement_evidence": "6/6 probe items emitted the probe value \"definitely not a member\"",
+    "attempted_items": 420,
+    "probe": {
+      "n_items": 6,
+      "status_counts": {
+        "echoed": 6
+      },
+      "cost_usd": 0.000243
+    },
+    "n_items": 420,
+    "substitution_rate": 0.319047619047619,
+    "equivalent_rate": 0.41304347826086957,
+    "shifted_rate": 0.1388888888888889,
+    "echo_rate": 0.680952380952381,
+    "clean_error_rate": 0.0,
+    "usage": {
+      "prompt_tokens": 142279,
+      "completion_tokens": 11757
+    },
+    "cost_usd": 0.015991,
+    "wall_seconds": 554.1,
+    "errors": 0,
+    "error_note": ""
+  },
+  {
+    "name": "parasail",
+    "provider": "Parasail",
+    "quantization": "BF16",
+    "model": "qwen/qwen3.5-9b",
+    "enforcement": "unclear",
+    "enforcement_evidence": "unavailable: 6/6 probe requests returned HTTP 404 for qwen/qwen3.5-9b; retried once with the same result",
+    "attempted_items": 420,
+    "probe": {
+      "n_items": 0,
+      "status_counts": {},
+      "cost_usd": 0.0
+    },
+    "n_items": 0,
+    "substitution_rate": null,
+    "equivalent_rate": null,
+    "shifted_rate": null,
+    "echo_rate": null,
+    "clean_error_rate": null,
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    "cost_usd": 0.0,
+    "wall_seconds": null,
+    "errors": 6,
+    "error_note": "full arm not run: probe failed 6/6 with HTTP 404; all item requests also fail 404 for this provider/model pair"
+  },
+  {
+    "name": "siliconflow",
+    "provider": "SiliconFlow",
+    "quantization": "FP8",
+    "model": "qwen/qwen3.5-9b",
+    "enforcement": "yes",
+    "enforcement_evidence": "6/6 probe items emitted an enum member (all \"open\") instead of the probe value",
+    "attempted_items": 420,
+    "probe": {
+      "n_items": 6,
+      "status_counts": {
+        "substituted": 6
+      },
+      "cost_usd": 0.000242
+    },
+    "n_items": 417,
+    "substitution_rate": 0.9857142857142858,
+    "equivalent_rate": 0.9782608695652174,
+    "shifted_rate": 1.0,
+    "echo_rate": 0.0,
+    "clean_error_rate": 0.004830917874396135,
+    "usage": {
+      "prompt_tokens": 141967,
+      "completion_tokens": 11101
+    },
+    "cost_usd": 0.015862,
+    "wall_seconds": 907.3,
+    "errors": 3,
+    "error_note": "3 malformed provider responses (missing \"choices\") were excluded; metrics use 417 completed items"
+  },
+  {
+    "name": "venice",
+    "provider": "Venice",
+    "quantization": "FP8",
+    "model": "qwen/qwen3.5-9b",
+    "enforcement": "no",
+    "enforcement_evidence": "6/6 probe items emitted the probe value \"definitely not a member\"",
+    "attempted_items": 420,
+    "probe": {
+      "n_items": 6,
+      "status_counts": {
+        "echoed": 6
+      },
+      "cost_usd": 0.000243
+    },
+    "n_items": 420,
+    "substitution_rate": 0.319047619047619,
+    "equivalent_rate": 0.41304347826086957,
+    "shifted_rate": 0.1388888888888889,
+    "echo_rate": 0.680952380952381,
+    "clean_error_rate": 0.0,
+    "usage": {
+      "prompt_tokens": 142279,
+      "completion_tokens": 11758
+    },
+    "cost_usd": 0.015992,
+    "wall_seconds": 124.6,
+    "errors": 0,
+    "error_note": ""
+  },
+  {
+    "name": "darkbloom",
+    "provider": "Darkbloom",
+    "quantization": "FP4",
+    "model": "qwen/qwen3.5-9b",
+    "enforcement": "unclear",
+    "enforcement_evidence": "0/6 emitted an enum member; 6/6 returned a refusal with no tool call, so the probe cannot distinguish enforcement from refusal",
+    "attempted_items": 420,
+    "probe": {
+      "n_items": 6,
+      "status_counts": {
+        "abstain": 6
+      },
+      "cost_usd": 0.000207
+    },
+    "n_items": 252,
+    "substitution_rate": 0.9047619047619048,
+    "equivalent_rate": 0.9459459459459459,
+    "shifted_rate": 0.6,
+    "echo_rate": 0.0,
+    "clean_error_rate": 0.0,
+    "usage": {
+      "prompt_tokens": 80247,
+      "completion_tokens": 7134
+    },
+    "cost_usd": 0.007347,
+    "wall_seconds": 7864.6,
+    "errors": 168,
+    "error_note": "partial arm: 168/420 items failed with upstream 429 rate limiting (mostly awkward items); all 210 clean items completed but only 42/210 awkward items did"
+  }
+]

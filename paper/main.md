@@ -21,9 +21,12 @@ Qwen2.5-3B, equally perfect on clean items, instead echo the invalid value, but
 one validation retry turns most of those echoes (72% to 95%) into silent
 substitutions too. Permitting a clarification cuts the 7B's silent
 substitutions to 34.8%, and a hosted API that enforces the enum leaves
-substitution as the only route (Qwen3.5-9B: 210/210). Two trained comparators
-and a zero-shot judge fail to supply the missing semantic check. The study is
-small (three local models, one hosted model, a designed item set, one
+substitution as the only route (Qwen3.5-9B: 210/210). A descriptive panel of
+seven further free-choice hosted models (9B to 72B, four families) finds the
+silent route in every arm (13.9% to 66.7% of shifted items), with clean
+accuracy at 0/210. Two trained comparators and a zero-shot judge fail to
+supply the missing semantic check. The study is small (three local models, one
+enforcing hosted model, a descriptive hosted panel, a designed item set, one
 annotator); we release the items, prompts and every generation at
 https://github.com/LakshitF/valid-but-wrong.
 
@@ -131,6 +134,14 @@ Our contributions are:
    and 72/72 shifted ones, with zero echoes; with the enum removed from the
    same tool definition it echoes 210/210. Enforcement removes the visible
    failure and leaves only the silent one.
+9. A descriptive hosted panel of seven free-choice models from 9B to 72B and
+   four families: every arm takes the silent route (13.9–66.7% shifted
+   substitution), clean error is 0/210, the substitution rate is non-monotonic
+   in parameter count, and Qwen2.5-72B and Llama-3.3-70B differ at matched
+   provider and precision (78.1% vs 65.7% substitution; 6.7% vs 25.2% echo).
+   A BF16/FP8 pair of the same model on two non-enforcing providers is
+   identical; a free-choice FP4 arm and the designed tokenizer contrast did not
+   complete and are reported as exclusions.
 
 # 2. Background and related work
 
@@ -160,6 +171,14 @@ output parses; it does not guarantee that the parsed value is the intended
 one, and Tam et al. (2024) showed that format restrictions can degrade
 reasoning quality. The Constraint Tax (Ray, 2026) measures a related phenomenon,
 that hard schema constraints during decoding produce valid-but-wrong outputs.
+Three 2026 studies sharpen the same validity/correctness distinction without
+measuring enum substitution. Chavan (2026) reports that constrained decoding
+removes structural failures in small models while a scale-dependent semantic gap
+remains. Lee (2026) decomposes constrained decoding in tool-call abstention into
+stop-token and enum components and concludes that the constraint repairs form
+rather than judgment. Yu et al. (2026) report that 97.9% of failed cloud-API
+calls in their benchmark are schema-valid but value-wrong. None of these studies
+measures a value that the instruction supplies and the enum cannot express.
 Our main setting differs in a way that matters for deployment: there the model
 decodes freely with no constraint at all. The substitution we measure is
 produced by an unconstrained model choosing to satisfy a schema it was merely
@@ -178,12 +197,17 @@ Huang et al., 2023) formalize unsupported content; Lost in the Middle (Liu et
 al., 2024) shows position-dependent failure; holistic evaluation established
 the protocol of measuring many behaviours at once (Liang et al., 2023); and
 LLM-as-judge studies (L. Zheng et al., 2023) show that automated evaluation has
-its own biases. Silent failure has been studied in prose: SilentProbe (Z. Li et
-al., 2026) shows that models asked to use a term absent from their vocabulary
-invent a substitute rather than report the absence, and PhantomFill (Usman,
-2026) shows invention on unanswerable inputs. Neither involves a schema, a supplied
-argument, or a validating call. In prose a substituted word is visible to a
-reader; in a tool call it is invisible to every component of the pipeline.
+its own biases. Silent failure has been studied mostly in prose. SilentProbe (Z. Li et al.,
+2026) shows that models asked to use a term absent from their vocabulary invent
+a substitute rather than report the absence; it names the pattern “semantic
+downgrade” and, in a tool-schema experiment, shows that promoting a documented
+vocabulary into an enum repairs a silent failure. Its downgrade is a legal but
+weaker value chosen by the model from the documented list, not a literal value
+supplied by the instruction outside the schema. PhantomFill (Usman, 2026) shows
+invention on unanswerable inputs. Our setting supplies the value in the
+instruction, emits it as an argument, and lets a schema validator decide
+whether the call executes. In prose a substituted word is visible to a reader;
+in a tool call it is invisible to every component of the pipeline.
 
 Related work also shows that models resolve conflicts between sources by
 authority and order: they merge retrieved and generated context without marking
@@ -198,8 +222,14 @@ schema. That is the narrower conflict every tool-calling pipeline contains.
 Table 1 positions the closest work. We did not find prior work that studies
 a value supplied by the instruction that no enum member can express, under
 unconstrained decoding, with matched clean twins, a paraphrase/shift split, and
-measurements of the downstream checks, though our search was not exhaustive. SilentProbe (Z. Li et al., 2026) is prose-only and has no schema
-constraint; the Constraint Tax (Ray, 2026) is about decoding modes and never
+measurements of the downstream checks, though our search was not exhaustive.
+The closest antecedent is SilentProbe (Z. Li et al., 2026). It names “semantic
+downgrade” and shows in a tool-schema experiment that promoting a documented
+vocabulary into an enum repairs a silent failure. Its downgrade is a legal but
+weaker value chosen by the model from the documented list, not a literal value
+supplied by the instruction outside the enum; and it does not use matched clean
+twins, separate equivalent from shifted mappings, or measure the downstream
+checks. The Constraint Tax (Ray, 2026) is about decoding modes and never
 mentions enums; Schema-First Tool APIs (Sigdel & Baral, 2026) is about
 interface versus semantic misuse without an argument-value rate; PhantomFill
 (Usman, 2026) invents values where none exist rather than substituting a
@@ -210,7 +240,7 @@ Table: Position relative to the closest prior work.
 
 | Prior work | Manipulation | Why this study is not it |
 |---|---|---|
-| SilentProbe (Z. Li et al., 2026) | Prose; absent term comes from the request | No schema, no supplied argument, no conflict |
+| SilentProbe (Z. Li et al., 2026) | Prose requests and a tool-schema enum-promotion experiment; names “semantic downgrade” | Model chooses a legal weaker value; no instruction-supplied out-of-enum value, no matched twins, no rotation, no equivalent/shifted split, no downstream checks |
 | Constraint Tax (Ray, 2026) | Decoding modes; model generates its own values | No enum, no near-miss class, no abstention |
 | Schema-First Tool APIs (Sigdel & Baral, 2026) | Interface versus semantic misuse | No argument-value rate |
 | PhantomFill (Usman, 2026) | Unanswerable input, invented values | Invention, not substitution |
@@ -439,13 +469,58 @@ refused to call; no call contained the requested string. With the enum
 removed, the same 210 items returned the supplied string on all 210. The full
 open-field pass repeats this at n = 420.
 
+This arm is the primary enforcement demonstration. §5.13 reports a separate,
+descriptive panel of other hosted endpoints; its enforcing row repeats this arm
+with three malformed clean responses excluded.
+
+## 3.11 Descriptive hosted panel
+
+The local study and the single enforcing arm leave external validity open: the
+local models are all 4-bit, and one provider is one serving stack. We therefore
+sent the same 420 items to a panel of hosted endpoints through OpenRouter, using
+the same runner, closed enum, temperature 0, fixed seed and 96-token cap as the
+primary hosted arm. The panel is descriptive and was run after the primary
+study; it is not pre-registered and carries no confirmatory tests.
+
+The panel covers seven free-choice models from 9B to 72B across four families
+(Qwen, Mistral, Llama and DeepSeek): Qwen3.5-9B, Qwen3.5-27B, Qwen3-32B,
+Qwen2.5-72B, Llama-3.3-70B, Mistral Small 3.2 24B and DeepSeek V4 Flash 0731.
+Qwen3.5-9B also runs on a second non-enforcing endpoint, and the enforcing
+SiliconFlow endpoint from §5.12 is repeated for comparison. Each endpoint is
+first probed on six items with an explicit request to emit a non-member. An
+endpoint that returns a member is treated as enforcing, and its full run as a
+ceiling rather than a free-choice replication. Two free-choice endpoints
+(Qwen3-32B and Llama-3.3-70B) refused the probe instead of echoing; for those
+we resolve enforcement from the full arm, where a non-member tool-call argument
+is impossible under a strict constraint. A third, FP4 endpoint also refused,
+and its enforcement remains unclear.
+
+The panel is not a controlled ablation. Providers differ in hardware, sampler,
+tool-call serialization and, in one case, availability. The Qwen ladder mixes
+generations (Qwen3.5, Qwen3 and Qwen2.5), and the 27B step also changes provider,
+so the panel can test whether the route survives scale and family changes but
+cannot estimate a causal effect of parameter count. The tokenizer contrast we
+designed did not run: Llama-3.1-8B had no tool-capable endpoint under the pinned
+provider, and Gemma-3-12B's endpoint serialized tool arguments as `{}` or
+truncated them, including on clean items. One BF16 endpoint (Parasail) returned
+HTTP 404 for this model and was not run. One FP4 endpoint completed only 42 of
+210 awkward items before rate limiting; its awkward metrics are a selected
+subset and are not used for a precision comparison. These endpoints are
+reported as exclusions or, for the FP4 endpoint, as a partial result; none is
+used as a free-choice model result. Model identifiers as sent to OpenRouter were
+`qwen/qwen3.5-9b`, `qwen/qwen3.5-27b`, `qwen/qwen3-32b`,
+`qwen/qwen-2.5-72b-instruct`, `meta-llama/llama-3.3-70b-instruct`,
+`mistralai/mistral-small-3.2-24b-instruct` and
+`deepseek/deepseek-v4-flash-0731`.
+
 # 4. Materials and data sources
 
 The three study models run locally in 4-bit normal-float quantization on a
 single 8 GB laptop GPU, in bfloat16 compute, with greedy decoding and a fixed
 seed. The hosted arm in §5.12 runs Qwen3.5-9B through OpenRouter on the same
 420 items, pinned to one provider; it is a separate protocol and is not pooled
-with the local runs. The
+with the local runs. The descriptive panel in §5.13 runs the same items on
+additional hosted endpoints and is likewise reported separately. The
 anchor is Qwen2.5-7B-Instruct (Qwen Team, 2024); the smaller model is
 Qwen2.5-3B-Instruct. The same-scale cross-family model is
 Mistral-7B-Instruct-v0.3 (Jiang et al., 2023). Two instruction arms append a
@@ -956,6 +1031,113 @@ of faithfulness therefore gains nothing from a stricter provider. The failure
 it relied on seeing, an invalid call, cannot be emitted, and the meaning
 change it should fear is now the only route the model can take.
 
+## 5.13 The hosted panel: the route survives scale and family changes
+
+The local study is three 4-bit models, and §5.12 uses one serving stack. To see
+whether the route is an artifact of either, we ran the base arm on seven
+free-choice hosted models from 9B to 72B and four families, plus a second
+non-enforcing endpoint for Qwen3.5-9B and the enforcing SiliconFlow endpoint
+from §5.12. Table 11 reports the precision-and-provider comparison; Table 12
+reports the free-choice panel.
+
+**Precision and enforcement.** The same Qwen3.5-9B weights on DeepInfra BF16 and
+Venice FP8, both non-enforcing, produce the same route item for item: 31.9%
+substitution, 13.9% shifted, 68.1% echo, and 0/210 clean errors on both. The
+counts are identical (67 substitutions, 143 echoes, 10 of 72 shifted
+substitutions). This is a null result for BF16 versus FP8 on these two stacks,
+not a general equivalence: the endpoints still differ in provider, sampler and
+serialization. On SiliconFlow FP8, where the probe returns a member on 6/6
+items, the same model substitutes on 207 of 210 awkward items (98.6%, with
+three no-calls), all 72 shifted items, and never echoes; three malformed clean
+responses are excluded. That reproduces §5.12's near-total substitution and
+zero echo, and confirms that the silence there is the provider's constraint,
+not a property of the weights. The FP4 endpoint completed only 42 of 210
+awkward items before rate limiting; on that selected subset it substituted on
+38 and echoed on none, but the subset is plausibly biased toward short
+generations and we do not use it as a precision comparison. A second BF16 endpoint (Parasail)
+returned HTTP 404 for this model and was not run. The panel therefore finds no
+BF16-versus-FP8 effect for this model on these two stacks and leaves a direct
+free-choice 4-bit control open.
+
+**Family and scale.** In the free-choice panel the silent route is present in
+every arm. Substitution ranges from 31.9% to 78.1% and shifted substitution from
+13.9% to 66.7%; clean error is 0/210 everywhere. The rate is not monotonic in
+parameter count: across the Qwen-family ladder it is 31.9% at 9B, 61.9% at 27B,
+44.3% at 32B and 78.1% at 72B, so the 32B sits below the smaller 27B. The 32B
+also declines often: 40.0% of its awkward items are no-call/other, so its lower
+substitution rate is a different route mix, not simply a weaker silent route.
+Only the 9B-to-27B step is same-generation (both Qwen3.5 at BF16), and it also
+changes provider, so it is consistent with a scale effect but cannot establish
+one.
+
+The matched contrast is cross-family. At the same provider and precision
+(DeepInfra FP8), Qwen2.5-72B substitutes on 78.1% of awkward items (65.3%
+shifted) and echoes on 6.7%, while Llama-3.3-70B substitutes on 65.7% (50.0%
+shifted) and echoes on 25.2%. Two models of approximately the same size, on the
+same serving stack, take different routes; a family change at matched scale
+moves the outcome. Mistral Small 3.2 24B (75.7% substitution, 66.7% shifted,
+5.2% echo) and DeepSeek V4 Flash 0731 (65.7%, 51.4%, 33.8%) add two more
+families to the same range and two more examples in which clean accuracy is
+perfect while the awkward route differs. The panel cannot separate tokenizer
+from training: the designed tokenizer rows failed for provider reasons (§3.11),
+and the matched 70B pair changes tokenizer and training together. What the panel
+does establish is narrower and still useful: the silent route is not a
+4-bit-only, one-family or small-model artifact; it persists at 70B/72B; and
+neither parameter count nor clean accuracy predicts it.
+
+**What this changes.** The local claim was that the route is a model policy not
+readable from scale or clean accuracy. The panel extends that claim across
+families and serving stacks, and adds a second axis: the serving stack can
+convert a mixed route into a near-total silent one. It does not establish a
+scaling law, a causal role for parameter count, or a tokenizer mechanism. It
+also does not carry the prose probe, so for the new models we cannot separate a
+policy from a mapping deficit; their perfect clean arms and the range of routes
+are consistent with a model-specific policy but do not prove one.
+
+Table: Qwen3.5-9B across hosting endpoints and provider-reported precision.
+Rates are shares of awkward items; shifted is of the 72 shifted items; the
+remainder is no call or another non-substitution outcome; clean error is of
+completed clean items. *Darkbloom's awkward arm is partial (42/210;
+168 rate-limit failures) and its clean arm is complete; its awkward rates are a
+selected subset, not a precision comparison. Parasail returned HTTP 404 for
+this model.
+
+| Provider | Quant | Probe | Substituted | Shifted | Echoed | Clean error | n |
+|---|---|---|---|---|---|---|---|
+| DeepInfra | BF16 | no (6/6 echo) | 31.9% (67/210) | 13.9% (10/72) | 68.1% (143/210) | 0/210 | 420 |
+| Venice | FP8 | no (6/6 echo) | 31.9% (67/210) | 13.9% (10/72) | 68.1% (143/210) | 0/210 | 420 |
+| SiliconFlow | FP8 | yes (6/6 member) | 98.6% (207/210) | 100% (72/72) | 0% (0/210) | 0.5% (1/207) | 417 |
+| Darkbloom* | FP4 | unclear (6/6 refusal) | 90.5% (38/42)* | 60.0% (3/5)* | 0% (0/42)* | 0/210 | 252* |
+| Parasail | BF16 | unavailable (404) | — | — | — | — | 0 |
+
+Table: Free-choice hosted panel across family and scale. No endpoint in this
+table enforced the enum: each either echoed the probe value or returned
+non-member tool-call arguments in the full arm. Rates are shares of 210 awkward
+items; the remainder is no call or another non-substitution outcome; clean
+error is of 210 clean items. DeepSeek V4 Flash is a mixture-of-experts model;
+active parameters are shown first.
+
+| Model | Params | Provider / quant | Substituted | Equivalent | Shifted | Echoed | Clean error |
+|---|---|---|---|---|---|---|---|
+| Qwen3.5-9B | 9B | DeepInfra / BF16 | 31.9% | 41.3% | 13.9% | 68.1% | 0/210 |
+| Mistral Small 3.2 | 24B | DeepInfra / FP8 | 75.7% | 80.4% | 66.7% | 5.2% | 0/210 |
+| Qwen3.5-27B | 27B | Novita / BF16 | 61.9% | 75.4% | 36.1% | 38.1% | 0/210 |
+| Qwen3-32B | 32B | DeepInfra / FP8 | 44.3% | 55.8% | 22.2% | 15.7% | 0/210 |
+| Llama-3.3-70B | 70B | DeepInfra / FP8 | 65.7% | 73.9% | 50.0% | 25.2% | 0/210 |
+| Qwen2.5-72B | 72B | DeepInfra / FP8 | 78.1% | 84.8% | 65.3% | 6.7% | 0/210 |
+| DeepSeek V4 Flash | 13B active / 284B total | DeepInfra / FP8 | 65.7% | 73.2% | 51.4% | 33.8% | 0/210 |
+
+Read against the local anchor, the panel is not a different phenomenon at
+larger scale. The anchor's 54.8% silent substitution and 34.7% shifted rate sit
+inside the hosted free-choice range, and every hosted arm is exact on the clean
+twins while its awkward route differs. What the panel removes is the
+possibility that the local result is a small-model or one-family curiosity.
+What it does not remove is the interpretation question: the panel measures the
+route, not why a model chooses it. The prose probe that separates policy from a
+mapping deficit was run only on the local models, and the panel's two
+tokenizer-diverse rows do not isolate tokenization from training. Those remain
+open, and §6.4 states them as such.
+
 # 6. Discussion
 
 ## 6.1 The blind spot is structural, and silence is a policy
@@ -969,16 +1151,19 @@ strings, so it flags a correct paraphrase almost as readily as a dangerous
 shift. The missing component is a semantic comparison, and §5.9 shows it is
 not trivial to build.
 
-The three-model result removes the two shortcuts an engineer would like to
-use. The first is scale: Mistral-7B is the same size as the anchor and resolves
-the conflict in the opposite way, so a bigger model is not automatically the
-quieter one and a smaller model is not automatically the loud one. The second
-is clean-task accuracy: all three models score zero errors on the matched clean
-items, so an evaluation that screens on ordinary tool-call accuracy ranks them
-as tied and tells you nothing about this failure. The comprehension control
-shows how little that tie means: on the same items, the fraction of awkward
-values a model can map to a member at all ranges from 0.66 to 1.00 while clean
-accuracy stays at 1.00 for all three.
+The local result, and the hosted panel in §5.13, remove the two shortcuts an
+engineer would like to use. The first is scale: Mistral-7B is the same size as
+the anchor and resolves the conflict in the opposite way, so a bigger model is
+not automatically the quieter one and a smaller model is not automatically the
+loud one; the panel adds that substitution is not monotonic from 9B to 72B and
+differs across families at matched provider and precision. The second is
+clean-task accuracy: all local models score zero errors on the matched clean
+items, and every usable panel arm does too, so an evaluation that screens on
+ordinary tool-call accuracy ranks them as tied and tells you nothing about this
+failure. The comprehension control shows how little that tie means: on the same
+items, the fraction of awkward values a model can map to a member at all ranges
+from 0.66 to 1.00 while clean accuracy stays at 1.00 for all three local
+models.
 
 What differs is what each model does when the instruction and the schema
 disagree. That behaviour is not visible in clean accuracy, and it varies from
@@ -1077,13 +1262,26 @@ is strictest.
 ## 6.4 Limitations
 
 The local study uses three models (one family at two scales plus one same-sized
-model from another family), all in 4-bit quantization on a single laptop GPU;
-quantization can change behaviour, and we did not run a full-precision control.
-A fourth, newer model appears only in the hosted arm, under a serving stack we
-do not control.
-Three models is enough to show that the silent route is not a simple function of scale, but
-not enough to say how common it is; the policy could be rare, or could be
-typical of models we did not run. The instruction arms use one wording each,
+model from another family), all in 4-bit quantization on a single laptop GPU.
+The descriptive hosted panel (§5.13) adds seven free-choice models from 9B to
+72B and four families, a second non-enforcing endpoint for the same 9B model,
+and one enforcing endpoint. It reduces, but does not remove, the
+external-validity worry. The panel is not a controlled ablation: providers
+differ in hardware, sampler and serialization; the Qwen ladder mixes
+generations and the 27B also changes provider, so it cannot estimate a causal
+scale effect. The one clean precision pair (BF16 vs FP8) is identical, but a
+free-choice 4-bit arm did not complete, so quantization is not fully ruled out;
+the local anchor's 4-bit rate sits inside the hosted free-choice range, which
+is consistent with the route not being a quantization artifact but does not
+establish it. The designed tokenizer contrast was inconclusive because two
+endpoints failed, so we do not claim a tokenizer mechanism. The panel also
+lacks the prose probe for the new models, so for them we cannot separate
+policy from a mapping deficit. Seven free-choice models are enough to show
+that the route is not a small-model or one-family curiosity, but they are a
+convenience sample of hosted endpoints, not a probability sample of models;
+how common the policy is remains unknown.
+
+The instruction arms use one wording each,
 measured once; they establish that the route is selectable and that the
 validity clause alone selects it, not how sensitive that response is to
 phrasing. The item set is
@@ -1100,10 +1298,11 @@ trained on 138 positive pairs, which is small, and their failure may be a
 data-scale result rather than an architectural one; we cannot distinguish
 those with the data we have. The zero-shot judge is one model with one prompt,
 so it is a baseline rather than a bound on what a better-prompted or larger
-judge could achieve. The hosted arm is one model on one provider, and the
-provider's enforcement is established by its behaviour rather than by a
-specification; another provider may enforce differently or not at all, and the
-hosted sampler is not the local greedy one. Finally, we measure one conflict
+judge could achieve. Enforcement is established by behaviour rather than by a
+specification: in the precision panel one endpoint constrained the enum, two
+did not, one was unavailable and one was ambiguous, so a provider can change
+the route without changing the model. The hosted sampler is not the local greedy one.
+Finally, we measure one conflict
 type, a value
 outside a closed enum, and say nothing about numeric ranges, free-text
 arguments, or multi-field constraints, where the same logic may or may not
@@ -1118,8 +1317,10 @@ member in 54.8% of cases and changes the meaning in 34.7% of the items where
 the nearest member is wrong; every such call validates and executes, schema
 validation detects none, and literal comparison detects almost all at the price
 of rejecting almost every correct mapping. For the 7B model the silence behaves like
-a policy rather than a property of the task; we test one model family at two
-sizes, one other family, and one hosted model, so we do not claim it generalises. Asked the same items in prose with a forced choice, the
+a policy rather than a property of the task; the local study covers one family
+at two sizes and one other family, and the descriptive panel adds seven hosted
+models, but we do not claim the policy generalises beyond them. Asked the same
+items in prose with a forced choice, the
 anchor names an allowed member for every one of the 210 awkward items, so the
 mapping is available; and merely
 permitting a clarification, with the instruction to emit a single call
@@ -1134,9 +1335,16 @@ remove the conversion. Provider-side enforcement does not close the gap
 either: behind an API that enforces the enum, a newer model substitutes on
 every awkward item and never echoes, and the same model with the enum removed
 echoes on every one. A stricter provider makes the meaning change the only
-route open to the model. In the models we test, that is why the risk cannot be
-screened for by size, by ordinary accuracy, or by whether the base model fails
-loudly. Two trained
+route open to the model. The hosted panel widens the picture without changing
+the moral. Seven free-choice models from 9B to 72B and four families all took
+the silent route, with shifted substitution between 13.9% and 66.7% while clean
+accuracy stayed perfect; the rate was not monotonic in parameter count, and at
+matched provider and precision two models of about 70B differed sharply. A
+BF16/FP8 pair of the same model on non-enforcing providers was identical, while
+an enforcing provider made the silent route near-total. The panel cannot isolate
+tokenization from training, and a free-choice 4-bit arm did not complete, so
+those questions remain open; but scale and clean accuracy do not predict the
+route, and neither does the base model's loudness. Two trained
 semantic comparators, and a zero-shot judge of the same decision, fail to
 supply the missing check at a usable operating point, and the released data
 makes that negative checkable. The practical conclusion is
@@ -1149,7 +1357,8 @@ caller rather than retried into a valid call.
 
 The fifteen schemas, 420 items, prompts, system-prompt arms, per-item
 generations, result JSONs, the pre-registration and its follow-up addendum,
-and every analysis script are released at
+the descriptive hosted-panel artifacts (`results/panel/`), and every analysis
+script are released at
 
 `https://github.com/LakshitF/valid-but-wrong`
 
@@ -1172,6 +1381,10 @@ International Conference on Machine Learning*.
 Breck, E., Cai, S., Nielsen, E., Salib, M., & Sculley, D. (2017). The ML test
 score: A rubric for ML production readiness and technical debt reduction.
 *IEEE International Conference on Big Data*.
+
+Chavan, A. (2026). *Constrained decoding eliminates structural failures in
+small LLMs but reveals a scale-dependent semantic gap* (arXiv:2609.23742).
+arXiv. https://arxiv.org/abs/2609.23742
 
 Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). BERT: Pre-training
 of deep bidirectional transformers for language understanding. *Proceedings of
@@ -1206,6 +1419,10 @@ arXiv:2609.37616*.
 Kurfali, M., & Östling, R. (2025). Conflicting needles in a haystack: How LLMs
 behave when faced with contradictory information. *Proceedings of EMNLP*,
 34361–34376.
+
+Lee, J. (2026). *Repair, not improvement: Decomposing constrained decoding in
+tool-call abstention* (arXiv:2608.13959). arXiv.
+https://arxiv.org/abs/2608.13959
 
 Li, J., Chen, X., Xu, R., et al. (2026). Answer first, evidence second?
 Uncovering hidden risks in well-structured AI search summaries. *Proceedings
@@ -1301,6 +1518,12 @@ overreliance on unreliable tools. *arXiv preprint arXiv:2609.05587*.
 Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y.
 (2023). ReAct: Synergizing reasoning and acting in language models.
 *International Conference on Learning Representations*.
+
+Yu, G., Sun, X., Huang, Z., Fan, S., Zhang, Z., Hu, X., Xue, X., Shi, Y.,
+Xiao, X., Song, Y., Lyu, B., Wen, R., Li, X., He, Q., Zhu, S., & Liu, Z.
+(2026). *Getting the parameters right: A difficulty-graded benchmark and
+probe-guided training for LLM tool calls* (arXiv:2608.03071). arXiv.
+https://arxiv.org/abs/2608.03071
 
 Zheng, C., Zhou, H., Meng, F., Zhou, J., & Huang, M. (2023). Large language
 models are not robust multiple choice selectors. *arXiv preprint

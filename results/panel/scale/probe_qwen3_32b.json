@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 1.0,
+    "readout_4_no_call_rate": 0.0,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "abstain": 6
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "qwen/qwen3-32b",
+    "api_models": {
+      "qwen/qwen3-32b": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 1440,
+      "completion_tokens": 251
+    },
+    "cost_usd": 0.000185,
+    "reported_cost_usd": 0.000185,
+    "wall_seconds": 4.4,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status option. Please choose a status from the following: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 42,
+        "cost": 3.096e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status for the function. Valid statuses are: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 40,
+        "cost": 3.04e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status for the function. Valid statuses are: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 40,
+        "cost": 3.04e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status option. Please provide a valid status from the following: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 43,
+        "cost": 3.124e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status. Please choose a valid status from the following options: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 43,
+        "cost": 3.124e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided value \"definitely not a member\" is not a valid status. Please choose a valid status from the following options: [\"open\", \"in_progress\", \"blocked\", \"resolved\", \"closed\"].",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 240,
+        "completion": 43,
+        "cost": 3.124e-05
+      }
+    }
+  ]
+}

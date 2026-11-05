@@ -1,0 +1,65 @@
+{
+  "summary": {
+    "n_items": 0,
+    "n_awkward": 0,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": NaN,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": NaN,
+    "readout_3_schema_validity_awkward": NaN,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": NaN,
+    "readout_4_no_call_rate": NaN,
+    "echo_rate_awkward": NaN,
+    "by_kind": {
+      "equivalent": {
+        "n": 0,
+        "substituted": 0,
+        "rate": NaN
+      },
+      "shifted": {
+        "n": 0,
+        "substituted": 0,
+        "rate": NaN
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {},
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "meta-llama/llama-3.1-8b-instruct",
+    "api_models": {},
+    "providers": {},
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    "cost_usd": 0.0,
+    "reported_cost_usd": 0,
+    "wall_seconds": 252.7,
+    "errors": [
+      "s00_004: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+      "s00_002: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+      "s00_000: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+      "s00_006: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+      "s00_010: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+      "s00_008: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')"
+    ],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": []
+}

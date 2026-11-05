@@ -1,0 +1,258 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 0.16666666666666666,
+    "readout_4_no_call_rate": 0.8333333333333334,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "no_call": 5,
+      "abstain": 1
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "qwen/qwen3-32b",
+    "api_models": {
+      "qwen/qwen3-32b": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "urgent",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 1392,
+      "completion_tokens": 190
+    },
+    "cost_usd": 0.000165,
+    "reported_cost_usd": 0.000165,
+    "wall_seconds": 4.2,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided tools do not have a function to set the status to \"urgent\" for a record.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 21,
+        "cost": 2.444e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "None of the available functions can set the status to \"urgent\" as it is not a valid option in the provided workflow statuses.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 27,
+        "cost": 2.612e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided tools do not allow setting a status to \"urgent.\" Valid statuses are: \"open,\" \"in_progress,\" \"blocked,\" \"resolved,\" or \"closed.\" Please provide a valid status.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 41,
+        "cost": 3.004e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided tools do not allow setting a status to \"urgent.\" Please use one of the allowed statuses: \"open,\" \"in_progress,\" \"blocked,\" \"resolved,\" or \"closed.\"",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 39,
+        "cost": 2.948e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided tools do not allow setting a status to \"urgent.\" Valid statuses are: \"open,\" \"in_progress,\" \"blocked,\" \"resolved,\" or \"closed.\" Please provide a valid status.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 41,
+        "cost": 3.004e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided tools do not have a function to set the status to \"urgent\" for a record.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen3-32b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 232,
+        "completion": 21,
+        "cost": 2.444e-05
+      }
+    }
+  ]
+}

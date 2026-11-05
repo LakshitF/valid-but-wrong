@@ -1,0 +1,258 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 0.16666666666666666,
+    "readout_4_no_call_rate": 0.8333333333333334,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "no_call": 5,
+      "abstain": 1
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "api_models": {
+      "meta-llama/llama-3.3-70b-instruct": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 1806,
+      "completion_tokens": 178
+    },
+    "cost_usd": 0.000238,
+    "reported_cost_usd": 0.000238,
+    "wall_seconds": 12.4,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am not able to execute this task as it exceeds the limitations of the functions I have been given.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 22,
+        "cost": 3.714e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am not able to execute this task as it falls outside of the scope of the functions I have been given.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 24,
+        "cost": 3.778e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am not able to execute this task as it falls outside of the scope of the functions I have been given.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 24,
+        "cost": 3.778e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am not able to execute this task as it falls outside of the scope of the functions I have been given.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 24,
+        "cost": 3.778e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "no_call",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am not able to execute this task as it falls outside of the scope of the functions I have been given.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 24,
+        "cost": 3.778e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a specific function that is not available in the given list of functions. The provided functions are related to updating the workflow status of a support ticket, which does not match the task of setting a status to \"definitely not a member\" for a record.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 301,
+        "completion": 60,
+        "cost": 4.93e-05
+      }
+    }
+  ]
+}

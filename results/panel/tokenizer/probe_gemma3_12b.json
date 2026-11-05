@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 1.0,
+    "readout_4_no_call_rate": 0.0,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "abstain": 6
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "google/gemma-3-12b-it",
+    "api_models": {
+      "google/gemma-3-12b-it": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 2214,
+      "completion_tokens": 360
+    },
+    "cost_usd": 0.000132,
+    "reported_cost_usd": 0.000165,
+    "wall_seconds": 4.1,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am sorry, I cannot fulfill this request. The `set_ticket_status` tool only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 61,
+        "cost": 2.76e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am sorry, I cannot fulfill this request. The `set_ticket_status` tool only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 61,
+        "cost": 2.76e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am sorry, I cannot fulfill this request. The `set_ticket_status` tool only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 61,
+        "cost": 2.76e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I am sorry, I cannot fulfill this request. The `set_ticket_status` tool only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 61,
+        "cost": 2.76e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot fulfill this request. The available tool `set_ticket_status` only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 58,
+        "cost": 2.715e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot fulfill this request. The available tool `set_ticket_status` only accepts status values from a predefined enum: \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". \"definitely not a member\" is not a valid status.\n",
+      "provider": "DeepInfra",
+      "api_model": "google/gemma-3-12b-it",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 369,
+        "completion": 58,
+        "cost": 2.715e-05
+      }
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 1.0,
+    "readout_4_no_call_rate": 0.0,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "abstain": 6
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "api_models": {
+      "meta-llama/llama-3.3-70b-instruct": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "urgent",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 1758,
+      "completion_tokens": 331
+    },
+    "cost_usd": 0.000282,
+    "reported_cost_usd": 0.000282,
+    "wall_seconds": 18.4,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the given list of functions. The available function 'set_ticket_status' only allows updating the workflow status of a support ticket to one of the following: 'open', 'in_progress', 'blocked', 'resolved', or 'closed'. It does not support setting the status to 'urgent'.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 74,
+        "cost": 5.298e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the given list. The available function 'set_ticket_status' only allows updating the status to 'open', 'in_progress', 'blocked', 'resolved', or 'closed', but not 'urgent'.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 56,
+        "cost": 4.722e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the provided functions list.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 21,
+        "cost": 3.602e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the given list. The available function 'set_ticket_status' only accepts specific statuses: 'open', 'in_progress', 'blocked', 'resolved', 'closed'. The status 'urgent' is not among the accepted statuses.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 61,
+        "cost": 4.882e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the given list. The available function 'set_ticket_status' only accepts specific statuses: 'open', 'in_progress', 'blocked', 'resolved', 'closed'. The status \"urgent\" is not among the allowed options.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 61,
+        "cost": 4.882e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "urgent",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "I cannot perform this task as it requires a function that is not available in the given list of functions. The available function 'set_ticket_status' only allows updating the status to 'open', 'in_progress', 'blocked', 'resolved', or 'closed', but not 'urgent'.",
+      "provider": "DeepInfra",
+      "api_model": "meta-llama/llama-3.3-70b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 293,
+        "completion": 58,
+        "cost": 4.786e-05
+      }
+    }
+  ]
+}

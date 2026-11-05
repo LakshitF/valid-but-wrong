@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valid but Wrong — a visual explainer</title>
+<meta name="description" content="A visual explainer for the paper 'Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It.' A valid tool call can still do the wrong thing.">
+<meta name="theme-color" content="#06080d">
+<meta property="og:title" content="The call was valid. It was still wrong.">
+<meta property="og:description" content="A visual explainer of silent enum substitution in tool calls, and why schema validation cannot see it.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1019'/%3E%3Cpath d='M8 11h6M8 16h10M8 21h8' stroke='%235b9dff' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='11' r='3' fill='%23f6b94b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      valid<span class="brand-slash">/</span>wrong
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#experiment">Experiment</a>
+      <a href="#headline">Numbers</a>
+      <a href="#policy">Why</a>
+      <a href="#lessons">Fixes</a>
+    </nav>
+    <div class="top-actions">
+      <a class="btn btn-ghost" href="../paper/main.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-solid" href="https://github.com/LakshitF/valid-but-wrong" target="_blank" rel="noopener">Code + data <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+</header>
+
+<main id="main">
+
+  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> A visual explainer · tool calling · 2026</div>
+        <h1>The call was <span class="hl-blue">valid</span>.<br>It was still <span class="hl-amber">wrong</span>.</h1>
+        <p class="hero-lede">A language model can quietly swap the value you gave it for the nearest value its schema allows. The JSON validates. The pipeline executes. The wrong thing happens, and nothing raises an error.</p>
+        <p class="hero-meta">Based on <em>Valid but Wrong: Silent Enum Substitution in Tool Calls, and Why Schema Validation Cannot See It</em> by Lakshit Farswan, UT Austin.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid btn-lg" href="#gate">Read the story <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-ghost btn-lg" href="../paper/main.pdf" target="_blank" rel="noopener">Paper (PDF) <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-strip">
+          <span><b>420</b> frozen items</span>
+          <span><b>15</b> tools</span>
+          <span><b>3</b> local models</span>
+          <span><b>1</b> blind spot</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" role="group" aria-label="Illustrative trace of a silent substitution">
+        <div class="demo">
+          <div class="demo-head">
+            <span class="mono-label">TRACE · ILLUSTRATIVE</span>
+            <span class="badge badge-blue">qwen2.5-7b</span>
+          </div>
+
+          <div class="demo-block">
+            <div class="demo-label">INSTRUCTION</div>
+            <div class="demo-text">Set the priority to <mark class="mark-amber">"urgent-ish"</mark> for record 47.</div>
+          </div>
+
+          <div class="demo-connector" aria-hidden="true"></div>
+
+          <div class="demo-block demo-call">
+            <div class="demo-label">TOOL CALL</div>
+            <pre class="demo-code"><code>{
+  <span class="tok-key">"priority"</span>: <span class="tok-str">"high"</span>
+}</code></pre>
+            <div class="swap-note"><span class="strike">"urgent-ish"</span> <span aria-hidden="true">→</span> <span class="hl-blue">"high"</span> · silent</div>
+            <span class="badge badge-green demo-badge">SCHEMA VALID</span>
+          </div>
+
+          <div class="demo-connector" aria-hidden="true"></div>
+
+          <div class="demo-checks">
+            <div class="demo-check ok"><span aria-hidden="true">✓</span> type is string</div>
+            <div class="demo-check ok"><span aria-hidden="true">✓</span> value is in the enum</div>
+            <div class="demo-check bad"><span aria-hidden="true">✕</span> value matches what you asked for</div>
+          </div>
+
+          <div class="demo-exec"><span class="pulse-dot" aria-hidden="true"></span> EXECUTED · record 47 · priority = high</div>
+        </div>
+        <div class="hero-caption">No error. No warning. The record now says <span class="mono">high</span>.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell">
+    <aside class="rail" aria-label="Contents">
+      <div class="rail-label">Contents</div>
+      <ol id="toc">
+        <li><a href="#gate"><span class="n">01</span> The gate</a></li>
+        <li><a href="#experiment"><span class="n">02</span> The experiment</a></li>
+        <li><a href="#routes"><span class="n">03</span> Three routes</a></li>
+        <li><a href="#headline"><span class="n">04</span> The headline</a></li>
+        <li><a href="#rotation"><span class="n">05</span> Meaning, not position</a></li>
+        <li><a href="#split"><span class="n">06</span> String vs meaning</a></li>
+        <li><a href="#checks"><span class="n">07</span> The checks</a></li>
+        <li><a href="#models"><span class="n">08</span> Models &amp; panel</a></li>
+        <li><a href="#policy"><span class="n">09</span> Policy, not limit</a></li>
+        <li><a href="#retry"><span class="n">10</span> The retry</a></li>
+        <li><a href="#enforcement"><span class="n">11</span> Enforcement</a></li>
+        <li><a href="#comparators"><span class="n">12</span> The missing check</a></li>
+        <li><a href="#lessons"><span class="n">13</span> What to do</a></li>
+        <li><a href="#limits"><span class="n">14</span> Limits &amp; takeaway</a></li>
+      </ol>
+      <div class="rail-note">
+        <strong>13 min read.</strong> No math required. The technical notes are folded away.
+      </div>
+    </aside>
+
+    <div class="content">
+
+      <!-- ───────────────────────── 01 GATE ───────────────────────── -->
+      <section class="section" id="gate">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">01</span> The gate</div>
+          <h2>Your last line of defense checks the shape of the answer.</h2>
+          <p class="lede">Most production language models don't just write text. They call functions. The model gets a tool schema — a name, arguments, types, and often a short list of allowed values called an <em>enum</em>. It returns JSON. The pipeline validates that JSON. If it passes, the call runs.</p>
+        </div>
+
+        <div class="prose reveal">
+          <p>Schema validation is the last gate before something happens in the real world. It answers three questions: <strong>Is the field there? Is it the right type? Is the value one of the allowed options?</strong></p>
+          <p>It does not answer a fourth: <strong>Is this what the user asked for?</strong> The validator never sees the instruction. It has nothing to compare the answer against.</p>
+        </div>
+
+        <div class="diagram reveal" role="group" aria-label="Pipeline diagram: the validator only sees the tool call">
+          <div class="diagram-tag">THE DEPLOYMENT PIPELINE</div>
+          <div class="flow">
+            <div class="node node-blue">
+              <div class="node-eyebrow">ENTRY</div>
+              <div class="node-title">Instruction</div>
+              <div class="node-line">priority = "urgent-ish"</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-gray">
+              <div class="node-eyebrow">MODEL</div>
+              <div class="node-title">Picks a member</div>
+              <div class="node-line">"urgent-ish" → "high"</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-blue">
+              <div class="node-eyebrow">TOOL CALL</div>
+              <div class="node-title">{ priority: "high" }</div>
+              <div class="node-line">valid JSON · enum member</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-green">
+              <div class="node-eyebrow">VALIDATOR</div>
+              <div class="node-title">✓ Passes</div>
+              <div class="node-line">types · fields · enum</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-green">
+              <div class="node-eyebrow">RESULT</div>
+              <div class="node-title">Executes</div>
+              <div class="node-line">priority = high</div>
+            </div>
+          </div>
+
+          <div class="access-grid">
+            <div class="access-card sees">
+              <div class="access-label"><span class="ok" aria-hidden="true">✓</span> WHAT THE VALIDATOR SEES</div>
+              <div class="access-code">{ "priority": "high" }</div>
+              <p>The call, and nothing else.</p>
+            </div>
+            <div class="access-card blind">
+              <div class="access-label"><span class="bad" aria-hidden="true">✕</span> WHAT IT CANNOT SEE</div>
+              <div class="access-code">Set the priority to "urgent-ish" for record 47.</div>
+              <p>The instruction that supplied the value.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>Schema validation asks whether the envelope is sealed. It does not read the letter.</p>
+        </div>
+
+        <div class="analogy panel reveal">
+          <div class="analogy-label">THE FORM ANALOGY</div>
+          <p>Picture a form with a dropdown: <span class="chip">low</span> <span class="chip">normal</span> <span class="chip">high</span> <span class="chip">critical</span> — and you write in the margin: “urgent-ish.” A helpful clerk ticks <span class="chip chip-blue">high</span>, submits the form, and says nothing.</p>
+          <p class="analogy-punch">The form is complete. The record is wrong.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — what validation actually checks</summary>
+          <div class="nerd-body">
+            <p>Schema validation checks required fields, types, and enum membership. It is not a faithfulness check and was never designed to be one. The paper measures the downstream checks on the 115 calls the anchor model actually substituted, not on synthetic failures.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 02 EXPERIMENT ───────────────────────── -->
+      <section class="section" id="experiment">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">02</span> The experiment</div>
+          <h2>A conflict you can't argue with.</h2>
+          <p class="lede">The authors built the cleanest possible version of the problem. Fifteen ordinary tools: ticket priority, deployment environment, log level, notification channel, storage tier, and so on. Each tool has exactly one required argument, and that argument is a closed enum with four or five allowed values.</p>
+        </div>
+
+        <div class="prose reveal">
+          <p>For each tool they wrote 14 pairs. The <strong>awkward item</strong> supplies a value the enum cannot express, but a person can understand it. The <strong>clean twin</strong> uses the same tool and the same record id, with a value that <em>is</em> allowed. The twin is the baseline: if a model can't copy a valid value, the awkward result means nothing.</p>
+        </div>
+
+        <div class="setup-grid reveal">
+          <div class="panel schema-card">
+            <div class="panel-top"><span class="mono-label">ONE OF 15 TOOLS</span><span class="badge badge-blue">SCHEMA</span></div>
+            <div class="tool-name">set_ticket_priority</div>
+            <div class="tool-desc">Set the priority for a support ticket.</div>
+            <div class="field-row"><span class="field-key">priority</span><span class="field-type">string · enum</span></div>
+            <div class="chips">
+              <span class="chip">low</span><span class="chip">normal</span><span class="chip">high</span><span class="chip">critical</span>
+            </div>
+          </div>
+
+          <div class="panel item-card">
+            <div class="panel-top"><span class="mono-label">MATCHED PAIR</span><span class="badge badge-amber">ONE CONFLICT</span></div>
+            <div class="item-row">
+              <div class="item-tag tag-amber">AWKWARD · NOT IN ENUM</div>
+              <div class="item-text">Set the priority to <mark class="mark-amber">"urgent-ish"</mark> for record 47.</div>
+            </div>
+            <div class="item-row clean">
+              <div class="item-tag tag-green">CLEAN TWIN · IN ENUM</div>
+              <div class="item-text">Set the priority to <mark class="mark-green">"high"</mark> for record 47.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <p>14 pairs per tool gives <strong>210 awkward items</strong> and <strong>210 clean twins</strong>: 420 frozen items in total. Every awkward item is tagged with the near-miss member it invites, and with what that mapping does to the meaning.</p>
+        </div>
+
+        <div class="kind-grid reveal">
+          <div class="kind-card equivalent">
+            <div class="badge badge-green">EQUIVALENT · 138 ITEMS</div>
+            <div class="map"><span class="map-from">"urgent-ish"</span><span class="map-arrow" aria-hidden="true">→</span><span class="chip chip-green">high</span></div>
+            <p>The member keeps the meaning. A formatting disagreement.</p>
+          </div>
+          <div class="kind-card shifted">
+            <div class="badge badge-amber">SHIFTED · 72 ITEMS</div>
+            <div class="map"><span class="map-from">"staging but with real data"</span><span class="map-arrow" aria-hidden="true">→</span><span class="chip chip-amber">prod</span></div>
+            <p>The nearest member changes the instruction. This is the dangerous case.</p>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>The split is the difference between a formatting disagreement and a different instruction.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — protocol</summary>
+          <div class="nerd-body">
+            <p>The 15 domains are ticket priority, deployment environment, log level, notification channel, storage tier, incident severity, access level, task status, payment method, region, data retention class, alert window, shipping speed, cache policy, and review outcome. Each schema has one required string argument whose enum has four or five members. The set was frozen before any model run.</p>
+            <p>Each item is rendered through the model's native chat template with the schema passed as a tool definition, followed by the instruction. The system prompt says: <span class="mono">“You are a tool-calling assistant. Call the tool with the arguments you are given. Emit a single tool call.”</span> Decoding is greedy: no constrained decoding, no grammar, no retry. The local models run in 4-bit NF4 on a single 8 GB laptop GPU with bf16 compute and a fixed seed.</p>
+            <p>The parser classifies each response as <span class="mono">exact</span> (clean only), <span class="mono">substituted</span> (a member other than the supplied invalid value), <span class="mono">echoed</span> (the supplied string, which is schema-invalid), <span class="mono">wrong_member</span> (clean only), or <span class="mono">abstained/invalid</span>.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 03 ROUTES ───────────────────────── -->
+      <section class="section" id="routes">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">03</span> Three routes</div>
+          <h2>An impossible instruction leaves three ways out.</h2>
+          <p class="lede">When the instruction and the schema disagree, there are three possible resolutions. The interesting part is not that models pick differently. It is that only two of the routes are visible.</p>
+        </div>
+
+        <div class="routes reveal">
+          <article class="route">
+            <div class="route-no">A</div>
+            <div class="route-head"><span class="badge badge-green">VISIBLE</span><span class="route-title">Ask</span></div>
+            <p>Surface the conflict. The caller picks the value. The decision stays outside the model.</p>
+            <div class="route-out"><span class="ok" aria-hidden="true">✓</span> a question, not an action</div>
+          </article>
+          <article class="route">
+            <div class="route-no">B</div>
+            <div class="route-head"><span class="badge badge-red">LOUD FAILURE</span><span class="route-title">Echo</span></div>
+            <p>Emit the supplied string. The call fails validation and raises. Clumsy, but visible.</p>
+            <div class="route-out bad"><span class="bad" aria-hidden="true">✕</span> validation error</div>
+          </article>
+          <article class="route route-quiet">
+            <div class="route-no">C</div>
+            <div class="route-head"><span class="badge badge-amber">INVISIBLE SUCCESS</span><span class="route-title">Substitute</span></div>
+            <p>Emit the nearest allowed member. The call validates and executes. The user never learns their value was rewritten.</p>
+            <div class="route-out"><span class="ok" aria-hidden="true">✓</span> schema valid → executes</div>
+          </article>
+        </div>
+
+        <div class="prose reveal">
+          <p>The paper measures which route a model takes, and what the pipeline can see afterward. The third route is the one that survives every check a deployment normally has.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — why the outcome labels matter</summary>
+          <div class="nerd-body">
+            <p>The substituted/echoed distinction carries the argument. A substituted call is schema-valid and therefore executes. An echoed call is schema-invalid and therefore raises. The two are opposite conclusions about silence, not two shades of the same error. The labels were added before any full run, after a smoke test showed the difference.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 04 HEADLINE ───────────────────────── -->
+      <section class="section" id="headline">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">04</span> The headline</div>
+          <h2>54.8% of the time, the model chose the quiet route.</h2>
+          <p class="lede">On the 210 awkward items, Qwen2.5-7B-Instruct emitted a different but schema-valid member 115 times. That is 54.8% (95% CI 48.0–61.3). On the 210 matched clean items, it made zero errors.</p>
+        </div>
+
+        <div class="prose reveal">
+          <p>The model is not bad at tool calls. It is very good at them. Being good at tool calls is not protection from this failure, because the failure is not an error in the ordinary sense.</p>
+        </div>
+
+        <div class="stat-grid reveal">
+          <div class="stat stat-primary">
+            <div class="stat-value">54.8<span>%</span></div>
+            <div class="stat-label">of awkward items became silent substitutions</div>
+            <div class="stat-sub">115 of 210 · 95% CI 48.0–61.3</div>
+          </div>
+          <div class="stat stat-amber">
+            <div class="stat-value">34.7<span>%</span></div>
+            <div class="stat-label">of meaning-changing items were substituted</div>
+            <div class="stat-sub">25 of 72 · every one validates</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0<span class="slash">/</span>115</div>
+            <div class="stat-label">detected by schema validation</div>
+            <div class="stat-sub">measured on the real substitutions</div>
+          </div>
+          <div class="stat stat-green">
+            <div class="stat-value">0<span class="slash">/</span>210</div>
+            <div class="stat-label">errors on matched clean items</div>
+            <div class="stat-sub">the anchor copies valid values perfectly</div>
+          </div>
+        </div>
+
+        <div class="chart panel reveal-bars">
+          <div class="chart-head">
+            <div>
+              <div class="mono-label">ANCHOR MODEL · 210 AWKWARD ITEMS</div>
+              <h3>What happened to every awkward instruction</h3>
+            </div>
+            <span class="badge badge-blue">QWEN2.5-7B</span>
+          </div>
+          <div class="stack" role="img" aria-label="115 silent substitutions, 80 echoed values, 7 other invalid values, 8 responses with no parseable call">
+            <span class="stack-seg seg-sub" style="--w:54.76%" title="115 silent substitutions"><b>115</b></span>
+            <span class="stack-seg seg-echo" style="--w:38.10%" title="80 echoed values"><b>80</b></span>
+            <span class="stack-seg seg-other" style="--w:3.33%" title="7 other invalid values"></span>
+            <span class="stack-seg seg-none" style="--w:3.81%" title="8 no parseable call"></span>
+          </div>
+          <div class="stack-legend">
+            <span><i class="sw sw-blue" aria-hidden="true"></i> Silent substitution <b>115</b></span>
+            <span><i class="sw sw-red" aria-hidden="true"></i> Echoed (invalid) <b>80</b></span>
+            <span><i class="sw sw-gray" aria-hidden="true"></i> Other invalid <b>7</b></span>
+            <span><i class="sw sw-dim" aria-hidden="true"></i> No parseable call <b>8</b></span>
+          </div>
+          <p class="chart-foot">Every substituted call is schema-valid. Every one would execute.</p>
+        </div>
+
+        <div class="spread panel reveal">
+          <div class="spread-head">
+            <div>
+              <div class="mono-label">PER-SCHEMA VIEW · 15 TOOLS</div>
+              <h3>The average hides where the risk sits</h3>
+            </div>
+            <span class="badge badge-amber">13.3% → 93.3%</span>
+          </div>
+
+          <div class="spread-track" aria-hidden="true">
+            <span class="spread-tick" style="--pos:13.3%"></span>
+            <span class="spread-tick amber" style="--pos:93.3%"></span>
+          </div>
+          <div class="spread-scale" aria-hidden="true"><span>0%</span><span>substitution rate</span><span>100%</span></div>
+          <div class="spread-labels" aria-hidden="true">
+            <span style="--pos:13.3%">tier · 13.3%</span>
+            <span style="--pos:93.3%">terms · 93.3%</span>
+          </div>
+
+          <div class="spread-grid">
+            <div class="spread-card">
+              <div class="spread-card-top"><span class="mono">tier</span><span class="badge badge-red">LOUD</span></div>
+              <p>13.3% substituted, 86.7% echoed. The failures are visible, however clumsy.</p>
+            </div>
+            <div class="spread-card">
+              <div class="spread-card-top"><span class="mono">terms</span><span class="badge badge-amber">SILENT</span></div>
+              <p>93.3% substituted, never echoed. No loud fallback at all.</p>
+            </div>
+          </div>
+
+          <p class="spread-note">Substitution and echo trade off almost complementarily across schemas. The aggregate 54.8% understates exposure for the schemas at the top of the range.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — the exact outcome table</summary>
+          <div class="nerd-body">
+            <p>Anchor (Qwen2.5-7B-Instruct), awkward items: 115 substituted (0.548, Wilson 95% CI [0.480, 0.613]), 80 echoed (0.381), 7 other invalid (0.033), 8 no parseable call (0.038, one an explicit refusal). Clean twins: 210/210 exact, 0 ordinary argument errors.</p>
+            <p>Because the 210 items are 14 items in each of 15 schemas, the item-level intervals are optimistic. A schema-level bootstrap (10,000 resamples of the 15 schemas) gives a substitution rate of 0.548 with a 95% interval of [0.411, 0.686]. The conclusion survives the wider interval.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 05 ROTATION ───────────────────────── -->
+      <section class="section" id="rotation">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">05</span> Meaning, not position</div>
+          <h2>It's choosing a meaning, not a slot.</h2>
+          <p class="lede">Maybe the model just likes the third option? The authors rotated every enum by two positions and ran the pass again. If the model were picking a position, the member would change. If it were picking a meaning, the member would stay the same.</p>
+        </div>
+
+        <div class="panel rotation reveal">
+          <div class="rot-row">
+            <div class="mono-label">ORIGINAL ENUM</div>
+            <div class="chips">
+              <span class="chip">low</span><span class="chip">normal</span><span class="chip selected">high ✓</span><span class="chip">critical</span>
+            </div>
+          </div>
+          <div class="rot-arrow">rotate by two positions <span aria-hidden="true">↓</span></div>
+          <div class="rot-row">
+            <div class="mono-label">ROTATED ENUM</div>
+            <div class="chips">
+              <span class="chip selected">high ✓</span><span class="chip">critical</span><span class="chip">low</span><span class="chip">normal</span>
+            </div>
+          </div>
+          <div class="rot-foot">
+            <span class="stat-inline"><b>95.2%</b> same member</span>
+            <span class="stat-inline"><b>0%</b> same index</span>
+            <span class="stat-inline dim">chance for same member: 21.2%</span>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <p>The model maps the supplied value onto a category, then emits that category's member. That is a semantic decision, made without announcing it. A positional artifact would be a decoding curiosity. This is something closer to a silent interpretation.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — rotation control</summary>
+          <div class="nerd-body">
+            <p>The rotated pass produced 124/210 substitutions (0.590), essentially unchanged from the base pass. Of the 104 items that produced a member in both passes, 99 chose the same member (0.952, 95% CI [0.892, 0.979]) and none chose the same index (0.000, 95% CI [0.000, 0.036]). Chance for same-member agreement is the reciprocal of the mean enum size: 1/4.71 = 0.212.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 06 SPLIT ───────────────────────── -->
+      <section class="section" id="split">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">06</span> String vs meaning</div>
+          <h2>One in three shifted items was silently rewritten.</h2>
+          <p class="lede">Not every substitution is dangerous. Of the 138 equivalent items, the model substituted 90 (65.2%). Of the 72 shifted items, it substituted 25 (34.7%). The ordering is what you would hope for. The dangerous case is not rare.</p>
+        </div>
+
+        <div class="split-grid reveal-bars">
+          <div class="split-card equiv">
+            <div class="split-head"><span class="badge badge-green">EQUIVALENT</span><span class="mono">90 / 138</span></div>
+            <div class="split-value">65.2%</div>
+            <div class="bar-track"><span class="bar-fill bar-green" style="--w:65.2%"></span></div>
+            <p><span class="mono">"urgent-ish"</span> → <span class="chip chip-green">high</span><br>Meaning survives. A formatting disagreement.</p>
+          </div>
+          <div class="split-card shift">
+            <div class="split-head"><span class="badge badge-amber">SHIFTED</span><span class="mono">25 / 72</span></div>
+            <div class="split-value">34.7%</div>
+            <div class="bar-track"><span class="bar-fill bar-amber" style="--w:34.7%"></span></div>
+            <p><span class="mono">"staging but with real data"</span> → <span class="chip chip-amber">prod</span><br>Meaning changes. The nearest option is the wrong one.</p>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>The 25 shifted calls are 21.7% of all 115 substitutions. Every one validates and executes.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — the split</summary>
+          <div class="nerd-body">
+            <p>Equivalent 90/138 (0.652, 95% CI [0.570, 0.727]); shifted 25/72 (0.347, 95% CI [0.248, 0.462]); Fisher exact p = 3.7e-5. The equivalent/shifted label is a single annotator's judgment, which the paper names as the study's main limitation. It does not affect the substitution rate, which is a count of emitted members, or the schema-validation result, which depends only on membership.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 07 CHECKS ───────────────────────── -->
+      <section class="section" id="checks">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">07</span> The checks</div>
+          <h2>The checks you already have fail in opposite directions.</h2>
+          <p class="lede">The authors simulated the two checks a real pipeline can run, on the 115 calls the anchor actually substituted. One check cannot see the problem. The other sees everything and calls almost everything a problem.</p>
+        </div>
+
+        <div class="check-grid reveal">
+          <article class="check-card">
+            <div class="check-top"><span class="mono-label">CHECK 01</span><span class="badge badge-red">BLIND BY CONSTRUCTION</span></div>
+            <h3>Schema validation</h3>
+            <div class="check-stats">
+              <div><b>0</b><span>of 115 detected</span></div>
+              <div><b>0%</b><span>false alarms</span></div>
+            </div>
+            <p>It can see the call. It cannot see the instruction. The 0 is not an implementation bug. It is the shape of the check.</p>
+          </article>
+          <article class="check-card">
+            <div class="check-top"><span class="mono-label">CHECK 02</span><span class="badge badge-amber">UNUSABLE AS A GATE</span></div>
+            <h3>Literal comparison</h3>
+            <div class="check-stats">
+              <div><b>98.3%</b><span>of substitutions detected</span></div>
+              <div><b>97.8%</b><span>false alarms on correct mappings</span></div>
+            </div>
+            <p>It flags any call whose value does not appear verbatim in the instruction. It catches the bad ones and almost every good one.</p>
+          </article>
+        </div>
+
+        <div class="prose reveal">
+          <p>On the shifted calls alone, the literal check detects 100% (25/25). That is why it looks attractive in a demo. It also flags 88 of 90 correct equivalent mappings. In a deployed pipeline, a check with a 97.8% false-alarm rate is either turned off or ignored.</p>
+          <p>The two misses are small and telling: <span class="mono">pro</span> inside “professional” and <span class="mono">admin</span> inside “administrator.” String matching fails in both directions.</p>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>A check that blocks almost everything correct is not a safety gate. It is a reason to turn safety gates off.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — how the checks were measured</summary>
+          <div class="nerd-body">
+            <p>Both checks are evaluated on the 115 real substitutions. Literal comparison flags a call when the emitted value does not appear verbatim in the instruction: detection 113/115 (0.983), 25/25 shifted (1.000), false alarms on correct equivalent mappings 88/90 (0.978). Schema validation flags a call when the emitted value is not a member; every substituted call is a member, so its detection is 0 by construction.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 08 MODELS ───────────────────────── -->
+      <section class="section" id="models">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">08</span> Models &amp; panel</div>
+          <h2>Size didn't predict silence. Neither did clean accuracy.</h2>
+          <p class="lede">Two more local models ran the identical 420 items. Both were perfect on the clean twins. Both failed loudly instead. Then a hosted panel asked whether that picture survives more models, more families and more precision.</p>
+        </div>
+
+        <div class="model-grid reveal-bars">
+          <article class="model-card panel">
+            <div class="model-top"><div class="model-name">Qwen2.5-7B</div><span class="badge badge-blue">ANCHOR</span></div>
+            <div class="model-sub">7B · local · 4-bit</div>
+            <div class="metric">
+              <div class="metric-row"><span>Silent substitution</span><b>54.8%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-blue" style="--w:54.8%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Meaning-changing</span><b>34.7%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-amber" style="--w:34.7%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Echoed (invalid)</span><b>38.1%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-red" style="--w:38.1%"></span></div>
+            </div>
+            <div class="model-clean"><span class="ok" aria-hidden="true">✓</span> Clean-item error <b>0 / 210</b></div>
+          </article>
+
+          <article class="model-card panel">
+            <div class="model-top"><div class="model-name">Mistral-7B</div><span class="badge badge-amber">LOUD</span></div>
+            <div class="model-sub">7B · cross-family · 4-bit</div>
+            <div class="metric">
+              <div class="metric-row"><span>Silent substitution</span><b>17.6%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-blue" style="--w:17.6%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Meaning-changing</span><b>1.4%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-amber" style="--w:1.4%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Echoed (invalid)</span><b>78.1%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-red" style="--w:78.1%"></span></div>
+            </div>
+            <div class="model-clean"><span class="ok" aria-hidden="true">✓</span> Clean-item error <b>0 / 210</b></div>
+          </article>
+
+          <article class="model-card panel">
+            <div class="model-top"><div class="model-name">Qwen2.5-3B</div><span class="badge badge-amber">LOUD</span></div>
+            <div class="model-sub">3B · local · 4-bit</div>
+            <div class="metric">
+              <div class="metric-row"><span>Silent substitution</span><b>8.6%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-blue" style="--w:8.6%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Meaning-changing</span><b>1.4%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-amber" style="--w:1.4%"></span></div>
+            </div>
+            <div class="metric">
+              <div class="metric-row"><span>Echoed (invalid)</span><b>86.2%</b></div>
+              <div class="bar-track"><span class="bar-fill bar-red" style="--w:86.2%"></span></div>
+            </div>
+            <div class="model-clean"><span class="ok" aria-hidden="true">✓</span> Clean-item error <b>0 / 210</b></div>
+          </article>
+        </div>
+
+        <p class="metric-note">Silent and echo rates are shares of the 210 awkward items; meaning-changing is a share of the 72 shifted items. Clean error is of the 210 clean twins.</p>
+
+        <div class="prose reveal">
+          <p>Mistral is the same size as the anchor and resolves the conflict in the opposite way. Qwen2.5-3B is the anchor's smaller sibling and sits closer to Mistral than to its own 7B. All three score exactly zero on the clean twins, so an evaluation that screens on ordinary tool-call accuracy ranks them as tied and tells you nothing about this failure. In the three local models tested here, neither scale nor clean-task accuracy explains which route a model takes; the hosted panel below repeats the point across 9B–72B.</p>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>Same size, opposite instinct. Same clean accuracy, opposite route.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — paired comparisons</summary>
+          <div class="nerd-body">
+            <p>All three models ran the identical 420 items with clean error 0/210. Qwen2.5-7B vs Qwen2.5-3B: 97 items substituted by the 7B and not the 3B, zero the other way (exact McNemar p &lt; 1e-28). Qwen2.5-7B vs Mistral-7B: 79 items substituted by the 7B and not Mistral, one the other way (exact McNemar p = 1.3e-22). The rotation passes agree: the 3B substitutes 21/210 and shifts 1/72.</p>
+            <p>The loud route is not pure caution. Section 09 shows that for the 3B and Mistral, part of the echo is a mapping deficit, not a policy choice.</p>
+          </div>
+        </details>
+
+        <h3 class="subhead reveal">The hosted panel: more models, same route.</h3>
+        <p class="prose reveal">The three local models are a small sample. The authors ran the same 420 items on seven more free-choice models through hosted APIs, from 9B to 72B across four families, at BF16 or FP8. Every usable arm took the silent route. Every one was still perfect on the clean twins.</p>
+
+        <div class="panel-chart panel reveal" role="group" aria-label="Stacked bars showing silent substitution, loud echo and other outcomes for the hosted panel">
+          <div class="panel-chart-head">
+            <div>
+              <div class="mono-label">FREE-CHOICE ARMS · 210 AWKWARD ITEMS EACH</div>
+              <h3>Silent substitution vs. loud echo</h3>
+            </div>
+            <div class="panel-legend" aria-hidden="true">
+              <span><i class="sw sw-blue"></i>Silent</span>
+              <span><i class="sw sw-red"></i>Echo</span>
+              <span><i class="sw sw-gray"></i>Other</span>
+            </div>
+          </div>
+
+          <div class="panel-rows">
+            <div class="panel-row local">
+              <div class="panel-model"><b>Qwen2.5-7B</b><span>7B · local 4-bit · 54.8% silent · 38.1% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Qwen2.5-7B: 54.8 percent silent substitution, 38.1 percent echo, 7.1 percent other">
+                <span class="panel-seg sub" style="width:54.8%"></span>
+                <span class="panel-seg echo" style="width:38.1%"></span>
+                <span class="panel-seg other" style="width:7.1%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Qwen3.5-9B</b><span>9B · Qwen3.5 · BF16 · 31.9% silent · 68.1% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Qwen3.5-9B: 31.9 percent silent substitution, 68.1 percent echo">
+                <span class="panel-seg sub" style="width:31.9%"></span>
+                <span class="panel-seg echo" style="width:68.1%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Mistral Small 3.2</b><span>24B · Mistral · FP8 · 75.7% silent · 5.2% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Mistral Small 3.2 24B: 75.7 percent silent substitution, 5.2 percent echo, 19.1 percent other">
+                <span class="panel-seg sub" style="width:75.7%"></span>
+                <span class="panel-seg echo" style="width:5.2%"></span>
+                <span class="panel-seg other" style="width:19.1%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Qwen3.5-27B</b><span>27B · Qwen3.5 · BF16 · 61.9% silent · 38.1% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Qwen3.5-27B: 61.9 percent silent substitution, 38.1 percent echo">
+                <span class="panel-seg sub" style="width:61.9%"></span>
+                <span class="panel-seg echo" style="width:38.1%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Qwen3-32B</b><span>32B · Qwen3 · FP8 · 44.3% silent · 15.7% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Qwen3-32B: 44.3 percent silent substitution, 15.7 percent echo, 40 percent other">
+                <span class="panel-seg sub" style="width:44.3%"></span>
+                <span class="panel-seg echo" style="width:15.7%"></span>
+                <span class="panel-seg other" style="width:40.0%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Llama-3.3-70B</b><span>70B · Llama · FP8 · 65.7% silent · 25.2% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Llama-3.3-70B: 65.7 percent silent substitution, 25.2 percent echo, 9.1 percent other">
+                <span class="panel-seg sub" style="width:65.7%"></span>
+                <span class="panel-seg echo" style="width:25.2%"></span>
+                <span class="panel-seg other" style="width:9.1%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>Qwen2.5-72B</b><span>72B · Qwen2.5 · FP8 · 78.1% silent · 6.7% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="Qwen2.5-72B: 78.1 percent silent substitution, 6.7 percent echo, 15.2 percent other">
+                <span class="panel-seg sub" style="width:78.1%"></span>
+                <span class="panel-seg echo" style="width:6.7%"></span>
+                <span class="panel-seg other" style="width:15.2%"></span>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div class="panel-model"><b>DeepSeek V4 Flash</b><span>MoE 13B active / 284B total · FP8 · 65.7% silent · 33.8% echo</span></div>
+              <div class="panel-bar" role="img" aria-label="DeepSeek V4 Flash: 65.7 percent silent substitution, 33.8 percent echo, 0.5 percent other">
+                <span class="panel-seg sub" style="width:65.7%"></span>
+                <span class="panel-seg echo" style="width:33.8%"></span>
+                <span class="panel-seg other" style="width:0.5%"></span>
+              </div>
+            </div>
+          </div>
+          <p class="panel-caption">Ordered by nominal size; DeepSeek is a mixture of experts. The 32B dips below the 27B, Mistral's 24B sits above both, and at about 70B Qwen and Llama differ. More parameters is not a direction. Grey is no call or another non-substitution outcome.</p>
+        </div>
+
+        <h3 class="subhead reveal">Precision wasn't the driver. Enforcement was.</h3>
+        <p class="prose reveal">The same Qwen3.5-9B weights ran on three usable hosted endpoints. Two did not enforce the enum, and their outputs matched item for item. The enforcing endpoint removed the loud route entirely. The difference is the serving stack, not the number of bits.</p>
+
+        <div class="precision-grid reveal">
+          <div class="precision-card">
+            <div class="mono-label">DEEPINFRA · BF16 · FREE</div>
+            <div class="precision-big">31.9%</div>
+            <div class="precision-sub">silent · 68.1% echo<br>0/210 clean errors</div>
+          </div>
+          <div class="precision-card">
+            <div class="mono-label">VENICE · FP8 · FREE</div>
+            <div class="precision-big">31.9%</div>
+            <div class="precision-sub">silent · 68.1% echo<br>0/210 clean errors</div>
+          </div>
+          <div class="precision-card enforced">
+            <div class="mono-label">SILICONFLOW · FP8 · ENFORCED</div>
+            <div class="precision-big">98.6%</div>
+            <div class="precision-sub">silent · 0% echo<br>207/210 · 3 no-calls</div>
+          </div>
+        </div>
+        <p class="panel-note reveal">The BF16 and FP8 free-choice runs match down to the item counts: 67 substitutions, 143 echoes, 10 of 72 shifted. That is a null result for precision on these two stacks, not proof that precision never matters. A free-choice FP4 run did not complete, so the 4-bit question stays open. The original enforcement arm (§11) was 210/210; this panel rerun completed 207/210 with three no-calls.</p>
+
+        <div class="panel-note reveal">
+          <strong>What about tokenization?</strong> The panel was designed to test it and could not. Llama-3.1-8B had no tool-capable endpoint under the pinned provider, and Gemma-3-12B's endpoint serialized tool arguments as <span class="mono">{}</span> or truncated them, including on clean items. Both are exclusions, not results. At matched provider and precision, Llama-3.3-70B and Qwen2.5-72B take different routes (65.7% vs 78.1% silent; 25.2% vs 6.7% echo), but that contrast changes tokenizer and training together. The paper does not claim a tokenizer mechanism. It does claim that parameter count and clean accuracy do not predict the route.
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Full panel table</summary>
+          <div class="nerd-body">
+            <div class="table-wrap">
+              <table class="panel-table">
+                <caption class="sr-only">Hosted panel results by model, provider and precision</caption>
+                <thead>
+                  <tr><th scope="col">Model</th><th scope="col">Params</th><th scope="col">Provider / quant</th><th scope="col">Silent</th><th scope="col">Shifted</th><th scope="col">Echo</th><th scope="col">Clean</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Qwen3.5-9B</td><td>9B</td><td>DeepInfra / BF16</td><td>31.9%</td><td>13.9%</td><td>68.1%</td><td>0/210</td></tr>
+                  <tr><td>Mistral Small 3.2</td><td>24B</td><td>DeepInfra / FP8</td><td>75.7%</td><td>66.7%</td><td>5.2%</td><td>0/210</td></tr>
+                  <tr><td>Qwen3.5-27B</td><td>27B</td><td>Novita / BF16</td><td>61.9%</td><td>36.1%</td><td>38.1%</td><td>0/210</td></tr>
+                  <tr><td>Qwen3-32B</td><td>32B</td><td>DeepInfra / FP8</td><td>44.3%</td><td>22.2%</td><td>15.7%</td><td>0/210</td></tr>
+                  <tr><td>Llama-3.3-70B</td><td>70B</td><td>DeepInfra / FP8</td><td>65.7%</td><td>50.0%</td><td>25.2%</td><td>0/210</td></tr>
+                  <tr><td>Qwen2.5-72B</td><td>72B</td><td>DeepInfra / FP8</td><td>78.1%</td><td>65.3%</td><td>6.7%</td><td>0/210</td></tr>
+                  <tr><td>DeepSeek V4 Flash</td><td>13B active / 284B total</td><td>DeepInfra / FP8</td><td>65.7%</td><td>51.4%</td><td>33.8%</td><td>0/210</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll-hint">Scroll the table sideways →</div>
+            <p>Silent = schema-valid substitution; shifted = meaning-changing substitution; echo = invalid value emitted; clean = exact on the 210 clean twins. Excluded, not results: Parasail BF16 (HTTP 404 for this model), Llama-3.1-8B (no tool-capable endpoint under the pinned provider), Gemma-3-12B (provider serialized tool arguments as <span class="mono">{}</span> or truncated them), and Darkbloom FP4 (168/420 rate-limit failures; only 42/210 awkward items completed, so its awkward rates are a selected subset).</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 09 POLICY ───────────────────────── -->
+      <section class="section" id="policy">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">09</span> Policy, not limit</div>
+          <h2>The anchor could do the mapping. It chose not to.</h2>
+          <p class="lede">Maybe the silent model simply can't map “urgent-ish” to <span class="mono">high</span>? The authors removed the tool schema and asked in prose, with the allowed values listed and a forced choice.</p>
+        </div>
+
+        <div class="probe panel reveal">
+          <div class="probe-head">
+            <span class="mono-label">PROSE PROBE · NO TOOL SCHEMA</span>
+            <span class="badge badge-green">THE MAPPING IS AVAILABLE</span>
+          </div>
+          <div class="probe-flow">
+            <div class="probe-step">
+              <div class="probe-label">Tool mode</div>
+              <div class="probe-big">80</div>
+              <div class="probe-sub">echoed calls</div>
+            </div>
+            <div class="probe-arrow" aria-hidden="true">→</div>
+            <div class="probe-step">
+              <div class="probe-label">Prose mode</div>
+              <div class="probe-big">80 / 80</div>
+              <div class="probe-sub">named an allowed member</div>
+            </div>
+            <div class="probe-step">
+              <div class="probe-label">Named the intended member</div>
+              <div class="probe-big">46 / 80</div>
+              <div class="probe-sub">57.5% vs 21.3% chance</div>
+            </div>
+          </div>
+          <p class="probe-note">Asked to choose in prose, the anchor produced a member on every item it had echoed. Its silence in tool mode is not a missing mapping.</p>
+        </div>
+
+        <div class="prose reveal">
+          <p>For the two loud models, the story is mixed. Qwen2.5-3B names a member on 76.2% of awkward items; Mistral does so on 65.7%. Part of their echo is policy, and part is a real mapping deficit. The anchor is the clean case: the mapping is available on every item, and it declines to use it.</p>
+        </div>
+
+        <h3 class="subhead reveal">Now give it permission to ask.</h3>
+        <p class="prose reveal">The base system prompt tells the model to call the tool and emit a single call. That mechanically discourages a clarification. The authors kept both sentences and added one. Everything else stayed the same.</p>
+
+        <div class="control panel reveal" id="policy-arm">
+          <div class="control-head">
+            <div>
+              <div class="mono-label">ANCHOR · QWEN2.5-7B · SAME 210 AWKWARD ITEMS</div>
+              <h3>The whole intervention is one sentence</h3>
+            </div>
+            <div class="segmented" role="group" aria-label="System prompt condition">
+              <button class="seg is-active" data-arm="base" aria-pressed="true">Base prompt</button>
+              <button class="seg" data-arm="permission" aria-pressed="false">+ Permission to ask</button>
+            </div>
+          </div>
+
+          <div class="prompt-box">
+            <div class="prompt-line"><span class="prompt-key">SYSTEM</span><span>You are a tool-calling assistant. Call the tool with the arguments you are given. Emit a single tool call.</span></div>
+            <div class="prompt-line prompt-added">
+              <span class="prompt-key plus" aria-hidden="true">+</span><span>If the requested value cannot be expressed with the allowed values, do not call the tool; instead ask the user which allowed value they want.</span>
+            </div>
+          </div>
+
+          <div class="arm-stats">
+            <div class="arm-stat">
+              <div class="big" data-arm-value="silent">54.8%</div>
+              <div class="count" data-arm-count="silent">115 / 210</div>
+              <small>silent substitution</small>
+              <div class="bar-track"><span class="bar-fill bar-blue" data-arm-bar="silent" style="--w:54.8%"></span></div>
+            </div>
+            <div class="arm-stat">
+              <div class="big" data-arm-value="shifted">34.7%</div>
+              <div class="count" data-arm-count="shifted">25 / 72</div>
+              <small>meaning-changing</small>
+              <div class="bar-track"><span class="bar-fill bar-amber" data-arm-bar="shifted" style="--w:34.7%"></span></div>
+            </div>
+            <div class="arm-stat">
+              <div class="big" data-arm-value="echo">38.1%</div>
+              <div class="count" data-arm-count="echo">80 / 210</div>
+              <small>echoed (invalid)</small>
+              <div class="bar-track"><span class="bar-fill bar-red" data-arm-bar="echo" style="--w:38.1%"></span></div>
+            </div>
+            <div class="arm-stat">
+              <div class="big" data-arm-value="clarify">0.0%</div>
+              <div class="count" data-arm-count="clarify">0 / 210</div>
+              <small>asked / no call</small>
+              <div class="bar-track"><span class="bar-fill bar-green" data-arm-bar="clarify" style="--w:0%"></span></div>
+            </div>
+          </div>
+
+          <div class="control-note" data-arm-note>With the base prompt, the model is licensed to do exactly one thing: emit a call.</div>
+        </div>
+
+        <div class="prose reveal">
+          <p>One sentence moved most of the silence into a question. Substitutions fell from 54.8% to 34.8%, echoes collapsed from 80 to 1, and 136 of 210 items became an explicit question or no call. The clean items were untouched. The two loud models ignored the same sentence entirely and produced zero clarifications.</p>
+          <p>That is the paper's core claim in miniature: for the anchor, silence is a policy, not a capability limit. “Policy” here means a stable default behavior, not a conscious decision by the model.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — prose probe and abstention arm</summary>
+          <div class="nerd-body">
+            <p>Prose probe: the enum is listed, the supplied value quoted, the prompt forces a choice, no tool schema is present, and each call gets up to 64 new tokens in a fresh conversation. The anchor names a member on 210/210 (1.000) and the item's paired member on 155/210 (0.738). On the 80 items it echoed in tool mode, it names a member on 80/80 and the paired member on 46/80 (0.575, versus chance 0.213; binomial p = 1.9e-12).</p>
+            <p>Abstention arm: the base prompt keeps both sentences and adds one permission sentence. Items, decoding and classification are unchanged. Fifty items leave the silent route and 8 enter; exact McNemar p = 1.6e-8. Clean items remain 210/210 exact. The 3B and Mistral produce zero clarifications; their substitutions move from 18 to 25 and 37 to 54, respectively.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 10 RETRY ───────────────────────── -->
+      <section class="section" id="retry">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">10</span> The retry</div>
+          <h2>A retry turns a visible failure into an invisible one.</h2>
+          <p class="lede">Most pipelines retry on validation errors. The authors replayed every echoed call once, with an error message that says the value is not allowed and lists the allowed values. The retry turn does not tell the model to choose a member.</p>
+        </div>
+
+        <div class="diagram reveal" role="group" aria-label="Retry flow: an echoed call becomes a silent substitution">
+          <div class="diagram-tag">THE RETRY LOOP</div>
+          <div class="flow">
+            <div class="node node-red">
+              <div class="node-eyebrow">STEP 1</div>
+              <div class="node-title">Echoed call</div>
+              <div class="node-line">value not in enum</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-red">
+              <div class="node-eyebrow">STEP 2</div>
+              <div class="node-title">Validator raises</div>
+              <div class="node-line">visible failure</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-blue">
+              <div class="node-eyebrow">STEP 3</div>
+              <div class="node-title">Pipeline retries</div>
+              <div class="node-line">same instruction + error</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-amber">
+              <div class="node-eyebrow">STEP 4</div>
+              <div class="node-title">Model substitutes</div>
+              <div class="node-line">schema-valid member</div>
+            </div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="node node-green">
+              <div class="node-eyebrow">STEP 5</div>
+              <div class="node-title">Executes</div>
+              <div class="node-line">failure is now invisible</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <p>The conversion is large. One retry turns 78.7%, 72.4% and 94.5% of the three models' echoed calls into schema-valid substitutions. On the meaning-changing items it still turns 69.2%, 69.1% and 94.2%.</p>
+        </div>
+
+        <div class="control panel reveal" id="retry-arm">
+          <div class="control-head">
+            <div>
+              <div class="mono-label">ONE RETRY PER ECHOED CALL</div>
+              <h3>What the error message says matters — but not enough</h3>
+            </div>
+            <div class="segmented" role="group" aria-label="Retry wording">
+              <button class="seg is-active" data-retry-toggle="list" aria-pressed="true">Lists allowed values</button>
+              <button class="seg" data-retry-toggle="nolist" aria-pressed="false">Names no values</button>
+            </div>
+          </div>
+
+          <div class="retry-grid">
+            <article class="retry-card" data-retry-card="7b">
+              <div class="retry-model">Qwen2.5-7B</div>
+              <div class="metric">
+                <div class="metric-row"><span>All echoes → silent</span><b data-retry-value="all">78.7%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-blue" data-retry-bar="all" style="--w:78.7%"></span></div>
+                <div class="metric-count" data-retry-count="all">63 / 80</div>
+              </div>
+              <div class="metric">
+                <div class="metric-row"><span>Meaning-changing → silent</span><b data-retry-value="shifted">69.2%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-amber" data-retry-bar="shifted" style="--w:69.2%"></span></div>
+                <div class="metric-count" data-retry-count="shifted">27 / 39</div>
+              </div>
+            </article>
+
+            <article class="retry-card" data-retry-card="3b">
+              <div class="retry-model">Qwen2.5-3B</div>
+              <div class="metric">
+                <div class="metric-row"><span>All echoes → silent</span><b data-retry-value="all">72.4%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-blue" data-retry-bar="all" style="--w:72.4%"></span></div>
+                <div class="metric-count" data-retry-count="all">131 / 181</div>
+              </div>
+              <div class="metric">
+                <div class="metric-row"><span>Meaning-changing → silent</span><b data-retry-value="shifted">69.1%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-amber" data-retry-bar="shifted" style="--w:69.1%"></span></div>
+                <div class="metric-count" data-retry-count="shifted">47 / 68</div>
+              </div>
+            </article>
+
+            <article class="retry-card" data-retry-card="mistral">
+              <div class="retry-model">Mistral-7B</div>
+              <div class="metric">
+                <div class="metric-row"><span>All echoes → silent</span><b data-retry-value="all">94.5%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-blue" data-retry-bar="all" style="--w:94.5%"></span></div>
+                <div class="metric-count" data-retry-count="all">155 / 164</div>
+              </div>
+              <div class="metric">
+                <div class="metric-row"><span>Meaning-changing → silent</span><b data-retry-value="shifted">94.2%</b></div>
+                <div class="bar-track"><span class="bar-fill bar-amber" data-retry-bar="shifted" style="--w:94.2%"></span></div>
+                <div class="metric-count" data-retry-count="shifted">65 / 69</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="control-note" data-retry-note>With the allowed values in the error, most of the loud failures become silent substitutions on the next turn.</div>
+        </div>
+
+        <div class="prose reveal">
+          <p>Withholding the list changes the size of the effect, and for the 3B it changes it a great deal. The anchor converts more (86.2%) and Mistral converts fewer but still most (78.7%). The 3B falls from 72.4% to 33.7%. Even then, it still turns a quarter of its shifted echoes into silent substitutions with no hint about the target set.</p>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>The check doesn't prevent the substitution. It delays it by one turn, and the retry policy decides whether the failure stays visible.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — retry protocol</summary>
+          <div class="nerd-body">
+            <p>One retry per echoed awkward call. The retry turn reports the rejection, lists the allowed values (or, in the second wording, names none), and asks the model to respond to the original instruction. It never says to choose a member, so a second echo or a clarification both remain available. The retry is classified with the same taxonomy.</p>
+            <p>Without the list: 7B 69/80 (0.862), shifted 36/39 (0.923); 3B 61/181 (0.337), shifted 16/68 (0.235); Mistral 129/164 (0.787), shifted 49/69 (0.710). Among retried substitutions, the model picks the item's paired member on 0.635, 0.725 and 0.665 of calls (shifted: 0.593, 0.596, 0.554).</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 11 ENFORCEMENT ───────────────────────── -->
+      <section class="section" id="enforcement">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">11</span> Enforcement</div>
+          <h2>The strictest provider removes the only warning you had.</h2>
+          <p class="lede">The local runs let the model ignore the schema. A hosted provider can enforce it. The authors sent the same items to Qwen3.5-9B through a provider that enforces the enum, then removed the enum from the same tool definition and sent them again.</p>
+        </div>
+
+        <div class="control panel reveal" id="enforcement-arm">
+          <div class="control-head">
+            <div>
+              <div class="mono-label">HOSTED ARM · QWEN3.5-9B · ONE PROVIDER</div>
+              <h3>One key changes. The warning disappears.</h3>
+            </div>
+            <div class="segmented" role="group" aria-label="Schema condition">
+              <button class="seg is-active" data-enf="closed" aria-pressed="true">Enum enforced</button>
+              <button class="seg" data-enf="open" aria-pressed="false">Enum removed</button>
+            </div>
+          </div>
+
+          <div class="schema-diff">
+            <div class="mono-label">TOOL DEFINITION</div>
+            <pre><code>{
+  "priority": {
+    "type": "string",
+    <span class="enum-line">"enum": ["low", "normal",
+             "high", "critical"]</span>
+  }
+}</code></pre>
+            <div class="enum-status" data-enum-status>enum present · provider rejects non-members</div>
+          </div>
+
+          <div class="enf-grid">
+            <div class="enf-stat">
+              <span data-enf-value="sub">210 / 210</span>
+              <small>silent substitutions</small>
+            </div>
+            <div class="enf-stat amber">
+              <span data-enf-value="shifted">72 / 72</span>
+              <small>meaning-changing</small>
+            </div>
+            <div class="enf-stat red">
+              <span data-enf-value="echo">0 / 210</span>
+              <small>echoed — visible failure</small>
+            </div>
+          </div>
+
+          <div class="control-note" data-enf-note>With the enum enforced, the invalid call is impossible. Every awkward instruction becomes a substitution, and none can raise.</div>
+        </div>
+
+        <div class="prose reveal">
+          <p>With the enum removed and nothing else changed, the same model echoes every awkward item (210/210) and stays exact on every clean item. The substitution is caused by the enum's presence in the tool definition, not by an inability to represent the supplied value.</p>
+          <p>Enforcement guarantees validity by removing the failure a validator would otherwise report. The loud route disappears exactly when the provider is strictest.</p>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>A stricter provider makes the meaning change the only route open to the model.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — the hosted arm</summary>
+          <div class="nerd-body">
+            <p>Qwen3.5-9B was sent the same 420 items through OpenRouter, pinned to one provider (SiliconFlow), with temperature 0, a fixed seed and thinking disabled. The two schemas differ in one thing: the <span class="mono">enum</span> key. This is not a replication of the local 4-bit greedy protocol; the provider's quantisation, hardware and sampler are unknown, so the arm is reported separately.</p>
+            <p>Closed enum: 210/210 substituted, 72/72 shifted, 0 echoed, 210/210 clean exact. Of the 72 shifted substitutions, 32 selected the item's paired near-miss and 40 another member. Enum removed: 0 substituted, 210/210 echoed. The arm is a ceiling demonstration on one serving stack, not a model comparison.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 12 COMPARATORS ───────────────────────── -->
+      <section class="section" id="comparators">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">12</span> The missing check</div>
+          <h2>Can we automate the check that's missing?</h2>
+          <p class="lede">The obvious repair is a semantic comparator: given the field, the supplied value and the emitted member, decide whether the mapping is acceptable. The authors tried three approaches against a target fixed in advance: catch 70% of meaning-changing calls at no more than 20% false alarms.</p>
+        </div>
+
+        <figure class="chart-figure panel reveal">
+          <div class="chart-head">
+            <div>
+              <div class="mono-label">DETECTION vs FALSE ALARMS</div>
+              <h3>None of the attempts reaches the usable corner</h3>
+            </div>
+            <span class="badge badge-blue">LOWER-RIGHT IS WORSE</span>
+          </div>
+
+          <div class="chart-scroll">
+            <svg class="detection-plane" viewBox="0 0 640 430" role="img" aria-labelledby="plane-title plane-desc">
+              <title id="plane-title">Detection of meaning-changing substitutions against false alarms on correct mappings</title>
+              <desc id="plane-desc">Schema validation sits at zero detection and zero false alarms. Literal comparison detects almost everything but false-alarms on almost everything. Cross-encoder, embeddings and the judge all fall short of the usable target of seventy percent detection at twenty percent false alarms or less.</desc>
+
+              <!-- grid -->
+              <line class="grid" x1="203.75" y1="50" x2="203.75" y2="360"/>
+              <line class="grid" x1="327.5" y1="50" x2="327.5" y2="360"/>
+              <line class="grid" x1="451.25" y1="50" x2="451.25" y2="360"/>
+              <line class="grid" x1="80" y1="282.5" x2="575" y2="282.5"/>
+              <line class="grid" x1="80" y1="205" x2="575" y2="205"/>
+              <line class="grid" x1="80" y1="127.5" x2="575" y2="127.5"/>
+
+              <!-- target region -->
+              <rect class="target" x="80" y="50" width="99" height="93" rx="3"/>
+              <text class="label label-blue" x="188" y="66">USABLE TARGET</text>
+              <text class="label-dim" x="188" y="82">70% detection · ≤20% false alarms</text>
+
+              <!-- chance line -->
+              <line class="chance" x1="80" y1="360" x2="575" y2="50"/>
+              <text class="label-dim" x="418" y="150">chance</text>
+
+              <!-- axes -->
+              <line class="axis" x1="80" y1="360" x2="575" y2="360"/>
+              <line class="axis" x1="80" y1="360" x2="80" y2="50"/>
+              <text x="80" y="380" text-anchor="middle">0</text>
+              <text x="203.75" y="380" text-anchor="middle">.25</text>
+              <text x="327.5" y="380" text-anchor="middle">.5</text>
+              <text x="451.25" y="380" text-anchor="middle">.75</text>
+              <text x="575" y="380" text-anchor="middle">1</text>
+              <text x="70" y="364" text-anchor="end">0</text>
+              <text x="70" y="286.5" text-anchor="end">.25</text>
+              <text x="70" y="209" text-anchor="end">.5</text>
+              <text x="70" y="131.5" text-anchor="end">.75</text>
+              <text x="70" y="54" text-anchor="end">1</text>
+              <text class="axis-title" x="327.5" y="408" text-anchor="middle">False alarms on correct mappings →</text>
+              <text class="axis-title" x="24" y="205" text-anchor="middle" transform="rotate(-90 24 205)">Detection of meaning-changing calls →</text>
+
+              <!-- points -->
+              <g class="point" id="pt-schema" data-point="schema">
+                <title>Schema validation: 0% detection, 0% false alarms</title>
+                <circle class="dot-gray" cx="80" cy="360" r="6"/>
+                <text class="label" x="92" y="350">Schema validation</text>
+                <text class="label-dim" x="92" y="364">0% / 0%</text>
+              </g>
+
+              <g class="point" id="pt-literal" data-point="literal">
+                <title>Literal comparison: 98.3% detection, 97.8% false alarms</title>
+                <circle class="dot-red" cx="564" cy="50" r="6"/>
+                <text class="label" x="552" y="72" text-anchor="end">Literal check</text>
+                <text class="label-dim" x="552" y="86" text-anchor="end">98.3% / 97.8%</text>
+              </g>
+
+              <g class="point" id="pt-ce" data-point="ce">
+                <title>Cross-encoder: 40.0% detection, 32.2% false alarms</title>
+                <circle class="dot-blue" cx="239.4" cy="236" r="6"/>
+                <text class="label" x="251" y="228">Cross-encoder</text>
+                <text class="label-dim" x="251" y="242">40.0% / 32.2%</text>
+              </g>
+
+              <g class="point" id="pt-embed" data-point="embed">
+                <title>Embeddings plus logistic regression: 36.0% detection, 34.4% false alarms. Raw cosine: 36.0% detection, 24.4% false alarms.</title>
+                <line class="embed-line" x1="200.8" y1="248.4" x2="250.3" y2="248.4"/>
+                <circle class="dot-blue2" cx="200.8" cy="248.4" r="5"/>
+                <circle class="dot-blue2" cx="250.3" cy="248.4" r="5"/>
+                <text class="label" x="262" y="262">Embeddings + LR</text>
+                <text class="label-dim" x="262" y="276">36.0% / 34.4%</text>
+              </g>
+
+              <g class="point" id="pt-judge" data-point="judge">
+                <title>Zero-shot LLM judge: 16.0% detection, 3.3% false alarms</title>
+                <circle class="dot-amber" cx="96.3" cy="310.4" r="6"/>
+                <text class="label" x="108" y="304">LLM judge</text>
+                <text class="label-dim" x="108" y="318">16.0% / 3.3%</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="scroll-hint">Scroll the chart sideways →</div>
+
+          <div class="plane-legend">
+            <button class="legend-item" data-point="literal"><i class="sw dot-red" aria-hidden="true"></i><span>Literal check</span><b>98.3 / 97.8</b></button>
+            <button class="legend-item" data-point="schema"><i class="sw dot-gray" aria-hidden="true"></i><span>Schema validation</span><b>0 / 0</b></button>
+            <button class="legend-item" data-point="ce"><i class="sw dot-blue" aria-hidden="true"></i><span>Cross-encoder</span><b>40.0 / 32.2</b></button>
+            <button class="legend-item" data-point="embed"><i class="sw dot-blue2" aria-hidden="true"></i><span>Embeddings + LR</span><b>36.0 / 34.4</b></button>
+            <button class="legend-item" data-point="judge"><i class="sw dot-amber" aria-hidden="true"></i><span>LLM judge</span><b>16.0 / 3.3</b></button>
+          </div>
+          <figcaption>Detection / false alarms. Upper-left is better. Only the literal check reaches high detection, and it pays for it with almost universal false alarms.</figcaption>
+        </figure>
+
+        <div class="table-wrap reveal">
+          <table class="result-table">
+            <caption class="sr-only">Comparator results against the pre-specified target</caption>
+            <thead>
+              <tr><th scope="col">Approach</th><th scope="col">Detection</th><th scope="col">False alarms</th><th scope="col">Verdict</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Cross-encoder</td><td>40.0%</td><td>32.2%</td><td><span class="badge badge-red">MISS</span></td></tr>
+              <tr><td>Embeddings + logistic regression</td><td>36.0%</td><td>34.4%</td><td><span class="badge badge-red">MISS</span></td></tr>
+              <tr><td>Zero-shot Qwen3.5-9B judge</td><td>16.0%</td><td>3.3%</td><td><span class="badge badge-amber">TOO CONSERVATIVE</span></td></tr>
+              <tr class="target-row"><td>Pre-specified usable target</td><td>70.0%</td><td>≤ 20%</td><td><span class="badge badge-blue">TARGET</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose reveal">
+          <p>Why do the comparisons fail? Because acceptability is not similarity. <span class="mono">"Staging but with real data"</span> is lexically and semantically closer to <span class="mono">staging</span> than to <span class="mono">prod</span>, yet the correct reading of the user's intent is that they want the data, which is the production characteristic. The decision depends on which dimension of the value the user cares about, and that is not recoverable from the value alone.</p>
+          <p>The zero-shot judge fails in the same direction. It is conservative: it rejects 7 of the 115 calls, 4 shifted and 3 equivalent. Given the same metadata, it sees less of a conflict than the annotation does.</p>
+        </div>
+
+        <details class="nerd">
+          <summary><span class="nerd-icon" aria-hidden="true">{ }</span> Nerd note — training and evaluation</summary>
+          <div class="nerd-body">
+            <p>Training pairs come from the 210 awkward items: the 138 equivalent items contribute one positive pair each, and every other (item, member) combination is a negative, giving 990 pairs (138 positive, 852 negative). Evaluation uses item-grouped five-fold cross-validation so no model scores an item it saw in training.</p>
+            <p>Cross-encoder (<span class="mono">cross-encoder/ms-marco-MiniLM-L-6-v2</span>): 0.400 [0.234, 0.593] detection at 0.322 [0.235, 0.424] false alarms; AUC 0.589 on emitted calls. Embeddings (<span class="mono">BAAI/bge-small-en-v1.5</span>): 0.360 [0.202, 0.555] at 0.244 [0.167, 0.342] raw cosine, or 0.360 at 0.344 with lexical features; AUC 0.500 and 0.509, which is chance. On the 18 unambiguous shifted calls, detection falls to 0.333 and 0.278, so the negative is not caused by label noise. The zero-shot judge is Qwen3.5-9B with one fixed prompt; it is a baseline, not a bound.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ───────────────────────── 13 LESSONS ───────────────────────── -->
+      <section class="section" id="lessons">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">13</span> What to do</div>
+          <h2>Six things to do instead.</h2>
+          <p class="lede">None of these requires a better model. They change where the decision happens, and what the pipeline is allowed to treat as evidence.</p>
+        </div>
+
+        <div class="scorecard panel reveal">
+          <div class="scorecard-head">
+            <div>
+              <div class="mono-label">WHAT THE HARNESS CHANGES</div>
+              <h3>Only one lever improved surfacing</h3>
+            </div>
+            <span class="badge badge-blue">MEASURED, NOT ASSUMED</span>
+          </div>
+
+          <div class="score-row score-head" aria-hidden="true">
+            <span>Lever</span><span>Key number</span><span>What it changes</span><span>Verdict</span>
+          </div>
+          <div class="score-row">
+            <span class="score-name">Base prompt</span>
+            <span class="score-num">54.8%</span>
+            <span class="score-see">silent substitution · 38.1% echoed · 3.8% no call</span>
+            <span><span class="badge badge-gray">BASELINE</span></span>
+          </div>
+          <div class="score-row good">
+            <span class="score-name">+ permission to ask</span>
+            <span class="score-num">34.8%</span>
+            <span class="score-see">silent substitution · 64.8% clarify / no call</span>
+            <span><span class="badge badge-green">IMPROVES</span></span>
+          </div>
+          <div class="score-row bad">
+            <span class="score-name">+ “must validate”</span>
+            <span class="score-num">86.7%</span>
+            <span class="score-see">silent substitution · 11.0% echoed · shifted 77.8%</span>
+            <span><span class="badge badge-red">WORSENS</span></span>
+          </div>
+          <div class="score-row bad">
+            <span class="score-name">One validation retry</span>
+            <span class="score-num">78.7–94.5%</span>
+            <span class="score-see">of echoes become silent · shifted 69.2–94.2%</span>
+            <span><span class="badge badge-red">HIDES FAILURE</span></span>
+          </div>
+          <div class="score-row bad">
+            <span class="score-name">Provider enum enforcement</span>
+            <span class="score-num">100%</span>
+            <span class="score-see">silent substitution · 0% echoed · 72/72 shifted</span>
+            <span><span class="badge badge-red">REMOVES VISIBILITY</span></span>
+          </div>
+
+          <p class="score-note">The permission cuts silence by 20 points and turns 64.8% of items into a question, but 34.8% still substitute and 22.2% of shifted items still change meaning. It is a lever, not a fix. The pre-call membership check in lesson 02 is the paper’s recommendation; it is not an additional measured arm.</p>
+        </div>
+
+        <div class="lesson-grid reveal">
+          <article class="lesson">
+            <div class="lesson-no">01</div>
+            <h3>Don't call validation a faithfulness check.</h3>
+            <p>It answers a question about types. The central number, 0 of 115, is what happens when it is asked a question about meaning.</p>
+          </article>
+          <article class="lesson">
+            <div class="lesson-no">02</div>
+            <h3>Check the instruction at the boundary.</h3>
+            <p>Before the model can paraphrase, check whether the supplied value is a member. Surface the conflict to the caller. This needs no semantic judgment about the call.</p>
+          </article>
+          <article class="lesson">
+            <div class="lesson-no">03</div>
+            <h3>Be precise about “must validate.”</h3>
+            <p>It sounds like a safety instruction. On the anchor, the validity requirement alone raised meaning-changing substitutions from 34.7% to 77.8%. Say “surface the conflict,” not merely “be valid.”</p>
+          </article>
+          <article class="lesson">
+            <div class="lesson-no">04</div>
+            <h3>Log the divergence; don't gate on it.</h3>
+            <p>Literal comparison has 97.8% false alarms. It is an audit sample to review after the fact, not a review queue or a blocking check.</p>
+          </article>
+          <article class="lesson">
+            <div class="lesson-no">05</div>
+            <h3>Don't retry invalid calls into compliance.</h3>
+            <p>A retry that asks the model to satisfy the schema again is a machine for turning a visible failure into an invisible one. If the pipeline can surface the conflict, let the caller choose the member.</p>
+          </article>
+          <article class="lesson">
+            <div class="lesson-no">06</div>
+            <h3>Don't outsource the check to the provider.</h3>
+            <p>Provider-side enforcement deletes the invalid call that would have warned you. It guarantees validity, not faithfulness.</p>
+          </article>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout-mark" aria-hidden="true">“</div>
+          <p>The metric moves the right way while the risk moves the wrong way.</p>
+        </div>
+      </section>
+
+      <!-- ───────────────────────── 14 LIMITS ───────────────────────── -->
+      <section class="section" id="limits">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="num">14</span> Limits &amp; takeaway</div>
+          <h2>What this study doesn't claim.</h2>
+          <p class="lede">The result is narrow by design. The authors are explicit about where it stops.</p>
+        </div>
+
+        <div class="limits reveal">
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>A small local core, a hosted panel, and no direct 4-bit control.</strong> The local study uses three models in 4-bit on a single laptop GPU. The hosted panel adds seven free-choice models from 9B to 72B and four families at BF16 or FP8, but it is not a controlled ablation: a free-choice FP4 run did not complete, and the designed tokenizer contrast was inconclusive. The local 4-bit rate sits inside the hosted range, which is suggestive, not a control.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>A designed item distribution.</strong> The items are generated, not sampled from production traffic. The rates are estimates for this distribution, not for your deployment.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>One annotator.</strong> The equivalent/shifted split is a single annotator's judgment. It does not affect the substitution rate or the schema check, but it affects the shifted detection numbers.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>One conflict type.</strong> A value outside a closed enum. The paper says nothing about numeric ranges, free-text arguments, or multi-field constraints.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>Enforcement is inferred, not specified.</strong> One endpoint constrained the enum, two did not, and the rest were unavailable or ambiguous. A provider can change its serving stack; the paper identifies enforcement by a probe, not a contract.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>Small training data.</strong> The comparators learn from 138 positive pairs. Their failure could be a data-scale result rather than an architectural one.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>One retry, not a loop.</strong> The retry arm replays a single retry. A production loop may behave differently.</p></div>
+          <div class="limit"><span class="limit-mark" aria-hidden="true">—</span><p><strong>No execution side effects.</strong> The study reports what would execute, not a simulation through a real framework.</p></div>
+        </div>
+
+        <div class="takeaway reveal">
+          <div class="mono-label">THE TAKEAWAY</div>
+          <p class="takeaway-big">The gate is not lying. It is answering a narrower question than the one you're asking it.</p>
+          <p>Schema validation says: <em>this call is well-formed.</em> It cannot say: <em>this call is what you meant.</em> Treat those as different checks. Put the meaning check at the boundary, where the conflict is still visible. And don't let a retry quietly make the decision for you.</p>
+        </div>
+
+        <div class="end-cta reveal">
+          <a class="btn btn-solid" href="../paper/main.pdf" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="https://github.com/LakshitF/valid-but-wrong" target="_blank" rel="noopener">Code + data <span aria-hidden="true">↗</span></a>
+          <button class="btn btn-ghost" id="copyCite" type="button">Copy BibTeX</button>
+        </div>
+
+        <details class="cite reveal">
+          <summary><span class="nerd-icon" aria-hidden="true">@</span> Citation</summary>
+          <pre id="bibtex">@article{farswan2026validbutwrong,
+  title   = {Valid but Wrong: Silent Enum Substitution in Tool Calls,
+             and Why Schema Validation Cannot See It},
+  author  = {Farswan, Lakshit},
+  year    = {2026},
+  note    = {Preprint},
+  url     = {https://github.com/LakshitF/valid-but-wrong}
+}</pre>
+        </details>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>valid<span class="brand-slash">/</span>wrong</span>
+    </div>
+    <p>A visual explainer for <em>Valid but Wrong</em> (2026) by Lakshit Farswan, Department of Computer Science, The University of Texas at Austin. Every number comes from the paper and its released result files. If this page and the paper disagree, the paper wins.</p>
+    <div class="footer-links">
+      <a href="../paper/main.pdf">Paper (PDF)</a>
+      <a href="https://github.com/LakshitF/valid-but-wrong">Code + data</a>
+      <a href="mailto:lf24586@my.utexas.edu">Email</a>
+    </div>
+    <p class="footer-fine">Static site: HTML, CSS, JavaScript. No trackers, no analytics.</p>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

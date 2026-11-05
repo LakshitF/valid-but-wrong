@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 0.0,
+    "readout_1_awkward_in_members": 0,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 0.0,
+    "readout_3_schema_validity_awkward": 0.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 1.0,
+    "readout_4_no_call_rate": 0.0,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 0,
+        "rate": 0.0
+      }
+    },
+    "near_target_hit_rate": NaN,
+    "awkward_status": {
+      "abstain": 6
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "qwen/qwen-2.5-72b-instruct",
+    "api_models": {
+      "qwen/qwen-2.5-72b-instruct": 6
+    },
+    "providers": {
+      "DeepInfra": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 2382,
+      "completion_tokens": 541
+    },
+    "cost_usd": 0.001074,
+    "reported_cost_usd": 0.001074,
+    "wall_seconds": 10.0,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not support a status value of \"definitely not a member\". The valid statuses are \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". Could you please confirm the correct status to set for the record? If you need to set a custom status, we may need to use a different function or approach.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 397,
+        "completion": 76,
+        "cost": 0.00017332
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not have an option for \"definitely not a member\" as it is not listed in the enum for the `status` property. However, I will use the closest appropriate value from the available options. Could you please confirm which of the following statuses you would like to use instead: \"open\", \"in_progress\", \"blocked\", \"resolved\", or \"closed\"? If none of these are suitable, we may need to request a",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "length",
+      "usage": {
+        "prompt": 397,
+        "completion": 96,
+        "cost": 0.00018132
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not have an option for \"definitely not a member\" as it is not listed in the enum for the `status` property. However, I will use the closest valid status based on the options available. Could you please confirm which of the following statuses you would like to use instead: \"open\", \"in_progress\", \"blocked\", \"resolved\", or \"closed\"? If none of these are suitable, we may need to request",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "length",
+      "usage": {
+        "prompt": 397,
+        "completion": 96,
+        "cost": 0.00018132
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not support a status value of \"definitely not a member\". The valid statuses are \"open\", \"in_progress\", \"blocked\", \"resolved\", and \"closed\". Could you please confirm the correct status to set for the record 1006? If you need to set a custom status, we may need to use a different function or method.",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt": 397,
+        "completion": 81,
+        "cost": 0.00017532
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not have an option for \"definitely not a member\" as it is not listed in the enum for the status property. However, I will use the closest valid status based on the options available. Could you please confirm which of the following statuses you would like to use: \"open\", \"in_progress\", \"blocked\", \"resolved\", or \"closed\"? If none of these are suitable, we may need to request a new function",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "length",
+      "usage": {
+        "prompt": 397,
+        "completion": 96,
+        "cost": 0.00018132
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "abstain",
+      "emitted": null,
+      "emitted_index": null,
+      "mode": "none",
+      "in_members": false,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "The provided function `set_ticket_status` does not have an option for \"definitely not a member\" as it is not listed in the enum for the `status` property. However, I will use the closest valid status based on the options available. Could you please confirm which of the following statuses you would like to use instead: \"open\", \"in_progress\", \"blocked\", \"resolved\", or \"closed\"? If none of these are suitable, we may need to request",
+      "provider": "DeepInfra",
+      "api_model": "qwen/qwen-2.5-72b-instruct",
+      "finish_reason": "length",
+      "usage": {
+        "prompt": 397,
+        "completion": 96,
+        "cost": 0.00018132
+      }
+    }
+  ]
+}

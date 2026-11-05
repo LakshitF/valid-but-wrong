@@ -33,6 +33,7 @@ Department of Computer Science, The University of Texas at Austin, 2026).
 | `PREREGISTRATION-c2-addendum.md` | The three post-primary controls, declared descriptive rather than confirmatory |
 | `results/` | Every JSON artifact the paper's numbers come from, including per-item generations |
 | `figures/` | Figures as PDF and PNG |
+| `site/` | Static visual explainer of the paper (HTML/CSS/JS; see `site/README.md`) |
 | `LICENSE` / `LICENSE-DATA` | MIT for code; CC BY 4.0 for data, figures and paper text |
 
 ## Reproduction
@@ -101,6 +102,11 @@ which allowed value they want." --out results/c2_abstain_7b.json
 .venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-9b \
     --provider SiliconFlow --probe --no-enum --limit 210 --out results/c2_enum_probe_open.json
 
+# descriptive hosted panel (§5.13): same runner, one pinned provider per arm
+# artifacts: results/panel/{precision,scale,tokenizer}/summary.json
+.venv/bin/python code/48_openrouter.py --model qwen/qwen3.5-27b \
+    --provider Novita --out results/panel/scale/qwen35_27b.json
+
 # literal check on the stored calls (no model run)
 .venv/bin/python code/25_literal_check.py
 
@@ -115,6 +121,11 @@ which allowed value they want." --out results/c2_abstain_7b.json
 .venv/bin/python code/21_compare_models.py
 .venv/bin/python code/30_figures.py
 ```
+
+The descriptive panel in §5.13 is stored under `results/panel/`
+(`precision/`, `scale/`, `tokenizer/`), each with a `summary.json` and a
+`findings.md`. It uses the same runner and flags, with `--provider` pinned and
+`--probe` run before each full arm.
 
 Model weights are not included. Nothing needs to be
 trained before the runner can be used; the comparators train inside their own
@@ -163,7 +174,7 @@ cd paper && ./build_arxiv.sh
 ```
 
 Categories, the Comments field, the author-block conventions used by UT Austin
-papers, and the plain-text abstract for arXiv's metadata field (1,386
+papers, and the plain-text abstract for arXiv's metadata field (1,615
 characters, under the field's 1,920-character limit) are in
 `paper/ARXIV-SUBMISSION.md`.
 
@@ -200,6 +211,7 @@ files; the mapping is below.
 | §5.10 | `code/45_cluster_stats.py` | `results/c2_cluster_stats.json` |
 | §5.11, Tables 8–9 | `code/42_retry.py` | `results/c2_retry_*.json` |
 | §5.12, Table 10 | `code/48_openrouter.py` | `results/c2_qwen35_9b_api*.json`, `c2_enum_probe_*.json` |
+| §3.11, §5.13, Tables 11–12 | `code/48_openrouter.py` | `results/panel/{precision,scale,tokenizer}/summary.json` |
 
 ## License
 

@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "n_items": 6,
+    "n_awkward": 6,
+    "n_clean": 0,
+    "rotate": 0,
+    "system_suffix": "",
+    "readout_1_substitution_rate": 1.0,
+    "readout_1_awkward_in_members": 6,
+    "readout_2_clean_error_rate": NaN,
+    "readout_2_clean_wrong_member": 0,
+    "readout_2_clean_exact": NaN,
+    "readout_3_schema_validity": 1.0,
+    "readout_3_schema_validity_awkward": 1.0,
+    "readout_3_schema_validity_clean": NaN,
+    "readout_4_abstain_rate": 0.0,
+    "readout_4_no_call_rate": 0.0,
+    "echo_rate_awkward": 0.0,
+    "by_kind": {
+      "equivalent": {
+        "n": 3,
+        "substituted": 3,
+        "rate": 1.0
+      },
+      "shifted": {
+        "n": 3,
+        "substituted": 3,
+        "rate": 1.0
+      }
+    },
+    "near_target_hit_rate": 0.0,
+    "awkward_status": {
+      "substituted": 6
+    },
+    "clean_status": {},
+    "ratio_sub_over_cleanerr": Infinity
+  },
+  "meta": {
+    "api": "openrouter",
+    "model": "qwen/qwen3.5-9b",
+    "api_models": {
+      "qwen/qwen3.5-9b": 6
+    },
+    "providers": {
+      "SiliconFlow": 6
+    },
+    "temperature": 0.0,
+    "seed": 20261017,
+    "enum_in_schema": true,
+    "probe": true,
+    "probe_value": "definitely not a member",
+    "max_new_tokens": 96,
+    "usage": {
+      "prompt_tokens": 2190,
+      "completion_tokens": 150
+    },
+    "cost_usd": 0.000242,
+    "reported_cost_usd": 0.000242,
+    "wall_seconds": 3.8,
+    "errors": [],
+    "note": "Hosted provider, not the local 4-bit protocol. Report separately from local runs."
+  },
+  "items": [
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "open",
+      "id": "s00_000",
+      "rid": "1000",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_002",
+      "rid": "1002",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "open",
+      "id": "s00_004",
+      "rid": "1004",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_006",
+      "rid": "1006",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "shifted",
+      "paired_member": "in_progress",
+      "id": "s00_008",
+      "rid": "1008",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    },
+    {
+      "schema_idx": 0,
+      "field": "status",
+      "value": "definitely not a member",
+      "gold_member": null,
+      "arm": "awkward",
+      "near_miss_kind": "equivalent",
+      "paired_member": "in_progress",
+      "id": "s00_010",
+      "rid": "1010",
+      "status": "substituted",
+      "emitted": "open",
+      "emitted_index": 0,
+      "mode": "bare",
+      "in_members": true,
+      "members": [
+        "open",
+        "in_progress",
+        "blocked",
+        "resolved",
+        "closed"
+      ],
+      "text": "{\"name\": \"set_ticket_status\", \"arguments\": {\"status\": \"open\"}}",
+      "provider": "SiliconFlow",
+      "api_model": "qwen/qwen3.5-9b",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt": 365,
+        "completion": 25,
+        "cost": 4.025e-05
+      }
+    }
+  ]
+}

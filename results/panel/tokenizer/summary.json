@@ -1,0 +1,303 @@
+{
+  "axis": "tokenizer/family",
+  "runner": "code/48_openrouter.py",
+  "generated": "2026-10-17",
+  "protocol": {
+    "items": 420,
+    "arms": [
+      "awkward 210",
+      "clean 210"
+    ],
+    "workers": 4,
+    "temperature": 0,
+    "seed": 20261017,
+    "max_new_tokens": 96,
+    "enum_in_schema": true,
+    "provider": "DeepInfra"
+  },
+  "models": [
+    {
+      "name": "llama31_8b",
+      "model": "meta-llama/llama-3.1-8b-instruct",
+      "family": "Llama 3",
+      "tokenizer": "Llama 3 BPE (128k)",
+      "params": "8B",
+      "quant": "FP8",
+      "enforcement": "unclear",
+      "enforcement_evidence": "No runnable DeepInfra endpoint: FP8 endpoint does not advertise tools; OpenRouter routing removes deepinfra/fp8 by tool compatibility, leaving zero endpoints with allow_fallbacks=false. Probe retried once, 6/6 items 404.",
+      "full_file": null,
+      "probe_file": "probe_llama31_8b.json",
+      "n_items": 0,
+      "substitution_rate": null,
+      "equivalent_rate": null,
+      "shifted_rate": null,
+      "echo_rate": null,
+      "clean_error_rate": null,
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "cost_usd": 0.0,
+      "reported_cost_usd": 0,
+      "wall_seconds": 252.7,
+      "errors": [
+        "s00_004: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "s00_002: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "s00_000: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "s00_006: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "s00_010: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "s00_008: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')"
+      ],
+      "max_new_tokens": 96,
+      "providers": {},
+      "awkward_status": {},
+      "clean_status": {},
+      "valid_for_mapping": true,
+      "probe": {
+        "n_items": 0,
+        "finish_reasons": {},
+        "statuses": {},
+        "echoed_probe_value": 0,
+        "emitted_member": 0,
+        "cost_usd": 0.0,
+        "errors": 6,
+        "error_sample": "s00_004: request failed after retries: HTTPError('404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions')",
+        "wall_seconds": 252.7
+      },
+      "note": "Unavailable on the specified provider/quant; not run. Probe retried once; all 6 items returned HTTP 404.",
+      "quantization": "FP8",
+      "provider": "DeepInfra"
+    },
+    {
+      "name": "gemma3_12b",
+      "model": "google/gemma-3-12b-it",
+      "family": "Gemma 3",
+      "tokenizer": "SentencePiece (262k)",
+      "params": "12B",
+      "quant": "BF16",
+      "enforcement": "unclear",
+      "enforcement_evidence": "Probe 6/6 refused with text (\"only accepts values from a predefined enum\"); no non-member and no member emitted, so the probe cannot separate enforcement from model refusal. Provider tool path also corrupts member strings, so no positive evidence either way.",
+      "full_file": "gemma3_12b.json",
+      "probe_file": "probe_gemma3_12b.json",
+      "n_items": 420,
+      "substitution_rate": 0.0,
+      "equivalent_rate": 0.0,
+      "shifted_rate": 0.0,
+      "echo_rate": 0.0,
+      "clean_error_rate": 1.0,
+      "usage": {
+        "prompt_tokens": 145274,
+        "completion_tokens": 12306
+      },
+      "cost_usd": 0.007288,
+      "reported_cost_usd": 0.00911,
+      "wall_seconds": 215.1,
+      "errors": [],
+      "max_new_tokens": 96,
+      "providers": {
+        "DeepInfra": 420
+      },
+      "awkward_status": {
+        "abstain": 167,
+        "no_call": 14,
+        "invalid": 8,
+        "missing_field": 21
+      },
+      "clean_status": {
+        "missing_field": 159,
+        "invalid": 51
+      },
+      "valid_for_mapping": false,
+      "note": "Metrics are not interpretable as substitution/mapping behaviour: DeepInfra serialized argument strings as {} or truncated them at a space/underscore and appended {} (e.g. in_progress -> in{}, awaiting triage -> awaiti{}). Reproduced with the enum removed. Clean error 100% is a provider tool-call defect.",
+      "probe": {
+        "n_items": 6,
+        "finish_reasons": {
+          "stop": 6
+        },
+        "statuses": {
+          "abstain": 6
+        },
+        "echoed_probe_value": 0,
+        "emitted_member": 0,
+        "cost_usd": 0.000132,
+        "errors": 0
+      },
+      "quantization": "BF16",
+      "provider": "DeepInfra"
+    },
+    {
+      "name": "mistral_small_32_24b",
+      "model": "mistralai/mistral-small-3.2-24b-instruct",
+      "family": "Mistral Small 3",
+      "tokenizer": "Tekken (131k)",
+      "params": "24B dense",
+      "quant": "FP8",
+      "enforcement": "no",
+      "enforcement_evidence": "Probe: 3/6 items emitted the exact non-member probe value (finish_reason=tool_calls); 3/6 made no call. Non-member values pass through the declared enum.",
+      "full_file": "mistral_small_32_24b.json",
+      "probe_file": "probe_mistral_small_32_24b.json",
+      "n_items": 420,
+      "substitution_rate": 0.7571,
+      "equivalent_rate": 0.8043,
+      "shifted_rate": 0.6667,
+      "echo_rate": 0.0524,
+      "clean_error_rate": 0.0,
+      "usage": {
+        "prompt_tokens": 57182,
+        "completion_tokens": 7477
+      },
+      "cost_usd": 0.005784,
+      "reported_cost_usd": 0.005784,
+      "wall_seconds": 219.8,
+      "errors": [],
+      "max_new_tokens": 96,
+      "providers": {
+        "DeepInfra": 420
+      },
+      "awkward_status": {
+        "substituted": 159,
+        "no_call": 36,
+        "abstain": 4,
+        "echoed": 11
+      },
+      "clean_status": {
+        "exact": 210
+      },
+      "valid_for_mapping": true,
+      "probe": {
+        "n_items": 6,
+        "finish_reasons": {
+          "stop": 3,
+          "tool_calls": 3
+        },
+        "statuses": {
+          "echoed": 3,
+          "no_call": 3
+        },
+        "echoed_probe_value": 3,
+        "emitted_member": 0,
+        "cost_usd": 0.000107,
+        "errors": 0
+      },
+      "quantization": "FP8",
+      "provider": "DeepInfra"
+    },
+    {
+      "name": "deepseek_v4_flash",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "family": "DeepSeek V4",
+      "tokenizer": "DeepSeek BPE (V3-family, ~128k)",
+      "params": "13B active / 284B total (MoE)",
+      "quant": "FP8",
+      "enforcement": "no",
+      "enforcement_evidence": "Probe: 6/6 items emitted the exact non-member probe value (finish_reason=tool_calls). Non-member values pass through the declared enum.",
+      "full_file": "deepseek_v4_flash.json",
+      "probe_file": "probe_deepseek_v4_flash.json",
+      "n_items": 420,
+      "substitution_rate": 0.6571,
+      "equivalent_rate": 0.7319,
+      "shifted_rate": 0.5139,
+      "echo_rate": 0.3381,
+      "clean_error_rate": 0.0,
+      "usage": {
+        "prompt_tokens": 143727,
+        "completion_tokens": 20367
+      },
+      "cost_usd": 0.01229,
+      "reported_cost_usd": 0.00752,
+      "wall_seconds": 110.7,
+      "errors": [],
+      "max_new_tokens": 256,
+      "providers": {
+        "DeepInfra": 420
+      },
+      "awkward_status": {
+        "substituted": 138,
+        "echoed": 71,
+        "abstain": 1
+      },
+      "clean_status": {
+        "exact": 210
+      },
+      "valid_for_mapping": true,
+      "note": "Primary run at 256 new tokens because the 96-token run hit the ceiling on 3/420 items (1 finish_reason=length). Companion 96-token run is retained.",
+      "probe": {
+        "n_items": 6,
+        "finish_reasons": {
+          "tool_calls": 6
+        },
+        "statuses": {
+          "echoed": 6
+        },
+        "echoed_probe_value": 6,
+        "emitted_member": 0,
+        "cost_usd": 0.000185,
+        "errors": 0
+      },
+      "quantization": "FP8",
+      "provider": "DeepInfra"
+    }
+  ],
+  "companion_runs": [
+    {
+      "name": "deepseek_v4_flash_96_companion",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "max_new_tokens": 96,
+      "n_items": 420,
+      "substitution_rate": 0.6429,
+      "equivalent_rate": 0.7246,
+      "shifted_rate": 0.4861,
+      "echo_rate": 0.3429,
+      "clean_error_rate": 0.0,
+      "finish_reasons": {
+        "tool_calls": 419,
+        "length": 1
+      },
+      "cost_usd": 0.012237,
+      "note": "Three awkward items sat at the 96-token ceiling (one finish_reason=length); the 256-token rerun resolved them. Primary is the 256-token run."
+    }
+  ],
+  "qwen_reference": {
+    "name": "qwen35_9b_reference",
+    "model": "qwen/qwen3.5-9b",
+    "family": "Qwen",
+    "tokenizer": "Qwen BPE",
+    "params": "9B",
+    "provider": "SiliconFlow",
+    "quantization": "not reported",
+    "enforcement": "yes (enum arm)",
+    "enforcement_evidence": "SiliconFlow: closed-enum arm substituted 210/210 awkward items into members; open-schema (--no-enum) control echoed 210/210. The 100% substitution is consistent with provider-side enum constrained decoding, not free-choice mapping.",
+    "n_items": 420,
+    "substitution_rate": 1.0,
+    "equivalent_rate": 1.0,
+    "shifted_rate": 1.0,
+    "echo_rate": 0.0,
+    "clean_error_rate": 0.0,
+    "usage": {
+      "prompt_tokens": 144379,
+      "completion_tokens": 11289
+    },
+    "cost_usd": 0.016131,
+    "wall_seconds": 170.3,
+    "errors": [],
+    "no_enum_control": {
+      "substitution_rate": 0.0,
+      "echo_rate": 1.0,
+      "clean_error_rate": 0.0,
+      "cost_usd": 0.015321
+    },
+    "source_files": [
+      "results/c2_qwen35_9b_api.json",
+      "results/c2_qwen35_9b_api_noenum.json"
+    ],
+    "note": "Existing precision-axis result; not rerun for this axis."
+  },
+  "total_cost_usd": 0.038023,
+  "budget_usd": 0.5,
+  "notes": [
+    "Base arm only: substitution is an in-enum call produced for a value that is not a member. Provider enum enforcement was probed separately.",
+    "Llama 3.1 8B could not run on DeepInfra with tools; see model note and probe errors.",
+    "Gemma 3 12B metrics are invalid for mapping because the provider corrupted tool-call argument strings; see note.",
+    "DeepSeek primary is the 256-token run; the 96-token run is kept as a companion."
+  ]
+}

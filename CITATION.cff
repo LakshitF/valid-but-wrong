@@ -8,8 +8,8 @@ authors:
     affiliation: "Department of Computer Science, The University of Texas at Austin"
     email: "lf24586@my.utexas.edu"
 year: 2026
-license: MIT
-abstract: "Code, data and paper for Valid but Wrong, a study of what tool-calling models do when a user gives a value the tool's list of allowed values does not include. The repository has the 420 test items, the scripts that ran the models and computed the statistics, and the raw model outputs behind every number in the paper. The code is under the MIT license. The items, results, figures and paper text are under CC BY 4.0."
+license: CC-BY-4.0
+abstract: "Code, data and paper for Valid but Wrong, a study of what tool-calling models do when a user gives a value the tool's list of allowed values does not include. The repository has the 420 test items, the scripts that ran the models and computed the statistics, and the raw model outputs behind every number in the paper. The code, items, results, figures and paper text are all under CC BY 4.0."
 keywords:
   - tool calling
   - structured output

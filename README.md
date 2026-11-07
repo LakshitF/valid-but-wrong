@@ -34,7 +34,7 @@ Department of Computer Science, The University of Texas at Austin, 2026).
 | `results/` | Every JSON artifact the paper's numbers come from, including per-item generations |
 | `figures/` | Figures as PDF and PNG |
 | `site/` | Static visual explainer of the paper (HTML/CSS/JS; see `site/README.md`) |
-| `LICENSE` / `LICENSE-DATA` | MIT for code; CC BY 4.0 for data, figures and paper text |
+| `LICENSE` | CC BY 4.0 for code, data, figures and paper text |
 
 ## Reproduction
 
@@ -215,9 +215,13 @@ files; the mapping is below.
 
 ## License
 
-The code is released under the MIT License (`LICENSE`). The item set, result
-JSONs, figures and manuscript text are released under the Creative Commons
-Attribution 4.0 International License (`LICENSE-DATA`).
+All of it — the code, the item set, the result JSONs, the figures and the
+manuscript text — is released under the Creative Commons Attribution 4.0
+International License (`LICENSE`).
+
+Suggested attribution: Farswan, L. (2026). *Valid but Wrong: Silent Enum
+Substitution in Tool Calls, and Why Schema Validation Cannot See It*.
+https://github.com/LakshitF/valid-but-wrong
 
 ## Citation
 

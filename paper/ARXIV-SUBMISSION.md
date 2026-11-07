@@ -10,7 +10,7 @@ Everything the arXiv form asks for, in the form it expects it.
 | Authors | Lakshit Farswan |
 | Affiliation (in the paper, not the metadata) | Department of Computer Science, The University of Texas at Austin |
 | Comments | Preprint. Code, frozen items and results: https://github.com/LakshitF/valid-but-wrong |
-| License | arXiv non-exclusive distribution licence (default); the work itself is MIT / CC BY 4.0 |
+| License | CC BY 4.0 (select the Creative Commons Attribution 4.0 option on arXiv; the work itself is CC BY 4.0) |
 | Files | `arxiv.tar.gz` from `build_arxiv.sh` (LaTeX source + figures) |
 
 ## Abstract for the metadata field
